@@ -189,7 +189,7 @@
 
                                 <div class="chart-text m-r-10">
                                     <h4 class="m-b-0"><small>HEURES D'ABSENCES</small></h4>
-                                    <h6 class="m-t-0 text-info">xxxx</h6>
+                                    <h6 class="m-t-0 text-info">xxxxx</h6>
                                 </div>
                                 <div class="spark-chart">
                                     <div id="monthchart"><canvas style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"
@@ -199,7 +199,7 @@
                             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                                 <div class="chart-text m-r-10">
                                     <h4 class="m-b-0"><small>DISCIPLINE</small></h4>
-                                    <h6 class="m-t-0 text-primary"> xxxx</h6>
+                                    <h6 class="m-t-0 text-primary"> xxxxx</h6>
                                 </div>
                             </div>
                         </div>
