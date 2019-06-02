@@ -21,7 +21,7 @@
     <link rel="stylesheet" id="campress-style-css" href="css/style.css" type="text/css" media="all">
     <link rel="stylesheet" id="kc-general-css" href="css/kingcomposer.css" type="text/css" media="all">
 
-    <script type='text/javascript' src='http://code.jquery.com/jquery-1.9.1.js'></script>
+    <script src="js/jquery.js"></script>
 
 </head>
 
@@ -90,7 +90,7 @@
                                         <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
 
                                         <li><a href="vote.blade.php"><img src="images/vote.png" width="10%"/> Vote</a></li>
-                                        <li><a href="emploi.blade.php"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
+                                        <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
                                         <li><a href="discipline.blade.php"><img src="images/discipline.png" width="10%"/> Discipline</a></li>
                                         <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
                                         <li role="separator" class="divider"></li>
@@ -135,7 +135,7 @@
                                         <li><a href="blog.blade.php"><img src="images/blog.png" width="20%"/>Blog</a></li>
 
                                         <li><a href="vote.blade.php"><img src="images/vote.png" width="20%"/> Vote</a></li>
-                                        <li><a href="emploi.blade.php"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
+                                        <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
                                         <li><a href="discipline.blade.php"><img src="images/discipline.png" width="20%"/> Discipline</a></li>
                                         <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="20%"/> Inbox</a></li>
 
@@ -179,7 +179,7 @@
 
                                     <div class="chart-text m-r-10">
                                             <h4 class="m-b-0"><small>CLASSE</small></h4>
-                                            <h6 class="m-t-0 text-info" style="text-transform: uppercase; font-size: 15px;">{{ $utilisateur->classe }}</h6>
+                                            <h6 class="m-t-0 text-info" style="text-transform: uppercase; font-size: 15px;">{{ $utilisateur->filiere.$utilisateur->niveau }}</h6>
                                         </div>
 
                                         <div class="spark-chart">

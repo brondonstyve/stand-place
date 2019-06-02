@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMatriculesTable extends Migration
+class CreateGl1MatieresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateMatriculesTable extends Migration
      */
     public function up()
     {
-        Schema::create('matricules', function (Blueprint $table) {
+        Schema::create('gl1_matieres', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('matricule',20);
             $table->string('nom',50);
-            $table->string('prenom',50)->nullable();
-            $table->string('filiere',10);
-            $table->integer('niveau');
-            $table->string('annee_accademique',20);
+            $table->string('nom_prof',50);
+            $table->integer('semestre');
+            $table->string('classe',4);
+            $table->integer('nombre_heure');
+            $table->date('periode');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateMatriculesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matricules');
+        Schema::dropIfExists('gl1_matieres');
     }
 }

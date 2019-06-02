@@ -48,7 +48,8 @@ class ControllerCompte extends Controller
                 'matricule'=>$request->matricule,
                 'nom'=>$request->nom,
                 'prenom'=>$request->prenom,
-                'classe'=>$request->classe,
+                'filiere'=>$request->filiere,
+                'niveau'=>$request->niveau,
                 'email'=>$request->email,
                 'mot_de_passe'=>bcrypt($request->mdpconf)]);
 
@@ -172,9 +173,10 @@ class ControllerCompte extends Controller
                 $matricules=$matri->matricule;
                 $nom=$matri->nom;
                 $prenom=$matri->prenom;
-                $classe=$matri->classe;
+                $filiere=$matri->filiere;
+                $niveau=$matri->niveau;
                 $anne_acc=$matri->annee_accademique;
-                return \view('index/creationCompte',compact('matricules','nom','prenom','classe'));
+                return \view('index/creationCompte',compact('matricules','nom','prenom','filiere','niveau'));
             }
             else {
                 Flashy::error('Le matricule entré est deja utilisé');

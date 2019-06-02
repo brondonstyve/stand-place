@@ -71,7 +71,7 @@ Route::get('test.blade.php', 'PagesController@test');
 
 Route::get('/vote.blade.php', 'PagesController@ouvrirVote');
 
-Route::get('/emploi.blade.php', 'PagesController@ouvrirEmploi');
+Route::get('/emploi.blade.php', 'PagesController@ouvrirEmploi')->name('edt_path');
 
 Route::get('/discipline.blade.php', 'PagesController@ouvrirDiscipline');
 
@@ -79,6 +79,14 @@ Route::get('/inbox.blade.php', 'PagesController@ouvrirInbox');
 
 Route::get('/gestEmploi.blade.php', 'PagesController@ouvrirGestEmploi');
 
-Route::get('/paiement', 'PaiementController@validerPaiement')->name('paiement_path');
+Route::post('/paiement', 'PaiementController@Paiement')->name('paiement_path');
+
+Route::post('/valider_paiement', 'PaiementController@validerPaiement')->name('valider_paiement_path');
+
+Route::post('/paiement_suite', 'PaiementController@suite_Paiement')->name('suite_paiement_path');
+
+Route::post('/valider_suite_paiement', 'PaiementController@validerSuitePaiement')->name('valider_suite_paiement_path');
+
+Route::get('emploiDeTemps', 'emploiDeTempsController@genererEDT')->name('generer_edt_path');
 
 

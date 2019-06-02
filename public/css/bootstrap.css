@@ -6256,6 +6256,19 @@ fieldset[disabled] .btn-success.active {
     border-color: #000
 }
 
+.b1 {
+    color: #fff;
+    background-color: #002b46;
+    border-color: #001b2d
+}
+
+.b1:hover,
+.open>.btn-info.dropdown-toggle {
+    color: #fff;
+    background-color: #002b46;
+    border-color: #000
+}
+
 .btn-info:active,
 .btn-info.active,
 .open>.btn-info.dropdown-toggle {
@@ -6521,11 +6534,11 @@ tbody.collapse.in {
     left: 0;
     z-index: 1000;
     display: none;
-    float: left;
-    min-width: 33rem;
+    float: right;
+    min-width: 28rem;
     padding: .5rem 0;
     margin: .125rem 0 0;
-    font-size: 15px;
+    font-size: 12px;
     color: #212529;
     text-align: left;
     list-style: none;

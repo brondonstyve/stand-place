@@ -51,8 +51,10 @@
                                     </div>
                                 <div class="form-group">
                                             <div class="col-xs-12">
-                                                <input class="form-control"  type="text"  disabled value="{{ $classe }}" style="text-align: left;">
-                                                <input type="hidden" name='classe' value="{{ $classe }}">
+                                                <input class="form-control"  type="text"  disabled value="{{ $filiere.$niveau }}" style="text-align: left;">
+                                                <input type="hidden" name='' value="{{ $filiere.$niveau }}">
+                                                <input type="hidden" name='filiere' value="{{ $filiere }}">
+                                                <input type="hidden" name='niveau' value="{{ $niveau }}">
                                                 {{ $errors->first('classe',':message') }}
                                             </div>
                                         </div>

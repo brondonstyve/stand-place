@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Matricule extends Model
 {
-    public $timestamp=true;
-    protected $fillable=['matricule','nom','prenom','classe','annee_scolaire'];
+    public $timestamps=false;
+    protected $fillable=['matricule','nom','prenom','filiere','niveau','annee_accademique'];
 
 }

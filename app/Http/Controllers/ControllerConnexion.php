@@ -22,12 +22,12 @@ class ControllerConnexion extends Controller
         $connect=Auth::attempt(['email' => $request->email, 'password' => $request->mdp]);
 
         if ($connect) {
-            $utilisteur=auth()->user();
-            Flashy::success('Bienvenu '.$utilisteur->prenom);
+            $utilisateur=auth()->user();
+            Flashy::success('Bienvenu '.$utilisateur->prenom);
             return redirect()->route('profil_path');
         }else{
             Flashy::error('Erreur de connexion. vérifiez vos identifiants');
-            return back();
+            return redirect()->route('home');
         }
 
     }

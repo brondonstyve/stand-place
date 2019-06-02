@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -169,6 +170,7 @@ return [
 
         MercurySeries\Flashy\FlashyServiceProvider::class,
         'Intervention\Image\ImageServiceProvider',
+        Jenssegers\Date\DateServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -231,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Flashy' => MercurySeries\Flashy\Flashy::class,
         'Image' => 'Intervention\Image\Facades\Image',
+        'Date' => Jenssegers\Date\Date::class,
 
     ],
 ];
