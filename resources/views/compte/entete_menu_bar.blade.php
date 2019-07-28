@@ -22,6 +22,7 @@
     <link rel="stylesheet" id="kc-general-css" href="css/kingcomposer.css" type="text/css" media="all">
 
     <script src="js/jquery.js"></script>
+    <script href=" http://projects.erikzaadi.com/jQueryPlugins/jQuery.printElement/"></script>
 
 </head>
 
@@ -29,7 +30,7 @@
 
     <div id="main-wrapper">
 
-        <header class="topbar is_stuck" style="position: fixed; top: 0px; width: 1349px; height: 90px; background-color: #002b46; ">
+        <header class="topbar is_stuck" style="position: fixed; top: 0px; width: 1380px; height: 90px; background-color: #002b46; ">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
 
 
@@ -84,18 +85,40 @@
                                                 </div>
                                             </div>
                                         </li>
+
+                                        @if ($utilisateur->type =="enseignant")
                                         <li role="separator" class="divider"></li>
                                         <li><a href="profil.blade.php"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
-                                        <li><a href="notes.blade.php"><img src="images/note.png" width="10%"/> Notes</a></li>
-                                        <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
-
-                                        <li><a href="vote.blade.php"><img src="images/vote.png" width="10%"/> Vote</a></li>
+                                        <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/>Remplir notes</a></li>
+                                        <li><a href="{{ route('appel_ct_path') }}"><img src="images/blog.png" width="10%"/>Appel/cahier de texte</a></li>
+                                        <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
+                                        <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>blog</a></li>
                                         <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
                                         <li><a href="discipline.blade.php"><img src="images/discipline.png" width="10%"/> Discipline</a></li>
                                         <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
                                         <li><a href="deconnexion.blade.php"><img src="images/power.png" width="10%"/>Déconnexion</a></li>
+
+                                        @else
+                                               @if ($utilisateur->type='null')
+                                               <li role="separator" class="divider"></li>
+                                               <li><a href="profil.blade.php"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
+                                               <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/> Notes</a></li>
+                                               <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
+
+                                               <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
+                                               <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
+                                               <li><a href="discipline.blade.php"><img src="images/discipline.png" width="10%"/> Discipline</a></li>
+                                               <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
+                                               <li role="separator" class="divider"></li>
+                                               <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
+                                               <li><a href="deconnexion.blade.php"><img src="images/power.png" width="10%"/>Déconnexion</a></li>
+                                                @else
+
+                                               @endif
+                                        @endif
+
                                     </ul>
                                 </div>
                             </li>
@@ -128,16 +151,31 @@
 
                     <nav class="sidebar-nav active">
                         <ul id="sidebarnav" class="in">
-                                <ul aria-expanded="true" class="collapse in">
+                            <ul aria-expanded="true" class="collapse in">
+                                @if ($utilisateur->type=="enseignant")
+                                    <li ><a href="profil.blade.php"><img src="images/profil.png" width="20%"/> Mon profil</a></li>
+                                    <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="20%"/>Remplir notes</a></li>
+                                    <li><a href="{{ route('appel_ct_path') }}"><img src="images/blog.png" width="20%"/>Appel/CT</a></li>
+                                    <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
+                                    <li><a href="discipline.blade.php"><img src="images/discipline.png" width="20%"/> Discipline</a></li>
+                                    <li><a href="blog.blade.php"><img src="images/blog.png" width="20%"/>Blog</a></li>
+                                    <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="20%"/> Vote</a></li>
+                                    <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="20%"/> Inbox</a></li>
 
-                                        <li ><a href="profil.blade.php"><img src="images/profil.png" width="20%"/> Mon profil</a></li>
-                                        <li><a href="notes.blade.php"><img src="images/note.png" width="20%"/> Notes</a></li>
-                                        <li><a href="blog.blade.php"><img src="images/blog.png" width="20%"/>Blog</a></li>
+                                    @else
+                                         @if ($utilisateur->type=="null")
+                                         <li ><a href="profil.blade.php"><img src="images/profil.png" width="20%"/> Mon profil</a></li>
+                                         <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="20%"/> Notes</a></li>
+                                         <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
+                                         <li><a href="{{ route('discipline_path') }}"><img src="images/discipline.png" width="20%"/> Discipline</a></li>
+                                         <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="20%"/> Inbox</a></li>
+                                         <li><a href="blog.blade.php"><img src="images/blog.png" width="20%"/>Blog</a></li>
+                                         <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="20%"/> Vote</a></li>
 
-                                        <li><a href="vote.blade.php"><img src="images/vote.png" width="20%"/> Vote</a></li>
-                                        <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
-                                        <li><a href="discipline.blade.php"><img src="images/discipline.png" width="20%"/> Discipline</a></li>
-                                        <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="20%"/> Inbox</a></li>
+                                         @else
+
+                                         @endif
+                                    @endif
 
                                 </ul>
                             </li>
@@ -175,33 +213,54 @@
 
                     <div class="col-md-7 col-4 align-self-center">
                         <div class="d-flex m-t-10 justify-content-end">
-                            <div class="d-flex m-r-20 m-l-10 hidden-md-down">
 
-                                    <div class="chart-text m-r-10">
-                                            <h4 class="m-b-0"><small>CLASSE</small></h4>
-                                            <h6 class="m-t-0 text-info" style="text-transform: uppercase; font-size: 15px;">{{ $utilisateur->filiere.$utilisateur->niveau }}</h6>
+                                @if ($utilisateur->type=="enseignant")
+
+
+                                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                                        <div class="chart-text m-r-10">
+                                            <h4 class="m-b-0"><small>DISCIPLINE</small></h4>
+                                            <h6 class="m-t-0 text-primary"> xxxxx</h6>
+                                        </div>
+                                    </div>
+                                @else
+                                     @if ($utilisateur->type=="null")
+                                     <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+
+                                            <div class="chart-text m-r-10">
+                                                    <h4 class="m-b-0"><small>CLASSE</small></h4>
+                                                    <h6 class="m-t-0 text-info" style="text-transform: uppercase; font-size: 15px;">{{ $utilisateur->filiere.$utilisateur->niveau }}</h6>
+                                                </div>
+
+                                                <div class="spark-chart">
+                                                        <div id="monthchart"><canvas style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"
+                                                                width="60" height="35"></canvas></div>
+                                                    </div>
+                                        @if ($etat=="Discipline")
+                                        <div class="chart-text m-r-10">
+                                            <h4 class="m-b-0"><small>HEURES D'ABSENCES</small></h4>
+                                            <h6 class="m-t-0 text-info">{{ $remplisseur }} @if($remplisseur==0) heure @else heures @endif </h6>
+                                        </div>
+                                        <div class="spark-chart">
+                                            <div id="monthchart"><canvas style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"
+                                                    width="60" height="35"></canvas></div>
                                         </div>
 
-                                        <div class="spark-chart">
-                                                <div id="monthchart"><canvas style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"
-                                                        width="60" height="35"></canvas></div>
+                                    <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                                            <div class="chart-text m-r-10">
+                                                <h4 class="m-b-0"><small>DISCIPLINE</small></h4>
+                                                <h6 class="m-t-0 text-primary"> @if($remplisseur<=10) bonne @else @if($remplisseur<=30) Attention @else Mauvaise @endif @endif</h6>
                                             </div>
+                                        </div>
+                                      @endif
+                                    </div>
+                                     @else
 
-                                <div class="chart-text m-r-10">
-                                    <h4 class="m-b-0"><small>HEURES D'ABSENCES</small></h4>
-                                    <h6 class="m-t-0 text-info">xxxxx</h6>
-                                </div>
-                                <div class="spark-chart">
-                                    <div id="monthchart"><canvas style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"
-                                            width="60" height="35"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="d-flex m-r-20 m-l-10 hidden-md-down">
-                                <div class="chart-text m-r-10">
-                                    <h4 class="m-b-0"><small>DISCIPLINE</small></h4>
-                                    <h6 class="m-t-0 text-primary"> xxxxx</h6>
-                                </div>
-                            </div>
+                                     @endif
+                                @endif
+
+
+
                         </div>
                     </div>
                 </div>

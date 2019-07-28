@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use MercurySeries\Flashy\Flashy;
 use App\Http\Requests\ConnexionRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\models\Compte;
 
 class ControllerConnexion extends Controller

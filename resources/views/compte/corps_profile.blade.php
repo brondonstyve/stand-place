@@ -1,5 +1,5 @@
 <!-- Debut page -->
-<h3 class="card-title">Emploi de temps</h3>
+<h3 class="card-title">Communiqués</h3>
 <div class="row">
     <!-- Column -->
 
@@ -22,13 +22,9 @@
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="amp-pxl" style="height: 360px;">
-
-                    </div>
+                <div class="col-12" style="background-color: aliceblue">
 
                 </div>
             </div>
@@ -39,30 +35,31 @@
     <div class="col-lg-4 col-md-6">
         <div class="card card-size color-md1">
             <div class="card-body">
-                <h3 class="card-title">Votes des professeurs</h3>
-                <h6 class="text-muted  text-info">Les meilleurs</h6>
+                <h3 class="card-title">Résultat du dernier vote</h3>
+                <h6 class="text-muted  text-info">Le Vainqueur</h6>
                 <div id="visitor" style="height: 267px; width: 100%; max-height: 290px; position: relative;" class="c3">
 
+                        <div class="table-responsive m-t-20">
+                            @if (sizeOf($liste)==0)
+                            <h3 class="card-title">Aucun resultat disponible pour le moment</h3>
+                            @else
 
-                    <div class="c3-tooltip-container" style="position: absolute; pointer-events: none; display: none;">
-                    </div>
+                            <table class="table stylish-table">
+                                    <tbody>
+                                 <tr class="">
+                                    <td><span class="round"><img src="images/2.jpg" alt="user" width="50"></span><td>
+                                        <h6> {{ $liste[0]->nom_prof }} </h6><small class="text-muted">{{ $liste[0]->nom }}  </small></td>
+                                    <td> {{ $liste[0]->vote }} voix <br><div class="progress-bar bg-success" role="progressbar" style="width: {{ $liste[0]->vote }}%; height:25px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> </td>
+
+                                 </tr>
+                                    </tbody>
+                             </table>
+
+                            @endif
+
                 </div>
-            </div>
-            <div>
-                <hr class="m-t-0 m-b-0">
-            </div>
-            <div class="card-body text-center ">
-                <ul class="list-inline m-b-0">
-                    <li>
-                        <h6 class="text-muted text-info"><a href="" class="text-muted text-info">GL</a></h6>
-                    </li>
-                    <li>
-                        <h6 class="text-muted  text-primary"><a href="" class="text-muted text-info">SR</a></h6>
-                    </li>
-                    <li>
-                        <h6 class="text-muted  text-success"><a href="" class="text-muted text-info">SE</a></h6>
-                    </li>
-                </ul>
+
+                </div>
             </div>
         </div>
     </div>

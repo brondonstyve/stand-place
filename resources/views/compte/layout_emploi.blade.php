@@ -31,7 +31,7 @@
                 {{ $jour[$i] }} {!! '<br>'. $passeur->modify('+ 1 day')->format('d-m-Y') !!}
             </th>
 
-                @if ($k>$nombre-1 || $k<0) {{ $k=$init}} @endif @if ($jour[$i]=='MERCREDI' || $jour[$i]=='SAMEDI' )
+                @if ($k>$nombre-1 || $k<0) {{ $k=0}} @endif @if ($jour[$i]=='MERCREDI' || $jour[$i]=='SAMEDI' )
                 <td>
                     <!--test sur les cours terminés-->
                     @if ($resultat[$k]->nombre_heure < 0) <p class="alert-danger">{!! '<p
@@ -49,7 +49,7 @@
 
                     @endif
                 </td>
-                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=$init}} @endif
+                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=0}} @endif
 
                             <td>
                                 <!--test sur les cours terminés-->
@@ -63,7 +63,7 @@
                                             {{ $resultat[$k]->nombre_heure }}h resrantes @endif </p>
                                         @endif
                             </td>
-                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=$init}} @endif
+                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=0}} @endif
 
                             <td
                                 style="background-color: gray; color:aliceblue; vertical-align: middle; text-align: center">
@@ -87,7 +87,7 @@
                                             {{ $resultat[$k]->nombre_heure }}h resrantes @endif </p>
                                         @endif
                             </td>
-                            @php $resultat[$k]->nombre_heure-=2 ; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=$init}} @endif
+                            @php $resultat[$k]->nombre_heure-=2 ; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=0}} @endif
 
                             <td>
                                 <!--test sur les cours terminés-->
@@ -101,7 +101,7 @@
                                             {{ $resultat[$k]->nombre_heure }}h resrantes @endif </p>
                                         @endif
                             </td>
-                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=$init}} @endif
+                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=0}} @endif
 
                             <td
                                 style="background-color: gray; color:aliceblue; vertical-align: middle; text-align: center ">
@@ -119,7 +119,7 @@
                                             {{ $resultat[$k]->nombre_heure }}h resrantes @endif </p>
                                         @endif
                             </td>
-                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=$init}} @endif
+                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=0}} @endif
                             @endif
                             </tr>
 

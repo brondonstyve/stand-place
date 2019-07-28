@@ -30,6 +30,8 @@
         return -1;
     }
 
+
+
     function alias(name) { return function aliasClosure() { return this[name].apply(this, arguments); }; }
     proto.getListeners = function getListeners(evt) {
         var events = this._getEvents();

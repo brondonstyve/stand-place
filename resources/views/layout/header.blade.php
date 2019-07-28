@@ -438,32 +438,42 @@
 
 
 <!--add con -->
-<div class="table-responsive">
+<div class="table-responsive" >
     <div id="add-con" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        style="display: none;" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content col-xs-10">
+        style="display: none;" aria-hidden="true" >
+        <div class="modal-dialog" >
+            <div class="modal-content col-xs-6" >
                 <div class="modal-header">
-                    <h4 class="modal-title centre" id="myModalLabel">Votre Matricule</h4>
+                    <h4 class="modal-title centre" id="myModalLabel" style="color: #002b46">Connexion</h4>
                 </div>
                 <div class="modal-body ">
                     <form action="{{ route('connex_show') }}" method="POST" class="form-horizontal form-material "
                         enctype="multipart/form-data">
                         {{ csrf_field() }}
+                        <br>
 
-                        <div class="form-group">
-                            <div class="col-xs-12">
+                        <div class="form-group btn-sm" >
+                            <div class="col-xs-12 " >
                                 <input class="form-control" type="email" name='email' placeholder="Email" required>
                                 {{ $errors->first('email',':message') }}
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-xs-12">
+
+                        <div class="form-group btn-sm">
+                            <div class="col-xs-12 ">
                                 <input class="form-control" type="password" name='mdp' required=""
                                     placeholder="Mot de passe">
                                 {{ $errors->first('mdp',':message') }}
                             </div>
+                        </div>
+                        <br>
+                        <div class="contact-topbar btn-sm" style="text-align: right">
+                                <span >Créer un
+                                    <a href="#" style="color: #002b46" data-toggle="modal" data-target="#add-matricule" title="Login">
+                                        compte
+                                    </a>
+                                </span>
                         </div>
 
                         <div class="centre">

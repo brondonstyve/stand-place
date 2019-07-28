@@ -42,7 +42,7 @@ Route::get('/compReg.blade.php', 'controllerCompte@index')->name('compte_path');
 
 Route::post('storeCompte', 'controllerCompte@store')->name('compte_store_path');
 
-Route::post('findMatricule', 'controllerCompte@findMatricule')->name('find_matricule_path');
+Route::post('Matricule', 'controllerCompte@findMatricule')->name('find_matricule_path');
 
 Route::get('signin.blade.php', 'PagesController@signin')->name('signin_path');
 
@@ -69,11 +69,13 @@ Route::get('/blog.blade.php', 'PagesController@ouvrirBlog');
 
 Route::get('test.blade.php', 'PagesController@test');
 
-Route::get('/vote.blade.php', 'PagesController@ouvrirVote');
+Route::get('/vote', 'vote@membreVotes')->name('vote_path');
+
+Route::post('/vote', 'vote@membreVotes')->name('vote_path');
+
+Route::post('/voteEnvoi', 'vote@voteEnvoi')->name('vote_envoi_path');
 
 Route::get('/emploi.blade.php', 'PagesController@ouvrirEmploi')->name('edt_path');
-
-Route::get('/discipline.blade.php', 'PagesController@ouvrirDiscipline');
 
 Route::get('/inbox.blade.php', 'PagesController@ouvrirInbox');
 
@@ -89,4 +91,26 @@ Route::post('/valider_suite_paiement', 'PaiementController@validerSuitePaiement'
 
 Route::get('emploiDeTemps', 'emploiDeTempsController@genererEDT')->name('generer_edt_path');
 
+Route::get('note', 'noteController@afficherNote')->name('note_path');
 
+Route::post('ajouter_les_notes', 'noteController@remplirNotes')->name('remplir_note_path');
+
+Route::post('insertion_de_notes', 'noteController@insererNotes')->name('inserer_note_path');
+
+Route::get('appel/ct', 'appel_ctController@afficher')->name('appel_ct_path');
+
+Route::get('appelct', 'appelctController@afficher')->name('appel_ct_path');
+
+Route::post('appelct_liste', 'appelctController@remplirAbsence')->name('appel_ct_liste_path');
+
+Route::post('inserer_absence', 'appelctController@insererAbsence')->name('inserer_absence_path');
+
+Route::post('liste_absence', 'appelctController@listerAbsence')->name('liste_absence_path');
+
+Route::get('/discipline', 'disciplineController@Discipline')->name('discipline_path');
+
+Route::post('emploiDeTemps', 'emploiDeTempsController@disponibilite')->name('disponibilite_edt_path');
+
+Route::post('RempliremploiDeTemps', 'emploiDeTempsController@remplir')->name('remplir_emploi_path');
+
+Route::post('sauvegarderEDT', 'emploiDeTempsController@sauvegarder')->name('sauvegarder_edt_path');

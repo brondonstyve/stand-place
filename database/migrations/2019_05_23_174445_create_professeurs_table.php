@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGl1MatieresTable extends Migration
+class CreateProfesseursTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,12 @@ class CreateGl1MatieresTable extends Migration
      */
     public function up()
     {
-        Schema::create('matieres', function (Blueprint $table) {
+        Schema::create('professeurs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('compte')->unsigned()->default(null);
+            $table->integer('compte')->index()->unsigned();
             $table->string('nom',50);
-            $table->integer('semestre');
-            $table->string('classe',4);
-            $table->integer('nombre_heure');
-            $table->date('periode');
-            $table->integer('vote');
-            $table->integer('niveau');
-            $table->integer('coef');
+            $table->string('prenom',50)->nullable();
             $table->foreign('compte')->references('id')->on('comptes')->onDelete('cascade');
-
         });
     }
 
@@ -36,6 +29,6 @@ class CreateGl1MatieresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matieres');
+        Schema::dropIfExists('professeurs');
     }
 }

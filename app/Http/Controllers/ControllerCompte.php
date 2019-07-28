@@ -50,6 +50,7 @@ class ControllerCompte extends Controller
                 'prenom'=>$request->prenom,
                 'filiere'=>$request->filiere,
                 'niveau'=>$request->niveau,
+                'classe'=>$request->filiere.$request->niveau,
                 'email'=>$request->email,
                 'mot_de_passe'=>bcrypt($request->mdpconf)]);
 
