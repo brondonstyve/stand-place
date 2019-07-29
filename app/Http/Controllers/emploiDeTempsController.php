@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\models\Matiere;
 use App\models\disponibilite;
+use App\models\emploiDeTemp;
 use App\Http\Requests\insererNoteRequest;
 use Illuminate\Support\Facades\DB;
 use MercurySeries\Flashy\Flashy;
@@ -23,6 +24,20 @@ class emploiDeTempsController extends Controller
             }
 
             $passe=false;
+
+
+            $resultat=DB::table('emploi_de_temps')
+            ->join('comptes','comptes.id','=','emploi_de_temps.compte')
+            ->select('emploi_de_temps.classe','emploi_de_temps.jour','emploi_de_temps.matiere',
+                     'emploi_de_temps.tranche','emploi_de_temps.compte','emploi_de_temps.created_at','comptes.nom')
+            ->where([
+                ['emploi_de_temps.classe',$utilisateur->classe]
+                ])
+            ->orderBy('emploi_de_temps.jour')
+            ->get();
+
+            //return $resultat;
+
             $remplisseur=DB::table('disponibilites')
             ->join('comptes','comptes.id','=','disponibilites.compte')
             ->select('comptes.nom','disponibilites.jour')
@@ -137,9 +152,18 @@ class emploiDeTempsController extends Controller
         ])
         ->get();
 
+
+        $testeurEmpl=DB::table('emploi_de_temps')
+        ->select('jour','classe','matiere','tranche','compte')
+        ->where([
+            ['classe','<>',$request->classe],
+            ])
+        ->get();
+  ///return $testeurEmpl;
+
         $emploiTemp=DB::table('matieres')
         ->join('comptes','comptes.id','=','matieres.compte')
-        ->select('matieres.nom','comptes.nom as nom_prof')
+        ->select('matieres.nom','comptes.nom as nom_prof','matieres.compte','matieres.classe')
         ->where([
             ['matieres.classe',$request->classe],
             ])
@@ -148,19 +172,16 @@ class emploiDeTempsController extends Controller
             ])
         ->get();
 
-        $statute=DB::table('disponibilites')
+//return $emploiTemp;
+        $disponibilite=DB::table('disponibilites')
         ->join('comptes','comptes.id','=','disponibilites.compte')
-        ->distinct()
-        ->select('jour')
-        ->where([
-            ['disponibilites.compte',$utilisateur->id]
-        ])
+        ->select('jour','compte')
         ->get();
 
-return $statute;
+//return $disponibilite;
 
         $passe=true;
-        return view('index/emploi',compact('resultat','passe','nombre','emploiTemp','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
+        return view('index/emploi',compact('resultat','passe','testeurEmpl','nombre','disponibilite','emploiTemp','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
 
 
     }
@@ -172,7 +193,82 @@ return $statute;
             return redirect()->route('home');
             }
 
-             echo $request->LUNDImatiere0."<br>".$request->LUNDImatiere1."<br>".$request->LUNDImatiere2."<br>" ;
-             echo $request->MARDImatiere0."<br>".$request->MARDImatiere1."<br>".$request->MARDImatiere2."<br>" ;
+
+
+            emploiDeTemp::whereClasse($request->classe)->delete();
+
+            $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
+            // echo $_POST["$jour[0]matiere0"]."<br>".$_POST["$jour[0]matiere1"]."<br>".$_POST["$jour[0]matiere2"]."<br>" ;
+            //$aexplo=explode("-",$_POST["$jour[5]matiere1"]);
+            //return $aexplo[1];
+
+             for ($i=0; $i <6 ; $i++) {
+                 if(($jour[$i]=='MERCREDI') || ($jour[$i]=='SAMEDI')){
+                    for ($a=0; $a <2 ; $a++) {
+                    $aexplo=explode("-",$_POST["$jour[$i]matiere$a"]);
+                    if (sizeOf($aexplo)<=1) {
+
+                    } else {
+                        $newEDT=emploiDeTemp::create([
+
+                            'classe'=>$request->classe,
+                            'jour'=>$jour[$i],
+                            'compte'=>$aexplo[0],
+                            'matiere'=>$aexplo[1],
+                            'tranche'=>$a+1,
+
+                     ]);
+                    }
+                }}
+                 else {
+                    for ($a=0; $a <3 ; $a++) {
+                        $aexplo=explode("-",$_POST["$jour[$i]matiere$a"]);
+                        if (sizeOf($aexplo)<=1) {
+
+                        } else {
+                            $newEDT=emploiDeTemp::create([
+
+                                'classe'=>$request->classe,
+                                'jour'=>$jour[$i],
+                                'compte'=>$aexplo[0],
+                                'matiere'=>$aexplo[1],
+                                'tranche'=>$a+1,
+
+                         ]);
+                        }
+
+
+                    }
+                 }
+
+
+            }
+
+            if($newEDT){
+                $passe=false;
+            $remplisseur=DB::table('disponibilites')
+            ->join('comptes','comptes.id','=','disponibilites.compte')
+            ->select('comptes.nom','disponibilites.jour')
+            ->where([
+                ['disponibilites.compte',$utilisateur->id  ],
+
+                ])
+            ->get();
+
+
+
+
+        $classe=DB::table('comptes')
+        ->select('comptes.classe')
+        ->distinct()
+        ->where([
+            ['type',null],
+            ['classe','<>','null']
+        ])
+        ->get();
+        Flashy::error('Emploi de temps enregistré avec succès');
+        return redirect()->route('generer_edt_path',compact('resultat','passe','nombre','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
+            }
+
     }
 }

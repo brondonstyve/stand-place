@@ -1,22 +1,16 @@
-@if ($nombre==0)
+@if (sizeOf($resultat)==0)
 <h1 class="centre">Vous n'êtes pas encore programmé</h1>
 @else
 
 
 <div class="card-body">
-        <a class="register col-lg-12 modal-content fileupload bouton b1 btn-rounded waves-effect carousel-inner" class="btn-info" href="" data-toggle="modal" data-target="#add-con"
+        <a href="#" class="register col-lg-12 modal-content fileupload bouton b1 btn-rounded waves-effect carousel-inner" class="btn-info" href=""
         style="font-size: 15px;color: #002b46">
-        <span style="float: left;"> Semaine {{ $k }}</span> DU
-        @php
-        echo '<span style="color:red">'.$date->format('d-m-Y').'</span> Au ';
-        $date->modify('+ 6 day');
-        echo '<span style="color:red">'.$date->format('d-m-Y').'</span>';
-        echo '<span style="float: right; color:black">Derouler<b class="caret"></b></span> ';
-        $date->modify('+ 1 day');
-        @endphp
+        <span style="float: left;"> Emploi de temps delivré le {{ $resultat[0]->created_at }}
     </a>
-    <div class="table-responsive m-t-20" style="margin-top: -20px;">
-        <table class="table stylish-table">
+    <br>
+    <div class="table-responsive " style="margin-top: -20px;">
+        <table class="btn btn-sm " style="font-size: 15px;color: black;text-align: left; ">
             <tr class="btn-info">
                 <th>HORAIRES</th>
                 <th>7h30-9h30 </th>
@@ -24,110 +18,53 @@
                 <th>11h30-12h45</th>
                 <th>12h45-14h45</th>
             </tr>
+            @php
+            $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
+            @endphp
 
-            @for ($i=0; $i <6 ; $i++) @php $compteur=$i-7 ; @endphp
+
+            @for ($j =0 ; $j <sizeOf($jour) ; $j++)
             <tr>
-            <th style="vertical-align: middle;">
-                {{ $jour[$i] }} {!! '<br>'. $passeur->modify('+ 1 day')->format('d-m-Y') !!}
-            </th>
+                    <td>{{ $jour[$j] }}</td>
+                    <td>
+                        @for ($i =0 ; $i <sizeOf($resultat) ; $i++)
 
-                @if ($k>$nombre-1 || $k<0) {{ $k=0}} @endif @if ($jour[$i]=='MERCREDI' || $jour[$i]=='SAMEDI' )
-                <td>
-                    <!--test sur les cours terminés-->
-                    @if ($resultat[$k]->nombre_heure < 0) <p class="alert-danger">{!! '<p
-                            style="text-transform: uppercase;">'. $resultat[$k]->nom.'</p>
-                        <p class="alert-danger"> Cour terminé' !!} @else
-                            <!--affichages de cours non terminés-->
-                            {!! '<p style="text-transform: uppercase;">'. $resultat[$k]->nom.'</p>' .
-                            $resultat[$k]->nom_prof. '<br>' !!}
-                            <p class="alert-danger">
-                                @if ($resultat[$k]->nombre_heure==18) Devoir CC
-                                @else
-                                {{ $resultat[$k]->nombre_heure }}h resrantes
-                                @endif
-                            </p>
+                              @if ($resultat[$i]->tranche==1 && $resultat[$i]->jour==$jour[$j])
+                                    {{ $resultat[$i]->matiere }} <br> <p class="register btn btn-sm btn-reverse">M. {{ $resultat[$i]->nom }}</p>
+                              @endif
 
-                    @endif
-                </td>
-                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=0}} @endif
+                        @endfor
+                    </td>
 
-                            <td>
-                                <!--test sur les cours terminés-->
-                                @if ($resultat[$k]->nombre_heure < 0) <p class="alert-danger">{!! '<p
-                                        style="text-transform: uppercase;">'. $resultat[$k]->nom.'</p>
-                                    <p class="alert-danger"> Cour terminé' !!} @else
-                                        <!--affichages de cours non terminés-->
-                                        {!! '<p style="text-transform: uppercase;">'. $resultat[$k]->nom.'</p>'.
-                                        $resultat[$k]->nom_prof. '<br>' !!}
-                                        <p class="alert-danger">@if ($resultat[$k]->nombre_heure==18) Devoir CC @else
-                                            {{ $resultat[$k]->nombre_heure }}h resrantes @endif </p>
-                                        @endif
-                            </td>
-                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=0}} @endif
+                    <td>
+                        @for ($i =0 ; $i <sizeOf($resultat) ; $i++)
 
-                            <td
-                                style="background-color: gray; color:aliceblue; vertical-align: middle; text-align: center">
-                            </td>
+                              @if ($resultat[$i]->tranche==2 && $resultat[$i]->jour==$jour[$j])
+                                    {{ $resultat[$i]->matiere }}
+                                    <br>
+                                    <p class="register btn btn-sm btn-reverse" >M. {{ $resultat[$i]->nom }}</p>
+                              @endif
 
-                            <td
-                                style="background-color: gray; color:aliceblue; vertical-align: middle; text-align: center">
-                            </td>
+                        @endfor
+                    </td>
 
-                            @else
+                        <td style="background-color: gray"> PAUSE</td>
 
-                            <td>
-                                <!--test sur les cours terminés-->
-                                @if ($resultat[$k]->nombre_heure < 0) <p class="alert-danger">{!! '<p
-                                        style="text-transform: uppercase;">'. $resultat[$k]->nom.'</p>
-                                    <p class="alert-danger"> Cour terminé' !!} @else
-                                        <!--affichages de cours non terminés-->
-                                        {!! '<p style="text-transform: uppercase;">'. $resultat[$k]->nom.'</p>' .
-                                        $resultat[$k]->nom_prof. '<br>' !!}
-                                        <p class="alert-danger">@if ($resultat[$k]->nombre_heure==18) Devoir CC @else
-                                            {{ $resultat[$k]->nombre_heure }}h resrantes @endif </p>
-                                        @endif
-                            </td>
-                            @php $resultat[$k]->nombre_heure-=2 ; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=0}} @endif
+                    <td>
+                        @for ($i =0 ; $i <sizeOf($resultat) ; $i++)
 
-                            <td>
-                                <!--test sur les cours terminés-->
-                                @if ($resultat[$k]->nombre_heure < 0) <p class="alert-danger">{!! '<p
-                                        style="text-transform: uppercase;">'. $resultat[$k]->nom.'</p>
-                                    <p class="alert-danger"> Cour terminé' !!} @else
-                                        <!--affichages de cours non terminés-->
-                                        {!! '<p style="text-transform: uppercase;">'. $resultat[$k]->nom.'</p>'.
-                                        $resultat[$k]->nom_prof. '<br>' !!}
-                                        <p class="alert-danger">@if ($resultat[$k]->nombre_heure==18) Devoir CC @else
-                                            {{ $resultat[$k]->nombre_heure }}h resrantes @endif </p>
-                                        @endif
-                            </td>
-                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=0}} @endif
+                              @if ($resultat[$i]->tranche==3 && $resultat[$i]->jour==$jour[$j])
+                                    {{ $resultat[$i]->matiere }} <br> <p class="register btn btn-sm btn-reverse">M. {{ $resultat[$i]->nom }}</p>
+                              @endif
 
-                            <td
-                                style="background-color: gray; color:aliceblue; vertical-align: middle; text-align: center ">
-                                PAUSE </td>
+                        @endfor
+                    </td>
 
-                            <td>
-                                <!--test sur les cours terminés-->
-                                @if ($resultat[$k]->nombre_heure < 0) <p class="alert-danger">{!! '<p
-                                        style="text-transform: uppercase;">'. $resultat[$k]->nom.'</p>
-                                    <p class="alert-danger"> Cour terminé' !!} @else
-                                        <!--affichages de cours non terminés-->
-                                        {!! '<p style="text-transform: uppercase;">'. $resultat[$k]->nom.'</p>' .
-                                        $resultat[$k]->nom_prof. '<br>' !!}
-                                        <p class="alert-danger">@if ($resultat[$k]->nombre_heure==18) Devoir CC @else
-                                            {{ $resultat[$k]->nombre_heure }}h resrantes @endif </p>
-                                        @endif
-                            </td>
-                            @php $resultat[$k]->nombre_heure-=2; $k=$k+1 @endphp @if ($k>$nombre-1) {{ $k=0}} @endif
-                            @endif
-                            </tr>
 
-                            @endfor
-                            @php
-                            $passeur->modify('+ 1 day');
+              </tr>
+            @endfor
 
-                            @endphp
+
 
         </table>
     </div>

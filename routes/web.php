@@ -114,3 +114,5 @@ Route::post('emploiDeTemps', 'emploiDeTempsController@disponibilite')->name('dis
 Route::post('RempliremploiDeTemps', 'emploiDeTempsController@remplir')->name('remplir_emploi_path');
 
 Route::post('sauvegarderEDT', 'emploiDeTempsController@sauvegarder')->name('sauvegarder_edt_path');
+
+route::get('evaluation','evaluationController@evaluation')->name('evaluation_path');

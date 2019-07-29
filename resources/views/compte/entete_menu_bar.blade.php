@@ -94,7 +94,7 @@
                                         <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
                                         <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>blog</a></li>
                                         <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
-                                        <li><a href="discipline.blade.php"><img src="images/discipline.png" width="10%"/> Discipline</a></li>
+                                        <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="10%"/> Discipline</a></li>
                                         <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
@@ -157,7 +157,7 @@
                                     <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="20%"/>Remplir notes</a></li>
                                     <li><a href="{{ route('appel_ct_path') }}"><img src="images/blog.png" width="20%"/>Appel/CT</a></li>
                                     <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
-                                    <li><a href="discipline.blade.php"><img src="images/discipline.png" width="20%"/> Discipline</a></li>
+                                    <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="20%"/> Discipline</a></li>
                                     <li><a href="blog.blade.php"><img src="images/blog.png" width="20%"/>Blog</a></li>
                                     <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="20%"/> Vote</a></li>
                                     <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="20%"/> Inbox</a></li>

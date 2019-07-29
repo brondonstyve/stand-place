@@ -4,8 +4,8 @@
 
 $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
 
-if ($nombre<1){ } else { $date=new DateTime($resultat[0]->periode);
-    $passeur=new DateTime($resultat[0]->periode);
+if (sizeOf($resultat)<1){ } else { $date=new DateTime($resultat[0]->created_at);
+    $passeur=new DateTime($resultat[0]->created_at);
 
     $jourChiffre=$date->format('w');
     switch ($jourChiffre) {
@@ -59,44 +59,65 @@ if ($nombre<1){ } else { $date=new DateTime($resultat[0]->periode);
 
 
 
-   @php
-   /*
+
     <div class="">
         <div id="add-con" class="modal fade in" role="dialog" style="">
             <div class="modal-dialog">
                 <div class="modal-content col-xs-5">
                     <div class="modal-body ">
                         <ul class="nav nav-tabs profile-tab">
-                            @for ($c = $init; $c < 22; $c++) <li class="nav-item"> <a
-                                    class="nav-link @if($c==$init) active @endif" data-toggle="tab"
-                                    href="{{ '#semaine'.$c }}" role="tab" title=""> @if ($c<10) semaine {{ '0'.$c }}
-                                        @else semaine {{ $c }} @endif</a> </li> @endfor </ul> </div> </div> </div>
+                             </ul> </div> </div> </div>
                                         </div>
-                                    </div> <!-- Debut page -->
+                                    </div> <!-- M.Debut page -->
                                         <h3 style="margin-top: -30px;"> Emploi de temps </h3>
                                         <div class="row">
-                                            <div class="col-lg-12 col-xlg-12 col-md-7  ">
+                                            <div class="col-lg-8 ">
                                                 <div class="card">
-                                                    <!-- Nav tabs -->
+                                                    <!-- M.Nav tabs -->
 
-                                                    <!-- emploi1 -->
+                                                    <!-- M.emploi1 -->
 
                                                     <div class="tab-content">
-                                                        @for ($k = $init; $k < 22; $k++) <div
-                                                            class="tab-pane @if($k==$init) active @endif"
-                                                            id="semaine{{ $k }}" role="tabpanel">
                                                             @include('compte/layout_emploi')
                                                     </div>
-                                                    @endfor
 
 
 
                                                 </div>
 
                                             </div>
+
+
+                                            <div class="col-lg-4 col-md-6">
+                                                    <div class="card card-size color-md1">
+                                                        <div class="card-body">
+                                                            <h3 class="card-title">Programme des évaluations</h3>
+                                                            <div id="visitor" style="height: 267px; width: 100%; max-height: 290px; position: relative;" class="c3">
+
+                                                                    <div class="table-responsive m-t-20">
+
+                                                                        <table class="table stylish-table">
+                                                                                <tbody>
+                                                                             <tr class="">
+
+                                                                             </tr>
+                                                                                </tbody>
+                                                                         </table>
+
+                                                            </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
                                         </div>
-                                        */
-                          @endphp
+
+
+
 
                                         @else
 
@@ -122,12 +143,12 @@ if ($nombre<1){ } else { $date=new DateTime($resultat[0]->periode);
 
                                                     <tr class="">
 
-                                                          <td><input type="checkbox" name="jour1" value="lundi" ></td>
-                                                          <td><input type="checkbox" name="jour2" value="mardi" ></td>
-                                                          <td><input type="checkbox" name="jour3" value="mercredi" ></td>
-                                                          <td><input type="checkbox" name="jour4" value="jeudi" ></td>
-                                                          <td><input type="checkbox" name="jour5" value="vendredi" ></td>
-                                                          <td><input type="checkbox" name="jour6" value="samedi" ></td>
+                                                          <td><input type="checkbox" name="jour1" value="LUNDI" ></td>
+                                                          <td><input type="checkbox" name="jour2" value="MARDI" ></td>
+                                                          <td><input type="checkbox" name="jour3" value="MERCREDI" ></td>
+                                                          <td><input type="checkbox" name="jour4" value="JEUDI" ></td>
+                                                          <td><input type="checkbox" name="jour5" value="VENDREDI" ></td>
+                                                          <td><input type="checkbox" name="jour6" value="SAMEDI" ></td>
 
                                                     </tr>
 
@@ -206,57 +227,47 @@ if ($nombre<1){ } else { $date=new DateTime($resultat[0]->periode);
                                                              @endphp
 
                                                               @if ($jour[$i]=='MERCREDI' || $jour[$i]=='SAMEDI')
+                                                              @for ($v =1 ; $v <3 ; $v++)
                                                               <td>
-                                                                    <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="">
-                                                                        @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
-                                                                          <option>{{ $emploiTemp[$a]->nom. ' - ' .$emploiTemp[$a]->nom_prof }}
-                                                                        @endfor
+                                                                <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="" style="width: 250px">
+                                                                    @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
+                                                                      <option> @for($x=0; $x<sizeOf($disponibilite); $x++)
+                                                                                  @if(($jour[$i]==$disponibilite[$x]->jour) && ($emploiTemp[$a]->compte==$disponibilite[$x]->compte))
+
+                                                                                         {{ $emploiTemp[$a]->compte.'-'.$emploiTemp[$a]->nom}}
 
 
-                                                                    </select>
-                                                                </td>
-                                                                <td>
-                                                                    <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="">
-                                                                        @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
-                                                                          <option>{{ $emploiTemp[$a]->nom. ' - ' .$emploiTemp[$a]->nom_prof }}
-                                                                        @endfor
+                                                                                  @endif
+                                                                               @endfor
+                                                                    @endfor
 
-                                                                    </select>
-                                                                </td>
-                                                                <td>
-                                                                    <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="">
-                                                                        @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
-                                                                          <option>
-                                                                        @endfor
+                                                                </select>
+                                                            </td>
+                                                              @endfor
 
-                                                                    </select>
-                                                                </td>
                                                               @else
 
+                                                             @for ($v =1 ; $v <4 ; $v++)
                                                               <td>
-                                                                    <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="">
-                                                                        @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
-                                                                          <option >{{ $emploiTemp[$a]->nom. ' - ' .$emploiTemp[$a]->nom_prof }}
-                                                                        @endfor
+                                                                <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="" style="width: 250px">
+                                                                    @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
+                                                                      <option>@for($x=0; $x<sizeOf($disponibilite); $x++)
+                                                                        @if(($jour[$i]==$disponibilite[$x]->jour) && ($emploiTemp[$a]->compte==$disponibilite[$x]->compte))
+                                                                        @if (sizeOf($testeurEmpl)==0)
+                                                                        {{ $emploiTemp[$a]->compte.'-'.$emploiTemp[$a]->nom}}
+                                                                        @else
+                                                                                             {{ $emploiTemp[$a]->compte.'-'.$emploiTemp[$a]->nom}}
 
-                                                                    </select>
-                                                                </td>
-                                                                <td>
-                                                                    <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="">
-                                                                        @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
-                                                                          <option>{{ $emploiTemp[$a]->nom. ' - ' .$emploiTemp[$a]->nom_prof }}
-                                                                        @endfor
+                                                                        @endif
 
-                                                                    </select>
-                                                                </td>
-                                                                <td>
-                                                                    <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="">
-                                                                        @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
-                                                                          <option>{{ $emploiTemp[$a]->nom. ' - ' .$emploiTemp[$a]->nom_prof }}
-                                                                        @endfor
+                                                                        @else
+                                                                        @endif
+                                                                     @endfor
+                                                                    @endfor
 
-                                                                    </select>
-                                                                </td>
+                                                                </select>
+                                                            </td>
+                                                              @endfor
 
                                                               @endif
 
@@ -266,6 +277,7 @@ if ($nombre<1){ } else { $date=new DateTime($resultat[0]->periode);
                                                 </table>
 
                                                     <div class="centre">
+                                                        <input type="hidden" name="classe" value="{{ $emploiTemp[0]->classe }}">
                                                         <input type="submit" value="Envoyer" class="btn btn-info" >
                                                     </div>
                                             @endif
