@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 class disciplineController extends Controller
 {
     public function Discipline(){
+
+
+
         $utilisateur=auth()->user();
         $remplisseur=DB::table('appels')
         ->join('comptes','comptes.id','=','appels.compte')

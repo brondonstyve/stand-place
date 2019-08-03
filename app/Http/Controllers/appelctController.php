@@ -12,6 +12,13 @@ use MercurySeries\Flashy\Flashy;
 class appelctController extends Controller
 {
     public function afficher(){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
         if (auth()->guest()) {
             Flashy::success('Connectez vouz');
             return redirect()->route('home');
@@ -34,6 +41,12 @@ class appelctController extends Controller
     }
 
     public function remplirAbsence(noteRequest $request){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
         $utilisateur=auth()->user();
 
@@ -101,6 +114,13 @@ class appelctController extends Controller
     }
 
     public function insererAbsence(){
+
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
 
 

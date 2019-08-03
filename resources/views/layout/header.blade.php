@@ -6,8 +6,7 @@
         <div class="modal-dialog">
             <div class="modal-content col-xs-9">
                 <div class="modal-title">
-                    <form action="{{ route('suite_paiement_path') }}" method="POST"
-                        class="form-horizontal form-material " enctype="multipart/form-data">
+                    <form action="{{ route('suite_paiement_path') }}" method="POST" class="form-horizontal form-material " enctype="multipart/form-data">
                         {{ csrf_field() }}
 
 
@@ -436,7 +435,6 @@
 </div>
 
 
-
 <!--add con -->
 <div class="table-responsive" >
     <div id="add-con" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -578,10 +576,19 @@
                     <ul id="main-mobile-menu" class="nav navbar-nav">
 
                         <ul class="sub-menu">
+
+                            <li id="menu-item-318" class="menu-item-318"><a href="index.blade.php"
+                                    style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Accueil
+                                    <hr></a></li>
+
+                            <li id="menu-item-318" class="menu-item-318"><a href="#"
+                                    style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Parents
+                                    <hr></a></li>
+
+
                             <li class="dropdown active menu-item-69 aligned- menu-item-318">
                                 <a data-hover="dropdown" data-toggle="dropdown"  style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">
-                                Cours
-                                <b class="caret"></b></a>
+                                Cours<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li class="menu-item-69 aligned-">
                                         <a href="coursfc.blade.php"  style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">
@@ -606,10 +613,10 @@
                                     style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">évènement
                                     <hr></a></li>
                             <li id="menu-item-205" class="menu-item-205"><a href="#"
-                                    style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Blog
+                                    style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Forum
                                     <hr></a></li>
                             <li id="menu-item-234" class="menu-item-234"><a href="marche.blade.php"
-                                    style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">marché
+                                    style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Gallery
                                     <hr></a></li>
                             <li id="menu-item-125" class="menu-item-125"><a href="Apropos.blade.php"
                                     style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Apropos
@@ -648,44 +655,19 @@
             </div>
         </div>
     </div>
-    <div class="collapse navbar-collapse" style="float: right; margin-top: -50px;font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">
+    <div class="collapse navbar-collapse centre" >
             <ul id="primary-menu" class="nav navbar-nav megamenu">
-                <li class="dropdown menu-item-64 aligned-"><a href="index.blade.php"
-                        class="dropdown-toggle" data-hover="dropdown"
-                        data-toggle="dropdown">Accueil </a></li>
-                <li class="dropdown  menu-item-69 aligned-"><a class="dropdown-toggle"
-                        data-hover="dropdown" data-toggle="dropdown">Cours <b
-                            class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li class=" menu-item-389 aligned-"><a
-                                href="coursfc.blade.php">Cours de la FC</a></li>
-                        <li class="menu-item-390 aligned-"><a href="coursfi.blade.php">Cours
-                                de la FI</a></li>
-                        <li class="menu-item-351 aligned-"><a
-                                href="coursligne.blade.php">Cours en ligne</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item-318 aligned-left"><a
-                        href="evenement.blade.php">évènements</a></li>
-                <li class="menu-item-205 aligned-left"><a href="blog.blade.php">Blog</a>
-                </li>
-                <li class="dropdown  menu-item-69 aligned-"><a class="dropdown-toggle"
-                        data-hover="dropdown" data-toggle="dropdown">Paiements <b
-                            class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li class=" menu-item-389 aligned-"><a href="" data-toggle="modal"
-                                data-target="#add-paiement">Nouvel étudiant</a></li>
-                        <li class=" menu-item-389 aligned-"><a href="" data-toggle="modal"
-                                data-target="#add-suite-paiement">Ancien étudiant</a></li>
-                    </ul>
-                </li>
 
 
-                <li class="menu-item-125 aligned-left"><a href="Apropos.blade.php">A
-                        propos</a></li>
-                <li class="menu-item-134 aligned-left"><a
-                        href="contact.blade.php">Contact</a></li>
-                </li>
+                            <li class="dropdown active menu-item-69 aligned-">
+                                    <a data-hover="dropdown" data-toggle="dropdown" style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Paiements <b class="caret"></b></a>
+                                       <ul class="dropdown-menu">
+                                           <li class=" menu-item-389 aligned-">
+                                               <a  data-toggle="modal" data-target="#add-paiement" style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Nouvel étudiant</a></li>
+                                           <li class=" menu-item-389 aligned-">
+                                               <a  data-toggle="modal" data-target="#add-suite-paiement" style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Ancien étudiant</a></li>
+                                       </ul>
+                                   </li>
             </ul>
         </div>
 
@@ -783,6 +765,11 @@
                                             <li class="dropdown menu-item-64 aligned-"><a href="index.blade.php"
                                                     class="dropdown-toggle" data-hover="dropdown"
                                                     data-toggle="dropdown">Accueil </a></li>
+
+                                                    <li class="dropdown menu-item-64 aligned-"><a href="#"
+                                                    class="dropdown-toggle" data-hover="dropdown"
+                                                    data-toggle="dropdown">Parents </a></li>
+
                                             <li class="dropdown  menu-item-69 aligned-"><a class="dropdown-toggle"
                                                     data-hover="dropdown" data-toggle="dropdown">Cours <b
                                                         class="caret"></b></a>
@@ -797,7 +784,7 @@
                                             </li>
                                             <li class="menu-item-318 aligned-left"><a
                                                     href="evenement.blade.php">évènements</a></li>
-                                            <li class="menu-item-205 aligned-left"><a href="blog.blade.php">Blog</a>
+                                            <li class="menu-item-205 aligned-left"><a href="blog.blade.php">Forum</a>
                                             </li>
                                             <li class="dropdown  menu-item-69 aligned-"><a class="dropdown-toggle"
                                                     data-hover="dropdown" data-toggle="dropdown">Paiements <b

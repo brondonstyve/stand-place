@@ -546,6 +546,7 @@ html body .text-dark {
 }
 
 html body .text-themecolor {
+    vertical-align: bottom;
     color: #009efb;
 }
 
@@ -2172,134 +2173,138 @@ File: scss
 *******************/
 
 .topbar {
-    position: relative;
+    position: fixed;
     z-index: 50;
+    width: 100%;
+    background-color: #002b46;
+    max-height: 8rem;
     -webkit-box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.5);
-    box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.5)
 }
 
 .topbar .top-navbar {
     min-height: 70px;
-    padding: 0px 15px 0 0;
+    padding: 0px 15px 0 0
 }
 
-.topbar .top-navbar .dropdown-toggle::after {
-    display: none;
+.topbar .top-navbar .dropdown-toggle:after {
+    display: none
 }
 
 .topbar .top-navbar .navbar-header {
     line-height: 65px;
-    text-align: center;
+    text-align: center
 }
 
 .topbar .top-navbar .navbar-header .navbar-brand {
     margin-right: 0px;
     padding-bottom: 0px;
-    padding-top: 0px;
+    padding-top: 0px
 }
 
 .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
-    display: none;
+    display: none
 }
 
 .topbar .top-navbar .navbar-header .navbar-brand b {
     line-height: 70px;
-    display: inline-block;
+    display: inline-block
 }
 
 .topbar .top-navbar .navbar-nav>.nav-item>.nav-link {
     padding-left: .75rem;
     padding-right: .75rem;
     font-size: 19px;
-    line-height: 50px;
+    line-height: 50px
 }
 
 .topbar .top-navbar .navbar-nav>.nav-item.show {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.05)
 }
 
 .topbar .profile-pic {
     width: 60px;
-    border-radius: 100px;
+    border-radius: 100%
 }
 
 .topbar .dropdown-menu {
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
     -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
     -moz-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-    border-color: rgba(120, 130, 140, 0.13);
+    border-color: rgba(120, 130, 140, 0.13)
 }
 
 .topbar .dropdown-menu .dropdown-item {
-    padding: 7px 1.5rem;
+    padding: 7px 1.5rem
 }
 
 .topbar ul.dropdown-user {
     padding: 0px;
-    width: 270px;
+    width: 270px
 }
 
 .topbar ul.dropdown-user li {
     list-style: none;
     padding: 0px;
-    margin: 0px;
+    margin: 0px
 }
 
 .topbar ul.dropdown-user li.divider {
     height: 1px;
     margin: 9px 0;
     overflow: hidden;
-    background-color: rgba(120, 130, 140, 0.13);
+    background-color: rgba(120, 130, 140, 0.13)
 }
 
 .topbar ul.dropdown-user li .dw-user-box {
-    padding: 10px 15px;
+    padding: 10px 15px
 }
 
 .topbar ul.dropdown-user li .dw-user-box .u-img {
     width: 80px;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: top
 }
 
 .topbar ul.dropdown-user li .dw-user-box .u-img img {
-    width: 70%;
-    border-radius: 5px;
+    width: 100%;
+    border-radius: 5px
 }
 
 .topbar ul.dropdown-user li .dw-user-box .u-text {
     display: inline-block;
+    padding-left: 10px
 }
 
 .topbar ul.dropdown-user li .dw-user-box .u-text h4 {
-    margin: 0px;
+    margin: 0px
 }
 
 .topbar ul.dropdown-user li .dw-user-box .u-text p {
     margin-bottom: 2px;
-    font-size: 10px;
+    font-size: 14px
 }
 
 .topbar ul.dropdown-user li .dw-user-box .u-text .btn {
     color: #ffffff;
     padding: 5px 10px;
-    display: inline-block;
+    display: inline-block
 }
 
 .topbar ul.dropdown-user li .dw-user-box .u-text .btn:hover {
-    background: #e6294b;
+    background: #e6294b
 }
 
 .topbar ul.dropdown-user li a {
     padding: 9px 15px;
     display: block;
-    color: #67757c;
+    color: #67757c
 }
 
 .topbar ul.dropdown-user li a:hover {
     background: #f2f4f8;
     color: #009efb;
-    text-decoration: none;
+    text-decoration: none
 }
 
 .search-box .app-search {
@@ -2357,7 +2362,7 @@ File: scss
 .page-titles {
     background: #ffffff;
     margin: 0 -30px 30px;
-    padding: 45px;
+    position: relative static;
     -webkit-box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -6900,10 +6905,10 @@ Main sidebar
 ******************/
 
 .left-sidebar {
-    position: absolute;
+    position: fixed;
     width: 240px;
     height: 100%;
-    top: 0px;
+    top: 30px;
     z-index: 20;
     padding-top: 35px;
     background: #fff;
@@ -8798,7 +8803,7 @@ File: scss
 @media (max-width: 767px) {
     /*Header*/
     .topbar {
-        position: fixed;
+        position: fixed absolute;
         width: 100%;
     }
     .topbar .top-navbar {

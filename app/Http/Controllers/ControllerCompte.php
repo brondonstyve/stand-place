@@ -37,6 +37,8 @@ class ControllerCompte extends Controller
     public function store(CompteRequest $request)
     {
 
+
+
         //TEST SI EMAIL EXISTE
      $test_email=Compte::whereEmail($request->email)->first();
 
@@ -103,6 +105,8 @@ class ControllerCompte extends Controller
 
     public function edit(modiCompteRequest $request){
 
+
+
         if (auth()->guest()) {
             Flashy::success('Connectez vouz');
             return redirect()->route('home');
@@ -133,6 +137,8 @@ class ControllerCompte extends Controller
     //MIS A JOUR DE L'IMAGE DU PROFIL
     public function modifAvatar(avatarRequest $request){
 
+
+
         if (auth()->guest()) {
             Flashy::success('Connectez vouz');
             return redirect()->route('home');
@@ -160,6 +166,8 @@ class ControllerCompte extends Controller
     //RECHERCHE DU MATRUCULE ET ENTAME DE LA PHASE DE CREATION DU COMPTE
 
     public function findMatricule(MatriculeRequest $request){
+
+
 
 
         $matri=matricule::whereMatricule( $request->matricule)->first();
@@ -192,6 +200,8 @@ class ControllerCompte extends Controller
     //SUPPRESSION DE L'AVATAR
 
     public function suppAvatar(){
+
+
 
 
         if (auth()->guest()) {

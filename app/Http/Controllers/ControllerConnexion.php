@@ -17,19 +17,23 @@ class ControllerConnexion extends Controller
         return view('index/compSign');
     }
 
-    public function show(ConnexionRequest $request)
-    {
+    public function show(ConnexionRequest $request){
 
-        $connect=Auth::attempt(['email' => $request->email, 'password' => $request->mdp]);
 
-        if ($connect) {
-            $utilisateur=auth()->user();
-            Flashy::success('Bienvenu '.$utilisateur->prenom);
-            return redirect()->route('profil_path');
-        }else{
-            Flashy::error('Erreur de connexion. vérifiez vos identifiants');
-            return redirect()->route('home');
-        }
+
+
+            $connect=Auth::attempt(['email' => $request->email, 'password' => $request->mdp]);
+            if ($connect) {
+                $utilisateur=auth()->user();
+                Flashy::success('Bienvenu '.$utilisateur->prenom);
+                return redirect()->route('profil_path');
+            }else{
+                Flashy::error('Erreur de connexion. vérifiez vos identifiants');
+                return redirect()->route('home');
+            }
+
+
+
 
     }
 

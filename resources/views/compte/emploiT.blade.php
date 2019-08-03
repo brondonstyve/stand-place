@@ -1,59 +1,9 @@
-@if ($utilisateur->type=="null")
+@if ($utilisateur->type==null)
 
 @php
 
 $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
 
-if (sizeOf($resultat)<1){ } else { $date=new DateTime($resultat[0]->created_at);
-    $passeur=new DateTime($resultat[0]->created_at);
-
-    $jourChiffre=$date->format('w');
-    switch ($jourChiffre) {
-    case 0:
-    $date->modify('+ 1 day');
-    break;
-    case 1:
-    $date->modify('+ 7 day');
-    break;
-    case 2:
-    $date->modify('+ 6 day');
-    break;
-    case 3:
-    $date->modify('+ 5 day');
-    break;
-    case 4:
-    $date->modify('+ 4 day');
-    break;
-    case 5:
-    $date->modify('+ 3 day');
-    break;
-    case 6:
-    $date->modify('+ 2 day');
-    break;
-    }
-    switch ($jourChiffre) {
-    case 0:
-    break;
-    case 1:
-    $passeur->modify('+ 6 day');
-    break;
-    case 2:
-    $passeur->modify('+ 5 day');
-    break;
-    case 3:
-    $passeur->modify('+ 4 day');
-    break;
-    case 4:
-    $passeur->modify('+ 3 day');
-    break;
-    case 5:
-    $passeur->modify('+ 2 day');
-    break;
-    case 6:
-    $passeur->modify('+ 1 day');
-    break;
-    }
-    }
 
     @endphp
 
@@ -170,6 +120,51 @@ if (sizeOf($resultat)<1){ } else { $date=new DateTime($resultat[0]->created_at);
                                                 </ul>
                                         </div>
 
+
+<br><br>
+                                        <h3 style="margin-top: -30px;"> </h3>
+                                        <div class="row">
+                                            <div class="col-lg-8 ">
+                                                <div class="card">
+
+                                                    <!-- M.emploi1 -->
+
+                                                    <div class="tab-content">
+                                                            @include('compte/layout_emploi_prof')
+                                                    </div>
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="card card-size color-md1">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title">Programme des évaluations</h3>
+                                                        <div id="visitor" style="height: 267px; width: 100%; max-height: 290px; position: relative;" class="c3">
+
+                                                                <div class="table-responsive m-t-20">
+
+                                                                    <table class="table stylish-table">
+                                                                            <tbody>
+                                                                         <tr class="">
+
+                                                                         </tr>
+                                                                            </tbody>
+                                                                     </table>
+
+                                                        </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
                                         @if (sizeOf($classe)==0)
                                           <h4 class="card-title">Pas encor d'étudiants dans les salles de classes</h4>
                                         @else
@@ -201,13 +196,14 @@ if (sizeOf($resultat)<1){ } else { $date=new DateTime($resultat[0]->created_at);
                                         @endphp
                                     @if ($passe)
                                        <div class="table-responsive m-t-20" style="margin-top: -20px;">
-                                        <form action="{{ route('sauvegarder_edt_path') }}" method="post">
+                                         <form action="{{ route('sauvegarder_edt_path') }}" method="post">
 
                                             {{ csrf_field() }}
-                                            @if (sizeOf($emploiTemp)<=1)
+                                            @if (sizeOf($emploiTemp)<=0)
                                               <h3 class="card-title">Aucune Matiere enregistrer pour cette classe</h3>
                                             @else
 
+                                            <h3 class="card-title">{{ $emploiTemp[0]->classe }}</h3>
                                             <table class="table stylish-table">
                                                     <tr class="btn-info">
                                                         <th>JOUR</th>
@@ -229,20 +225,46 @@ if (sizeOf($resultat)<1){ } else { $date=new DateTime($resultat[0]->created_at);
                                                               @if ($jour[$i]=='MERCREDI' || $jour[$i]=='SAMEDI')
                                                               @for ($v =1 ; $v <3 ; $v++)
                                                               <td>
-                                                                <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="" style="width: 250px">
-                                                                    @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
-                                                                      <option> @for($x=0; $x<sizeOf($disponibilite); $x++)
-                                                                                  @if(($jour[$i]==$disponibilite[$x]->jour) && ($emploiTemp[$a]->compte==$disponibilite[$x]->compte))
+                                                                    <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="" style="width: 250px">
+                                                                        <option value=""></option>
+                                                                        @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
+                                                                          @for($x=0; $x<sizeOf($disponibilite); $x++)
 
-                                                                                         {{ $emploiTemp[$a]->compte.'-'.$emploiTemp[$a]->nom}}
+                                                                            @if(($jour[$i]==$disponibilite[$x]->jour) && ($emploiTemp[$a]->compte==$disponibilite[$x]->compte))
+                                                                            @if (sizeOf($testeurEmpl)<=0)
+                                                                            <option>{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
+                                                                            @else
+                                                                            @for ($u = 0; $u < sizeOf($testeurEmpl); $u++)
 
 
-                                                                                  @endif
-                                                                               @endfor
-                                                                    @endfor
+                                                                            @if($testeurEmpl[$u]->jour==$disponibilite[$x]->jour)
+                                                                                     @if($testeurEmpl[$u]->compte==$disponibilite[$x]->compte)
+                                                                                          @if($testeurEmpl[$u]->tranche==$v)
+                                                                                                <option disabled style="color: red">{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
+                                                                                                @php $test=true; $testeur=$emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom;  @endphp
+                                                                                            @else
+                                                                                                @php $test=false; @endphp
+                                                                                           @endif
+                                                                                       @else
+                                                                                           @php $test=false;  @endphp
 
-                                                                </select>
-                                                            </td>
+                                                                                     @endif
+                                                                            @endif
+
+                                                                            @endfor
+
+                                                                                @if ($test==false && $testeur!=$emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom )
+
+                                                                                 <option>{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
+                                                                                @endif
+                                                                            @endif
+
+
+                                                                            @endif
+                                                                         @endfor
+                                                                        @endfor
+                                                                    </select>
+                                                                </td>
                                                               @endfor
 
                                                               @else
@@ -250,21 +272,43 @@ if (sizeOf($resultat)<1){ } else { $date=new DateTime($resultat[0]->created_at);
                                                              @for ($v =1 ; $v <4 ; $v++)
                                                               <td>
                                                                 <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="" style="width: 250px">
+                                                                    <option value=""></option>
                                                                     @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
-                                                                      <option>@for($x=0; $x<sizeOf($disponibilite); $x++)
-                                                                        @if(($jour[$i]==$disponibilite[$x]->jour) && ($emploiTemp[$a]->compte==$disponibilite[$x]->compte))
-                                                                        @if (sizeOf($testeurEmpl)==0)
-                                                                        {{ $emploiTemp[$a]->compte.'-'.$emploiTemp[$a]->nom}}
-                                                                        @else
-                                                                                             {{ $emploiTemp[$a]->compte.'-'.$emploiTemp[$a]->nom}}
+                                                                      @for($x=0; $x<sizeOf($disponibilite); $x++)
 
+                                                                        @if(($jour[$i]==$disponibilite[$x]->jour) && ($emploiTemp[$a]->compte==$disponibilite[$x]->compte))
+                                                                        @if (sizeOf($testeurEmpl)<=0)
+                                                                        <option>{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
+                                                                        @else
+                                                                        @for ($u = 0; $u < sizeOf($testeurEmpl); $u++)
+
+
+                                                                        @if($testeurEmpl[$u]->jour==$disponibilite[$x]->jour)
+                                                                                 @if($testeurEmpl[$u]->compte==$disponibilite[$x]->compte)
+                                                                                      @if($testeurEmpl[$u]->tranche==$v)
+                                                                                            <option disabled style="color: red">{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
+                                                                                            @php $test=true; $testeur=$emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom;  @endphp
+                                                                                        @else
+                                                                                            @php $test=false; @endphp
+                                                                                       @endif
+                                                                                   @else
+                                                                                       @php $test=false;  @endphp
+
+                                                                                 @endif
                                                                         @endif
 
-                                                                        @else
+                                                                        @endfor
+
+                                                                            @if ($test==false && $testeur!=$emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom )
+
+                                                                             <option>{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
+                                                                            @endif
+                                                                        @endif
+
+
                                                                         @endif
                                                                      @endfor
                                                                     @endfor
-
                                                                 </select>
                                                             </td>
                                                               @endfor
@@ -286,7 +330,7 @@ if (sizeOf($resultat)<1){ } else { $date=new DateTime($resultat[0]->created_at);
 
                                         </form>
 
-                                        </div>
+                                    </div>
                                     @endif
                                       @else
                                    @endif
@@ -301,3 +345,9 @@ if (sizeOf($resultat)<1){ } else { $date=new DateTime($resultat[0]->created_at);
                 </body>
 
                 </html>
+<script>
+function select(id) {
+    var valeur = window.getElementById(id);
+    return valeur;
+}
+</script>

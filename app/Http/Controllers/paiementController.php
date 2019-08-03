@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Auth;
 class paiementController extends Controller
 {
     public function Paiement(infosPayementRequest $request){
+
+
+
         $t4=null;
         if ($request->niv==1) {
             $preinscrip=76000;
@@ -59,6 +62,10 @@ class paiementController extends Controller
     }
 
     public function validerPaiement(PaiementRequest $request){
+
+
+
+
         $t4=null;
         if ($request->niv==1) {
             $preinscrip=76000;
@@ -160,6 +167,11 @@ class paiementController extends Controller
     }
 
     public function suite_Paiement(paiementSuiteRequest $request){
+
+
+
+
+
         $matricule=$request->matricule;
         $recherche=Paiement::whereMatricule($matricule)->first();
 
@@ -229,6 +241,8 @@ class paiementController extends Controller
 }
 
      public function validerSuitePaiement(paiementSuiteRequest $request){
+
+
 
         $matricule=$request->matricule;
         $recherche=Paiement::whereMatricule($matricule)->first();

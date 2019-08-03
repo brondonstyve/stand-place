@@ -15,6 +15,10 @@ use App\models\Matiere;
 class noteController extends Controller
 {
     public function afficherNote(){
+
+
+
+
         if (auth()->guest()) {
             Flashy::success('Connectez vouz');
             return redirect()->route('home');
@@ -70,6 +74,8 @@ class noteController extends Controller
             */
 
     public function remplirNotes(noteRequest $request){
+
+
 
         $utilisateur=auth()->user();
 
@@ -133,6 +139,10 @@ class noteController extends Controller
     }
 
     public function insererNotes(insererNoteRequest $request){
+
+
+
+
       $a=0;
 
       $utilisateur=auth()->user();

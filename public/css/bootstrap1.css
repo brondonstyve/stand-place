@@ -588,6 +588,17 @@ pre code {
     margin-left: -15px
 }
 
+.row1 {
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    max-height: 10rem;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
 .no-gutters {
     margin-right: 0;
     margin-left: 0
@@ -7383,7 +7394,7 @@ button.bg-dark:hover {
 
 .align-self-center {
     -ms-flex-item-align: center!important;
-    align-self: center!important
+    align-self: center!important;
 }
 
 .align-self-baseline {

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class evaluationController extends Controller
 {
     public function evaluation(){
-      return view('');
+        $utilisateur=auth()->user();
+      return view('index/evaluation',compact('utilisateur'));
     }
 }

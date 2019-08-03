@@ -7696,9 +7696,7 @@ fieldset[disabled] .btn-theme-second.active {
 
 .navbar-offcanvas .navbar-nav li>a {
     background: 0 0;
-    text-transform: uppercase;
     font-weight: 400;
-    font-family: poppins, serif;
     display: block;
     padding: 10px 25px;
     width: 100%;

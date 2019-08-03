@@ -3,7 +3,7 @@
     <!-- Column -->
 
 
-@if ($utilisateur->type=="null")
+@if ($utilisateur->type==null)
 
 @if ($nombre<=0)
 <h2 class="card-title">Aucune note n'est disponible pour le moment</h2>

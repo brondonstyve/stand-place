@@ -53,6 +53,8 @@ class PagesController extends Controller
 
     public function ouvrirConnex(){
 
+
+
         if (auth()->guest()) {
         Flashy::success('Connectez vouz');
         return redirect()->route('home');
@@ -83,6 +85,8 @@ class PagesController extends Controller
 
     public function parametre(){
 
+
+
         if (auth()->guest()) {
         Flashy::success('Connectez vouz');
         return redirect()->route('home');
@@ -93,6 +97,8 @@ class PagesController extends Controller
 
 
     public function ouvrirNote(){
+
+
 
         if (auth()->guest()) {
             Flashy::success('Connectez vouz');

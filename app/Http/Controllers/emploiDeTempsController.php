@@ -17,6 +17,10 @@ class emploiDeTempsController extends Controller
 
     public function genererEDT(){
 
+
+
+
+
         $utilisateur=auth()->user();
         if (auth()->guest()) {
             Flashy::success('Connectez vouz');
@@ -38,6 +42,19 @@ class emploiDeTempsController extends Controller
 
             //return $resultat;
 
+
+            $resultatprof=DB::table('emploi_de_temps')
+            ->join('comptes','comptes.id','=','emploi_de_temps.compte')
+            ->select('emploi_de_temps.classe','emploi_de_temps.jour','emploi_de_temps.matiere',
+                     'emploi_de_temps.tranche','emploi_de_temps.compte')
+            ->where([
+                ['emploi_de_temps.compte',$utilisateur->id]
+                ])
+            ->get();
+
+            //return $resultatprof;
+
+
             $remplisseur=DB::table('disponibilites')
             ->join('comptes','comptes.id','=','disponibilites.compte')
             ->select('comptes.nom','disponibilites.jour')
@@ -58,7 +75,7 @@ class emploiDeTempsController extends Controller
             ['classe','<>','null']
         ])
         ->get();
-        return view('index/emploi',compact('resultat','passe','nombre','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
+        return view('index/emploi',compact('resultat','resultatprof','passe','nombre','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
 
 
 
@@ -66,6 +83,10 @@ class emploiDeTempsController extends Controller
 
 
     public function disponibilite(){
+
+
+
+
         if (auth()->guest()) {
             Flashy::success('Connectez vouz');
             return redirect()->route('home');
@@ -121,11 +142,23 @@ class emploiDeTempsController extends Controller
         ->get();
         //dd($nombre);
 
-        return view('index/emploi',compact('resultat','passe','nombre','utilisateur','niveau','filiere','init','classe','remplisseur'));
+
+        $resultatprof=DB::table('emploi_de_temps')
+->join('comptes','comptes.id','=','emploi_de_temps.compte')
+->select('emploi_de_temps.classe','emploi_de_temps.jour','emploi_de_temps.matiere',
+         'emploi_de_temps.tranche','emploi_de_temps.compte')
+->where([
+    ['emploi_de_temps.compte',$utilisateur->id]
+    ])
+->get();
+
+        return view('index/emploi',compact('resultat','resultatprof','passe','nombre','utilisateur','niveau','filiere','init','classe','remplisseur'));
 
     }
 
     public function remplir(insererNoteRequest $request){
+
+
 
         $utilisateur=auth()->user();
         if (auth()->guest()) {
@@ -159,16 +192,15 @@ class emploiDeTempsController extends Controller
             ['classe','<>',$request->classe],
             ])
         ->get();
-  ///return $testeurEmpl;
+  //return $testeurEmpl;
+        $test=false;
+        $testeur='';
 
         $emploiTemp=DB::table('matieres')
         ->join('comptes','comptes.id','=','matieres.compte')
         ->select('matieres.nom','comptes.nom as nom_prof','matieres.compte','matieres.classe')
         ->where([
             ['matieres.classe',$request->classe],
-            ])
-        ->orWhere([
-            ['matieres.nom','']
             ])
         ->get();
 
@@ -180,13 +212,27 @@ class emploiDeTempsController extends Controller
 
 //return $disponibilite;
 
+$resultatprof=DB::table('emploi_de_temps')
+->join('comptes','comptes.id','=','emploi_de_temps.compte')
+->select('emploi_de_temps.classe','emploi_de_temps.jour','emploi_de_temps.matiere',
+         'emploi_de_temps.tranche','emploi_de_temps.compte')
+->where([
+    ['emploi_de_temps.compte',$utilisateur->id]
+    ])
+->get();
+
         $passe=true;
-        return view('index/emploi',compact('resultat','passe','testeurEmpl','nombre','disponibilite','emploiTemp','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
+        return view('index/emploi',compact('resultat','resultatprof','test','testeur','passe','testeurEmpl','nombre','disponibilite','emploiTemp','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
 
 
     }
 
     public function sauvegarder(insererNoteRequest $request){
+
+
+
+
+
         $utilisateur=auth()->user();
         if (auth()->guest()) {
             Flashy::success('Connectez vouz');
@@ -201,7 +247,7 @@ class emploiDeTempsController extends Controller
             // echo $_POST["$jour[0]matiere0"]."<br>".$_POST["$jour[0]matiere1"]."<br>".$_POST["$jour[0]matiere2"]."<br>" ;
             //$aexplo=explode("-",$_POST["$jour[5]matiere1"]);
             //return $aexplo[1];
-
+            $newEDT=false;
              for ($i=0; $i <6 ; $i++) {
                  if(($jour[$i]=='MERCREDI') || ($jour[$i]=='SAMEDI')){
                     for ($a=0; $a <2 ; $a++) {
@@ -268,7 +314,11 @@ class emploiDeTempsController extends Controller
         ->get();
         Flashy::error('Emploi de temps enregistré avec succès');
         return redirect()->route('generer_edt_path',compact('resultat','passe','nombre','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
-            }
+            }else {
+        Flashy::error('Emploi de temps vidé avec succès');
+        return redirect()->route('generer_edt_path',compact('resultat','passe','nombre','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
+
+                }
 
     }
 }
