@@ -116,3 +116,7 @@ Route::post('RempliremploiDeTemps', 'emploiDeTempsController@remplir')->name('re
 Route::post('sauvegarderEDT', 'emploiDeTempsController@sauvegarder')->name('sauvegarder_edt_path');
 
 route::get('evaluation','evaluationController@evaluation')->name('evaluation_path');
+
+route::post('evaluation_Geneation_epreuve','evaluationController@generateur')->name('generer_epreuve_path');
+
+route::post('evaluation_Enregistreur_epreuve','evaluationController@enregistreur')->name('enregistrer_epreuve_path');

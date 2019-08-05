@@ -108,7 +108,7 @@ class ControllerCompte extends Controller
 
 
         if (auth()->guest()) {
-            Flashy::success('Connectez vouz');
+            Flashy::error('Connectez vouz');
             return redirect()->route('home');
             }
 
@@ -140,7 +140,7 @@ class ControllerCompte extends Controller
 
 
         if (auth()->guest()) {
-            Flashy::success('Connectez vouz');
+            Flashy::error('Connectez vouz');
             return redirect()->route('home');
             }
 
@@ -205,7 +205,7 @@ class ControllerCompte extends Controller
 
 
         if (auth()->guest()) {
-            Flashy::success('Connectez vouz');
+            Flashy::error('Connectez vouz');
             return redirect()->route('home');
             }
 

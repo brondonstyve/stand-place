@@ -35,14 +35,13 @@
 
 
 
-
-
-
-<div class="card-body">
+<div class="col-lg-12 col-md-6">
+  <div class="card">
+ <div class="card-body " style="min-width: 100%">
     <h4 class="card-title">Bulletin instantané</h4>
     <h6 class="card-subtitle"><code>notes</code></h6>
     <div class="table-responsive col-lg-10">
-        <table class="table " id="tab">
+        <table class="table " id="tab" >
             <thead>
                 <tr>
                     <th>matière</th>
@@ -83,8 +82,14 @@
             </tbody>
         </table>
     </div>
-    <input type="button" class="btn-danger" value="Imprimer" onclick=" $('tab').printElement ">
+            <input type="button" class="btn btn-sm btn-danger" value="Imprimer" onclick=" $('tab').printElement ">
+
 </div>
+</div>
+
+</div>
+
+
 @endif
 
 @else
@@ -96,10 +101,12 @@
 
         <h4 class="card-title">Mes salles de classes</h4>
 
-        <ul class="nav nav-pills m-t-30 m-b-30" style="margin-top: -10px">
                 @for ($i =0 ; $i <sizeOf($classe) ; $i++)
-                <li class="nav-item">
-                <a class="nav-link  active">
+                <div class="col-lg-3 col-md-6" style="color: black">
+                        <div class="card" style="background-color: aliceblue">
+                            <div class="card-body" >
+                                <div class="row p-t-10 p-b-10">
+                <a class="nav-link  active btn-sm">
                      Classe {{ $i+1 }} : {{ $classe[$i]->classe }}
                      <hr>
                      <span>{{ $classe[$i]->nom }}</span>
@@ -107,13 +114,11 @@
                         {{ csrf_field() }}
                          <input type="hidden" name="classe" value="{{ $classe[$i]->classe }}">
                          <input type="hidden" name="id" value="{{ $classe[$i]->id }}">
-                            <input type="submit" value="Liste des étudiants" class="nav-link  active">
+                            <input type="submit" value="Liste des étudiants" class="btn-sm">
                     </form>
                 </a>
-
-            </li>
+        </div></div></div></div>
                 @endfor
-        </ul>
 
 @if (!$ouverture)
   <h4 class="card-title">...</h4>
@@ -124,11 +129,11 @@
           <h3 class="card-title">erreur </h3>
        @else
        <div class="card-body" >
-
-            <div id="visitor" style="height: 267px; width: 100%; max-height: 290px; position: relative;" class="c3">
+            <div class="col-lg-10 col-md-6" style="color: black">
+            <div id="visitor" style="position: relative;" class="c3">
 
                     <div class="table-responsive m-t-20">
-                        <form action="{{ route('inserer_note_path') }}" method="post" style="background-color: black;" class="col-lg-10 col-md-6">
+                        <form action="{{ route('inserer_note_path') }}" method="post" style="">
                             {{ csrf_field() }}
                                 <h3 class="card-title">liste des étudiants de la {{ $liste[0]->classe}} </h3>
                             <table class="table stylish-table" >

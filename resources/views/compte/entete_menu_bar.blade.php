@@ -43,7 +43,7 @@
 
                             <ul class="navbar-nav my-lg-0">
                             <li class="nav-item dropdown">
-                                    <img src="images/logo-light-icon.png" width="50px" class="flag-icon flag-icon-us dark-logo">
+                                    <img src="images/logo-light-icon.png" width="45px" class="flag-icon flag-icon-us dark-logo">
                                     <img src="images/logo-light-text.png" width="150px" class="flag-icon flag-icon-us dark-logo">
                                 </li>
                             </ul>
@@ -73,7 +73,7 @@
                         <!-- Comment -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img width="35px" src="images/notif2.png" class="mdi mdi-message">
+                            <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img width="25px" src="images/notif2.png" class="mdi mdi-message">
                                 <!-- Si nouveau message -->
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
@@ -119,12 +119,12 @@
                         <!-- ============================================================== -->
                         <!-- Messages -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown  show">
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <img width="35px" src="images/sms1.png" class="mdi mdi-email">
+                        <li class="nav-item dropdown  show" >
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" > <img width="25px" src="images/sms1.png" class="mdi mdi-email">
                                     <!-- si nouveau message -->
                                     <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                                 </a>
-                                <div class="dropdown-menu mailbox dropdown-menu-right scale-up btn-sm" aria-labelledby="2">
+                                <div class="dropdown-menu mailbox dropdown-menu-right scale-up btn-sm" aria-labelledby="2" >
                                     <ul>
                                         <li>
                                             <div class="drop-title">heyy brondon 4 nouveaux messages</div>
@@ -169,7 +169,7 @@
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="images/lang.png" width="35px" class="flag-icon flag-icon-us"></a>
+                                    <img src="images/lang.png" width="25px" class="flag-icon flag-icon-us"></a>
                                 <div class="dropdown-menu dropdown-menu-right btn-sm">
                                     <a class="dropdown-item" href="#"><img src="images/anglais.png" width="30px" class="flag-icon flag-icon-in"></i> Anglais</a>
                                     <a class="dropdown-item" href="#"><img src="images/france.png" width="30px" class="flag-icon flag-icon-fr"></i> Francais</a>
@@ -178,15 +178,15 @@
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
-                               <div >
+
                                         <!-- Profile -->
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark " href="" data-toggle="dropdown">
                                                 <img src=" @if ($utilisateur->photo==null) images/profilDef.jpg @else  /storage/avatars/{{ $utilisateur->photo }}  @endif" alt="user" class="profile-pic">
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right scale-up" >
-                                                <ul class="dropdown-user btn-sm" >
-                                                    <li>
+                                                <ul class="dropdown-user btn-sm " >
+                                                    <li style="width: 120%">
                                                         <div class="dw-user-box">
                                                             <div class="u-img"><img src=" @if ($utilisateur->photo==null) images/profilDef.jpg @else  /storage/avatars/{{ $utilisateur->photo }}  @endif" alt="user"></div>
                                                             <div class="u-text">
@@ -214,7 +214,7 @@
                                                            @if ($utilisateur->type==null)
                                                            <li role="separator" class="divider"></li>
                                                            <li><a href="profil.blade.php"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
-                                                           <li><a href="#"><img src="images/discipline.png" width="10%"/> Evaluation</a></li>
+                                                           <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="10%"/> Evaluation</a></li>
                                                            <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/> Notes</a></li>
                                                            <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
 
@@ -243,6 +243,7 @@
                                                 </ul>
                                             </div>
                                         </li>
+
                                     </div>
 
                     </ul>
@@ -289,7 +290,7 @@
                                     @else
                                          @if ($utilisateur->type==null)
                                          <li><a href="profil.blade.php"><img src="images/profil.png" width="20%"/> Mon profil</a></li>
-                                         <li><a href="#"><img src="images/discipline.png" width="20%" > Evaluation</a></li>
+                                         <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="20%" > Evaluation</a></li>
                                          <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="20%"/> Notes</a></li>
                                          <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
                                          <li><a href="{{ route('discipline_path') }}"><img src="images/discipline.png" width="20%"/> Discipline</a></li>
@@ -371,6 +372,7 @@
                                                         <div id="monthchart"><canvas style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"
                                                                 width="60" height="35"></canvas></div>
                                                     </div>
+
                                         @if ($etat=="Discipline")
                                         <div class="chart-text m-r-10">
                                             <h4 class="m-b-0"><small>HEURES D'ABSENCES</small></h4>

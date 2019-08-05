@@ -2168,6 +2168,94 @@ File: scss
 }
 
 
+/* Table colored-bordered */
+
+.table-colored-bordered thead th {
+    border-bottom: 0 !important;
+    color: #ffffff;
+}
+
+.table-colored-bordered.table-bordered-primary {
+    border: 2px solid #4489e4;
+}
+
+.table-colored-bordered.table-bordered-primary thead th {
+    background-color: #4489e4;
+}
+
+.table-colored-bordered.table-bordered-success {
+    border: 2px solid #32c861;
+}
+
+.table-colored-bordered.table-bordered-success thead th {
+    background-color: #32c861;
+}
+
+.table-colored-bordered.table-bordered-info {
+    border: 2px solid #34d3eb;
+}
+
+.table-colored-bordered.table-bordered-info thead th {
+    background-color: #34d3eb;
+}
+
+.table-colored-bordered.table-bordered-custom {
+    border: 2px solid #64c5b1;
+}
+
+.table-colored-bordered.table-bordered-custom thead th {
+    background-color: #64c5b1;
+}
+
+.table-colored-bordered.table-bordered-warning {
+    border: 2px solid #ffa91c;
+}
+
+.table-colored-bordered.table-bordered-warning thead th {
+    background-color: #ffa91c;
+}
+
+.table-colored-bordered.table-bordered-danger {
+    border: 2px solid #f96a74;
+}
+
+.table-colored-bordered.table-bordered-danger thead th {
+    background-color: #f96a74;
+}
+
+.table-colored-bordered.table-bordered-inverse {
+    border: 2px solid #36404c;
+}
+
+.table-colored-bordered.table-bordered-inverse thead th {
+    background-color: #36404c;
+}
+
+.table-colored-bordered.table-bordered-pink {
+    border: 2px solid #ec6794;
+}
+
+.table-colored-bordered.table-bordered-pink thead th {
+    background-color: #ec6794;
+}
+
+.table-colored-bordered.table-bordered-purple {
+    border: 2px solid #5553ce;
+}
+
+.table-colored-bordered.table-bordered-purple thead th {
+    background-color: #5553ce;
+}
+
+.table-colored-bordered.table-bordered-success {
+    border: 2px solid #32c861;
+}
+
+.table-colored-bordered.table-bordered-success thead th {
+    background-color: #32c861;
+}
+
+
 /*******************
  Topbar
 *******************/
@@ -2177,7 +2265,7 @@ File: scss
     z-index: 50;
     width: 100%;
     background-color: #002b46;
-    max-height: 8rem;
+    max-height: 7.5rem;
     -webkit-box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.5);
     box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.5)
 }
@@ -2223,7 +2311,7 @@ File: scss
 }
 
 .topbar .profile-pic {
-    width: 60px;
+    width: 40px;
     border-radius: 100%
 }
 

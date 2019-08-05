@@ -1,11 +1,14 @@
+
 <div class="row">
     <div class="card-body">
 <!-- liste des salles de  classes -->
         <h4 class="card-title">Mes salles de classes</h4>
-
-        <ul class="nav nav-pills m-t-30 m-b-30" style="margin-top: -10px ">
-            @for ($i =0 ; $i <sizeOf($classe) ; $i++) <li class="nav-item">
-                <a class="nav-link " style="background-color: darkgrey">
+            @for ($i =0 ; $i <sizeOf($classe) ; $i++)
+                    <div class="col-lg-3 col-md-6" style="color: black">
+                            <div class="card" style="background-color: aliceblue">
+                                <div class="card-body" >
+                                    <div class="row p-t-10 p-b-10">
+                <a class="nav-link " >
                     Classe {{ $i+1 }} : {{ $classe[$i]->classe }}
                     <hr>
                     <span>{{ $classe[$i]->nom }}</span>
@@ -16,20 +19,23 @@
                         <input type="submit" value="Liste d'appel/CT"  class="btn" style="background-color: gray">
                     </form>
                 </a>
+            </div></div></div></div>
 
-                </li>
                 @endfor
-        </ul>
        <!-- liste d'appel et cahier de texte -->
+
+
         @if (!$ouverture)
         <h4 class="card-title">...</h4>
 
         @else
-        <div class="card-body">
 
-            <div id="visitor" style="height: 267px; width: 100%; max-height: 290px; position: relative;" class="c3">
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
 
-                <div class="table-responsive m-t-20">
+
                     <form action="" method="post" >
                         <input type="button" value="liste des absences" data-toggle="modal"
                             data-target="#add-absence" class="btn btn-danger">
@@ -37,6 +43,11 @@
                         <input type="button" value="Mon cahier de texte(Taches )" data-toggle="modal"
                             data-target="#add-cahier" class="btn btn-danger">
                     </form>
+
+
+
+
+                    <div class="table-responsive m-t-20">
                     <form action="{{ route('inserer_absence_path') }}" method="post" class="col-lg-10 col-md-6">
                         {{ csrf_field() }}
                         <h3 class="card-title">liste d'appel et cahier de texte de la {{ $liste[0]->classe}} </h3>
@@ -70,13 +81,8 @@
                         <input type="hidden" name="compteur" value="{{ $listec }}">
                         <input type="submit" value="Soumettre" class="btn" style="background-color: darkgrey;  ">
                     </form>
-
-
-
-                </div>
-            </div>
-        </div>
         @endif
+    </div></div></div></div></div>
 
         @if ($absence)
 
@@ -168,5 +174,7 @@
 
             </div>
 
-    </div>
+
+
+
 </div>
