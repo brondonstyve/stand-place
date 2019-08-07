@@ -178,8 +178,7 @@
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
-
-                                        <!-- Profile -->
+                             <div style="position: relative;margin-top: 8%">                                        <!-- Profile -->
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark " href="" data-toggle="dropdown">
                                                 <img src=" @if ($utilisateur->photo==null) images/profilDef.jpg @else  /storage/avatars/{{ $utilisateur->photo }}  @endif" alt="user" class="profile-pic">
@@ -243,6 +242,7 @@
                                                 </ul>
                                             </div>
                                         </li>
+                                    </div>
 
                                     </div>
 
@@ -336,7 +336,7 @@
             <div class="container-fluid">
 
 
-                <div class="row page-titles">
+                <div class="row page-titles" style=" min-width: 100%">
 
                     <div class="col-md-5  align-self-center">
                         <h3 class="text-themecolor">Tableau de bord</h3>

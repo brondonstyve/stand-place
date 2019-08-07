@@ -493,8 +493,7 @@
                         <h4 class="modal-title" id="myModalLabel">Modifier l'avatar du compte</h4>
                     </div>
                     <div class="modal-title">
-                        <form action="/modification_avatar" method="POST" class="form-horizontal form-material "
-                            enctype="multipart/form-data">
+                        <form action="/modification_avatar" method="POST" class="form-horizontal form-material " enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <div class="form-group" style="text-align: center;">

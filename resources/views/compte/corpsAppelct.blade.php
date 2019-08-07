@@ -30,10 +30,6 @@
 
         @else
 
-        <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
 
 
                     <form action="" method="post" >
@@ -44,15 +40,12 @@
                             data-target="#add-cahier" class="btn btn-danger">
                     </form>
 
-
-
-
-                    <div class="table-responsive m-t-20">
+                    <div class="table-responsive m-t-10">
                     <form action="{{ route('inserer_absence_path') }}" method="post" class="col-lg-10 col-md-6">
                         {{ csrf_field() }}
                         <h3 class="card-title">liste d'appel et cahier de texte de la {{ $liste[0]->classe}} </h3>
                         <span>Liste d'appel</span>
-                        <table class="table stylish-table"   style="background-color: darkgrey">
+                        <table class="table stylish-table table m-0 table-colored-bordered table-bordered-success"   style="background-color: darkgrey">
                             <thead>
                                 <tr>
                                     <th style="color: white">Numéro</th>
@@ -82,7 +75,7 @@
                         <input type="submit" value="Soumettre" class="btn" style="background-color: darkgrey;  ">
                     </form>
         @endif
-    </div></div></div></div></div>
+    </div></div>
 
         @if ($absence)
 

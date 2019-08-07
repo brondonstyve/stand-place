@@ -75,16 +75,19 @@ $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
 
 
                                         <h4 class="card-title">Mes jours libres</h4>
+                                        <div class="card-box">
+                                        <div class="table-responsive">
+
                                         <form action="{{ route('disponibilite_edt_path') }}" method="post" class="col-lg-12 col-md-6">
                                             {{ csrf_field() }}
-                                            <table class="table stylish-table"   style="background-color: darkgrey">
+                                            <table class=""   style="background-color: azure">
                                                 <thead>
                                                         @php
                                                         $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
                                                         @endphp
                                                     <tr>
                                                         @for ($i =0 ; $i < 6; $i++)
-                                                        <th style="color: white">{{ $jour[$i] }}</th>
+                                                        <th style="color: black">{{ $jour[$i] }}</th>
                                                         @endfor
 
                                                     </tr>
@@ -106,6 +109,8 @@ $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
                                             </table>
                                             <input type="submit" value="Envoyer" class="btn" style="background-color: darkgrey;  ">
                                         </form>
+                                    </div></div>
+
 
                                         <div class="">
 
@@ -174,7 +179,12 @@ $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
 
                                                 <ul class="nav nav-pills m-t-30 m-b-30" style="margin-top: -10px">
                                                     @for ($i =0 ; $i <sizeOf($classe) ; $i++)
+
                                                     <li class="nav-item">
+                                                            <div class="col-lg-3 col-md-6" style="color: black">
+                                                                    <div class="card" style="background-color: aliceblue">
+                                                                        <div class="card-body" >
+                                                                            <div class="row p-t-10 p-b-10">
                                                         <a class="nav-link  active centre"> Classe {{ $i+1 }}
                                                             <hr>
                                                             <span>{{ $classe[$i]->classe }}</span>
@@ -184,8 +194,9 @@ $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
                                                                 <input type="submit" value="Emploi de temps" class="nav-link  active">
                                                             </form>
                                                         </a>
-
+                                                    </div></div></div></div>
                                                         </li>
+
                                                         @endfor
                                                 </ul>
                                         </div>
@@ -202,45 +213,98 @@ $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
                                             @if (sizeOf($emploiTemp)<=0)
                                               <h3 class="card-title">Aucune Matiere enregistrer pour cette classe</h3>
                                             @else
+                                          <div style="max-width: 90%;display: inline-block; padding: 10%;margin: 0%">
 
-                                            <h3 class="card-title">{{ $emploiTemp[0]->classe }}</h3>
-                                            <table class="table stylish-table">
-                                                    <tr class="btn-info">
-                                                        <th>JOUR</th>
-                                                        <th>Matiere 1</th>
-                                                        <th>Matiere 2</th>
-                                                        <th>Matiere 3</th>
-                                                    </tr>
+                                                <h3 class="card-title"> Programmer la {{ $emploiTemp[0]->classe }}</h3>
+                                                <table class="table stylish-table">
+                                                        <tr class="btn-info">
+                                                            <th>JOUR</th>
+                                                            <th>Matiere 1</th>
+                                                            <th>Matiere 2</th>
+                                                            <th>Matiere 3</th>
+                                                        </tr>
 
 
-                                                        @for ($i = 0; $i < sizeOf($jour); $i++)
-                                                        <tr>
-                                                             <td>
-                                                               {{ $jour[$i] }}
-                                                             </td>
-                                                             @php
-                                                                 $c=0;
-                                                             @endphp
+                                                            @for ($i = 0; $i < sizeOf($jour); $i++)
+                                                            <tr>
+                                                                 <td>
+                                                                   {{ $jour[$i] }}
+                                                                 </td>
+                                                                 @php
+                                                                     $c=0;
+                                                                 @endphp
 
-                                                              @if ($jour[$i]=='MERCREDI' || $jour[$i]=='SAMEDI')
-                                                              @for ($v =1 ; $v <3 ; $v++)
-                                                              <td>
+                                                                  @if ($jour[$i]=='MERCREDI' || $jour[$i]=='SAMEDI')
+                                                                  @for ($v =1 ; $v <3 ; $v++)
+                                                                  <td>
+                                                                        <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="" style="width: 250px">
+                                                                            <option value=""></option>
+                                                                            @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
+                                                                              @for($x=0; $x<sizeOf($disponibilite); $x++)
+                                                                             <!--test de disponibilité-->
+                                                                                @if(($jour[$i]==$disponibilite[$x]->jour) && ($emploiTemp[$a]->compte==$disponibilite[$x]->compte))
+                                                                                @if (sizeOf($testeurEmpl)<=0)
+                                                                                <option>{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
+                                                                                @else
+                                                                                @for ($u = 0; $u < sizeOf($testeurEmpl); $u++)
+
+
+                                                                                @if($testeurEmpl[$u]->jour==$disponibilite[$x]->jour)
+                                                                                <!--test de disponibilité-jour -->
+                                                                                         @if($testeurEmpl[$u]->compte==$disponibilite[$x]->compte)
+                                                                                         <!--test de disponibilité-tranche -->
+                                                                                              @if($testeurEmpl[$u]->tranche==$v)
+                                                                                                    <option disabled style="color: red" value="{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}">{{ $emploiTemp[$a]->nom}}
+                                                                                                    @php $test=true; $testeur=$emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom;  @endphp
+                                                                                                @else
+                                                                                                    @php $test=false; @endphp
+                                                                                               @endif
+                                                                                           @else
+                                                                                               @php $test=false;  @endphp
+
+                                                                                         @endif
+                                                                                @endif
+
+                                                                                @endfor
+
+                                                                                    @if ($test==false && $testeur!=$emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom )
+
+                                                                                     <option value="{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}">{{ $emploiTemp[$a]->nom}}
+                                                                                            @php $testeur='';  @endphp
+                                                                                    @endif
+                                                                                @endif
+
+
+                                                                                @endif
+                                                                             @endfor
+                                                                            @endfor
+                                                                        </select>
+                                                                    </td>
+                                                                  @endfor
+
+                                                                  @else
+                                                                  @if ($jour[$i]=='LUNDI' || $jour[$i]=='MARDI' || $jour[$i]=='JEUDI' || $jour[$i]=='VENDREDI')
+                                                                 @for ($v =1 ; $v <4 ; $v++)
+                                                                  <td>
                                                                     <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="" style="width: 250px">
                                                                         <option value=""></option>
                                                                         @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
                                                                           @for($x=0; $x<sizeOf($disponibilite); $x++)
-
+                                                                          <!--stimulateur d'emploi de temps-->
                                                                             @if(($jour[$i]==$disponibilite[$x]->jour) && ($emploiTemp[$a]->compte==$disponibilite[$x]->compte))
                                                                             @if (sizeOf($testeurEmpl)<=0)
-                                                                            <option>{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
+                                                                            <option value="{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}" >{{ $emploiTemp[$a]->nom}}
                                                                             @else
+
                                                                             @for ($u = 0; $u < sizeOf($testeurEmpl); $u++)
 
-
+                                                                           <!--test de disponibilité--jour -->
                                                                             @if($testeurEmpl[$u]->jour==$disponibilite[$x]->jour)
+                                                                            <!--test de disponibilité--compte -->
                                                                                      @if($testeurEmpl[$u]->compte==$disponibilite[$x]->compte)
+                                                                                     <!--test de disponibilité--trache horaire-->
                                                                                           @if($testeurEmpl[$u]->tranche==$v)
-                                                                                                <option disabled style="color: red">{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
+                                                                                                <option disabled style="color: red" value="{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}">{{ $emploiTemp[$a]->nom}}
                                                                                                 @php $test=true; $testeur=$emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom;  @endphp
                                                                                             @else
                                                                                                 @php $test=false; @endphp
@@ -255,7 +319,8 @@ $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
 
                                                                                 @if ($test==false && $testeur!=$emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom )
 
-                                                                                 <option>{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
+                                                                                 <option value="{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}">{{ $emploiTemp[$a]->nom}}
+                                                                                        @php $testeur=''; @endphp
                                                                                 @endif
                                                                             @endif
 
@@ -265,65 +330,23 @@ $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
                                                                         @endfor
                                                                     </select>
                                                                 </td>
-                                                              @endfor
+                                                                  @endfor
+                                                                  @endif
+                                                                  @endif
 
-                                                              @else
+                                                             </tr>
+                                                            @endfor
+                                                            <tr>
+                                                                <td colspan="4">
+                                                                        <div class="centre">
+                                                                                <input type="hidden" name="classe" value="{{ $emploiTemp[0]->classe }}">
+                                                                                <input type="submit" value="Envoyer" class="btn btn-info" >
+                                                                            </div>
+                                                                </td>
+                                                            </tr>
 
-                                                             @for ($v =1 ; $v <4 ; $v++)
-                                                              <td>
-                                                                <select name="{{ $jour[$i] }}matiere{{ $c++ }}" id="" style="width: 250px">
-                                                                    <option value=""></option>
-                                                                    @for ($a = 0; $a < sizeOf($emploiTemp); $a++)
-                                                                      @for($x=0; $x<sizeOf($disponibilite); $x++)
-
-                                                                        @if(($jour[$i]==$disponibilite[$x]->jour) && ($emploiTemp[$a]->compte==$disponibilite[$x]->compte))
-                                                                        @if (sizeOf($testeurEmpl)<=0)
-                                                                        <option>{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
-                                                                        @else
-                                                                        @for ($u = 0; $u < sizeOf($testeurEmpl); $u++)
-
-
-                                                                        @if($testeurEmpl[$u]->jour==$disponibilite[$x]->jour)
-                                                                                 @if($testeurEmpl[$u]->compte==$disponibilite[$x]->compte)
-                                                                                      @if($testeurEmpl[$u]->tranche==$v)
-                                                                                            <option disabled style="color: red">{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
-                                                                                            @php $test=true; $testeur=$emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom;  @endphp
-                                                                                        @else
-                                                                                            @php $test=false; @endphp
-                                                                                       @endif
-                                                                                   @else
-                                                                                       @php $test=false;  @endphp
-
-                                                                                 @endif
-                                                                        @endif
-
-                                                                        @endfor
-
-                                                                            @if ($test==false && $testeur!=$emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom )
-
-                                                                             <option>{{ $emploiTemp[$a]->compte.'.'.$emploiTemp[$a]->nom}}
-                                                                            @endif
-                                                                        @endif
-
-
-                                                                        @endif
-                                                                     @endfor
-                                                                    @endfor
-                                                                </select>
-                                                            </td>
-                                                              @endfor
-
-                                                              @endif
-
-                                                         </tr>
-                                                        @endfor
-
-                                                </table>
-
-                                                    <div class="centre">
-                                                        <input type="hidden" name="classe" value="{{ $emploiTemp[0]->classe }}">
-                                                        <input type="submit" value="Envoyer" class="btn btn-info" >
-                                                    </div>
+                                                    </table>
+                                        </div>
                                             @endif
 
 

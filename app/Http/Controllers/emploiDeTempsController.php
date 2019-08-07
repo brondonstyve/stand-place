@@ -229,7 +229,7 @@ $resultatprof=DB::table('emploi_de_temps')
 
     public function sauvegarder(insererNoteRequest $request){
 
-
+//return $_POST["MERCREDImatiere0"];
 
 
 
@@ -245,13 +245,13 @@ $resultatprof=DB::table('emploi_de_temps')
 
             $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
             // echo $_POST["$jour[0]matiere0"]."<br>".$_POST["$jour[0]matiere1"]."<br>".$_POST["$jour[0]matiere2"]."<br>" ;
-            //$aexplo=explode("-",$_POST["$jour[5]matiere1"]);
+            //$aexplo=explode(".",$_POST["$jour[5]matiere1"]);
             //return $aexplo[1];
             $newEDT=false;
              for ($i=0; $i <6 ; $i++) {
                  if(($jour[$i]=='MERCREDI') || ($jour[$i]=='SAMEDI')){
                     for ($a=0; $a <2 ; $a++) {
-                    $aexplo=explode("-",$_POST["$jour[$i]matiere$a"]);
+                    $aexplo=explode(".",$_POST["$jour[$i]matiere$a"]);
                     if (sizeOf($aexplo)<=1) {
 
                     } else {
@@ -268,7 +268,7 @@ $resultatprof=DB::table('emploi_de_temps')
                 }}
                  else {
                     for ($a=0; $a <3 ; $a++) {
-                        $aexplo=explode("-",$_POST["$jour[$i]matiere$a"]);
+                        $aexplo=explode(".",$_POST["$jour[$i]matiere$a"]);
                         if (sizeOf($aexplo)<=1) {
 
                         } else {

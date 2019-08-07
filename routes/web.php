@@ -117,6 +117,19 @@ Route::post('sauvegarderEDT', 'emploiDeTempsController@sauvegarder')->name('sauv
 
 route::get('evaluation','evaluationController@evaluation')->name('evaluation_path');
 
-route::post('evaluation_Geneation_epreuve','evaluationController@generateur')->name('generer_epreuve_path');
+route::post('evaluation_Generation_epreuve','evaluationController@generateur')->name('generer_epreuve_path');
 
-route::post('evaluation_Enregistreur_epreuve','evaluationController@enregistreur')->name('enregistrer_epreuve_path');
+route::post('evaluation_Enregistreur_epreuve','evaluationController@enregistrer')->name('enregistrer_epreuve_path');
+
+route::post('Envoi_epreuve','evaluationController@envoyerEpreuve')->name('Envoyer_epreuve_path');
+
+route::get('supprimer_epreuve','evaluationController@supprimerEpreuve')->name('supprimer_epreuve_path');
+
+route::get('evaluer_classe','evaluationController@evaluerClasse')->name('evaluer_classe_path');
+
+route::post('enregistrer_evaluation','evaluationController@enregistrerEvalution')->name('enregistrer_evaluation_path');
+
+route::get('supprimer_evaluation','evaluationController@supprimerEvaluation')->name('supprimer_evaluation_path');
+
+
+route::get('modofier_evaluation','evaluationController@modifierEvaluation')->name('modifier_evaluation_path');
