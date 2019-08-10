@@ -34,11 +34,17 @@ var chrono = {
 //chargement  de la page
 window.onload = function() {
     t = document.getElementById("time");
-
     chrono.Start(document.getElementById("compteur").value);
+    document.getElementById('confirmeur').style.display = 'none'
+
 
 };
 
 function reponse(rep) {
     r = rep;
+};
+
+
+function cache() {
+    document.getElementById('confirmeur').style.display = 'inline'
 };

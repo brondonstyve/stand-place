@@ -14,12 +14,12 @@ class CreateNotesTable extends Migration
     public function up()
     {
         Schema::create('notes', function (Blueprint $table) {
-
             $table->integer('compte')->index()->unsigned();
             $table->integer('matiere')->index()->unsigned();
-            $table->float('CC')->nullable()->default(null);
-            $table->float('SN')->nullable()->default(null);
-            $table->float('final')->nullable()->default(null);
+            $table->float('tp')->default(0);
+            $table->float('CC')->default(0);
+            $table->float('SN')->default(0);
+            $table->float('final')->default(0);
             $table->foreign('compte')->references('id')->on('comptes')->onDelete('cascade');
             $table->foreign('matiere')->references('id')->on('matieres')->onDelete('cascade');
 

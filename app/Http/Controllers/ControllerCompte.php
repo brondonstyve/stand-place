@@ -12,6 +12,7 @@ use App\models\Matricule;
 use MercurySeries\Flashy\Flashy;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ControllerCompte extends Controller
 {
@@ -38,6 +39,11 @@ class ControllerCompte extends Controller
     {
 
 
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
         //TEST SI EMAIL EXISTE
      $test_email=Compte::whereEmail($request->email)->first();
@@ -105,6 +111,11 @@ class ControllerCompte extends Controller
 
     public function edit(modiCompteRequest $request){
 
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
 
         if (auth()->guest()) {
@@ -125,11 +136,11 @@ class ControllerCompte extends Controller
 
         if ($modif) {
             Flashy::success('modification reuissie');
-            return redirect()->route('profil_path');
+            return redirect()->route('profil');
         }
         else{
             Flashy::success('échec de la modification');
-            return redirect()->route('profil_path');
+            return redirect()->route('profil');
         }
     }
 
@@ -138,6 +149,11 @@ class ControllerCompte extends Controller
     public function modifAvatar(avatarRequest $request){
 
 
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
         if (auth()->guest()) {
             Flashy::error('Connectez vouz');
@@ -160,7 +176,7 @@ class ControllerCompte extends Controller
            );
 
            Flashy::success('avatar mis à jour avec succes');
-            return back();
+            return redirect()->route('profil_path');
     }
 
     //RECHERCHE DU MATRUCULE ET ENTAME DE LA PHASE DE CREATION DU COMPTE
@@ -168,12 +184,17 @@ class ControllerCompte extends Controller
     public function findMatricule(MatriculeRequest $request){
 
 
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
 
         $matri=matricule::whereMatricule( $request->matricule)->first();
         if ($matri==null) {
             Flashy::error('le matricule entré n\'est pas valide');
-            return back();
+            return redirect()->route('home');
         }
         else{
             $test_matri=compte::whereMatricule( $request->matricule)->first();
@@ -189,7 +210,7 @@ class ControllerCompte extends Controller
             }
             else {
                 Flashy::error('Le matricule entré est deja utilisé');
-                return back();
+                return redirect()->route('home');
             }
 
         }
@@ -200,7 +221,12 @@ class ControllerCompte extends Controller
     //SUPPRESSION DE L'AVATAR
 
     public function suppAvatar(){
-
+          try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+            mail('brondonstye@gmail.com','ERREUR A STAND PLACE','erreur de serveur admin');
+            return view('errors/errorbd');
+          }
 
 
 
@@ -212,7 +238,7 @@ class ControllerCompte extends Controller
         $test=auth()->user()->photo;
         if ($test==null) {
             Flashy::error('vous ne possédez pas de photo de profil');
-            return back();
+            return redirect()->route('profil_path');
         }
         else {
             $modif=auth()->user()->update(
@@ -223,11 +249,11 @@ class ControllerCompte extends Controller
 
             if ($modif) {
                 Flashy::success('Avatar supprimé avec succes');
-                return back();
+                return redirect()->route('profil_path');
             }
             else {
                 Flashy::error('erreur! Avatar non supprimé');
-                return back();
+                return redirect()->route('profil_path');
             }
         }
 

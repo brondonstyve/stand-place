@@ -64,8 +64,6 @@ class paiementController extends Controller
     public function validerPaiement(PaiementRequest $request){
 
 
-
-
         $t4=null;
         if ($request->niv==1) {
             $preinscrip=76000;
@@ -170,6 +168,11 @@ class paiementController extends Controller
 
 
 
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
 
         $matricule=$request->matricule;
@@ -243,6 +246,11 @@ class paiementController extends Controller
      public function validerSuitePaiement(paiementSuiteRequest $request){
 
 
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
         $matricule=$request->matricule;
         $recherche=Paiement::whereMatricule($matricule)->first();

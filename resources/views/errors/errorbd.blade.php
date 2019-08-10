@@ -38,11 +38,13 @@
                                     </div>
 
                                     <div class="account-content">
-                                        <h1 class="text-error">504 Fatal</h1>
+                                            <h1 class="text-error">Stand place</h1>
+                                        <h1 class="text-error">Erreur Fatale</h1>
                                         <h4 class="text-uppercase text-danger m-t-30">ERREUR DE CONNEXION</h4>
-                                        <h3 class="text-muted m-t-30">Base de données momentanement indisponible</h3>
+                                        <h3 class="text-muted m-t-30">Base de données momentanement indisponible ou en maintenance</h3>
+                                        <h2 class="text-muted m-t-30">Veuiller vous connecter ulterieurement</h2>
 
-                                        <a class="btn btn-md btn-block btn-primary waves-effect waves-light m-t-20" href="{{ route('home') }}"> Retourner a l'accueil</a>
+                                        <a class="btn  btn-md btn-danger btn-primary waves-effect waves-light m-t-20" href="{{ route('home') }}"> Retourner a l'accueil</a>
                                     </div>
                                 </div>
                             </div>

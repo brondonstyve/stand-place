@@ -16,13 +16,22 @@ class ContactsController extends Controller
         return view('index/contacter');
     }
 
-    public function store(ContactRequest $request)
-    {
+    public function store(ContactRequest $request){
+
+
+        try {
+
         sleep(0);
         $mailable=new ContactMessageCreated($request->nom,$request->email,$request->text);
         Mail::to('brondonstyve@gmail.com')->send($mailable);
         Flashy::success('nous vous repondrons dans les plus bref delais!');
-        return redirect()->route('contact_create');
+        return redirect()->route('home');
+
+        } catch (\Throwable $th) {
+            Flashy::error('erreur reseau.vérifiez votre connexion!');
+            return redirect()->route('home');
+        }
+
     }
 
 }

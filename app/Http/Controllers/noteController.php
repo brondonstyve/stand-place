@@ -4,18 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use MercurySeries\Flashy\Flashy;
-use Illuminate\Http\Request;
 use App\Http\Requests\noteRequest;
 use App\Http\Requests\insererNoteRequest;
 use App\models\note;
-use App\models\Compte;
-use App\models\Matiere;
 
 
 class noteController extends Controller
 {
     public function afficherNote(){
 
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
 
 
@@ -28,14 +30,14 @@ class noteController extends Controller
             $note=DB::table('notes')
             ->join('comptes','comptes.id','=','notes.compte')
             ->join('matieres','notes.matiere','=','matieres.id')
-            ->select('comptes.nom as nom_prof','matieres.nom','matieres.coef','notes.CC','notes.SN','notes.final')
+            ->select('comptes.nom as nom_prof','matieres.nom','matieres.coef','notes.CC','notes.tp','notes.SN','notes.final')
             ->where('notes.compte',$utilisateur->id)
             ->get();
 
             $nombre=DB::table('notes')
             ->join('comptes','comptes.id','=','notes.compte')
             ->join('matieres','notes.matiere','=','matieres.id')
-            ->select('comptes.nom as nom_prof','matieres.nom','matieres.coef','notes.CC','notes.SN','notes.final')
+            ->select('comptes.nom as nom_prof','matieres.nom','matieres.coef','notes.CC','notes.SN','notes.tp','notes.final')
             ->where('notes.compte',$utilisateur->id)
             ->count();
 
@@ -75,6 +77,11 @@ class noteController extends Controller
 
     public function remplirNotes(noteRequest $request){
 
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
 
         $utilisateur=auth()->user();
@@ -86,7 +93,7 @@ class noteController extends Controller
          $remplisseur=DB::table('notes')
             ->join('comptes','comptes.id','=','notes.compte')
             ->join('matieres','notes.matiere','=','matieres.id')
-            ->select('matieres.nom','comptes.nom as nom_prof','notes.CC','notes.SN','notes.final','comptes.nom','comptes.prenom','comptes.classe')
+            ->select('matieres.nom','comptes.nom as nom_prof','notes.CC','notes.SN','notes.tp','notes.final','comptes.nom','comptes.prenom','comptes.classe')
             ->where([
                 ['notes.matiere',$id],
                 ['comptes.classe',$classe],
@@ -96,7 +103,7 @@ class noteController extends Controller
             $remplisseurc=DB::table('notes')
             ->join('comptes','comptes.id','=','notes.compte')
             ->join('matieres','notes.matiere','=','matieres.id')
-            ->select('matieres.nom','comptes.nom as nom_prof','notes.CC','notes.SN','comptes.nom','comptes.prenom','comptes.classe')
+            ->select('matieres.nom','comptes.nom as nom_prof','notes.CC','notes.SN','notes.tp','comptes.nom','comptes.prenom','comptes.classe')
             ->where([
                 ['notes.matiere',$id],
                 ['comptes.classe',$classe],
@@ -141,6 +148,11 @@ class noteController extends Controller
     public function insererNotes(insererNoteRequest $request){
 
 
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
 
       $a=0;

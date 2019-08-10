@@ -12,17 +12,27 @@ use App\models\evaluation;
 class evaluationController extends Controller
 {
 
+
     //--Charger la page evaluation
     public function evaluation(){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
         $utilisateur=auth()->user();
         if(auth()->guest()){
             Flashy::error('Connectez vous');
             return \redirect()->route('home');
         }
+
+        //cas du prof
             if ($utilisateur->type=="enseignant") {
 
                  $classe_mat=DB::table('matieres')
-                 ->select('nom','classe')
+                 ->select('nom','classe','id')
                  ->whereCompte($utilisateur->id)
                  ->get();
 
@@ -43,30 +53,58 @@ class evaluationController extends Controller
 
                  $evaluation=DB::table('evaluations')
                  ->join('epreuves','epreuves.id','=','evaluations.epreuve')
-                 ->select('evaluations.id','evaluations.compte','evaluations.libelle','evaluations.statut','evaluations.class_mat',
-                 'epreuves.editeur','epreuves.matiere','epreuves.reponse','epreuves.epreuve','epreuves.dure')
+                 ->join('matieres','matieres.id','=','evaluations.matiere')
+                 ->select('evaluations.id','evaluations.compte','evaluations.matiere','evaluations.libelle','evaluations.statut',
+                 'epreuves.editeur','epreuves.matiere','epreuves.reponse','epreuves.epreuve','epreuves.dure'
+                 ,'matieres.classe as class_mat','matieres.nom')
                  ->where([
                     ['evaluations.compte',$utilisateur->id],
                     ])
                 ->orderBy('evaluations.updated_at','desc')
                 ->get();
-               // return $evaluation;
+               //return $evaluation;
             }
 
      //Changement déetats
      $createForm=true;
      $createEpreuve=false;
-      return view('index/evaluation',compact('utilisateur','classe_mat','createForm','createEpreuve','epreuve','prof','evaluation'));
+
+
+     //cas de l'etudiant
+            if ($utilisateur->type==null) {
+              $evaluation=DB::table('evaluations')
+                ->join('epreuves','epreuves.id','=','evaluations.epreuve')
+                ->join('matieres','matieres.id','=','evaluations.matiere')
+                ->select('matieres.nom','matieres.classe','evaluations.compte','evaluations.matiere','evaluations.libelle','epreuves.dure','epreuves.epreuve',
+                'epreuves.editeur','evaluations.id','epreuves.reponse','evaluations.created_at')
+                ->where([
+                    ['matieres.classe',$utilisateur->classe]
+                    ])
+                ->get();
+              $test=true;
+            }
+
+
+      return view('index/evaluation',compact('utilisateur','classe_mat','test','createForm','createEpreuve','epreuve','prof','evaluation'));
     }
 
 
     //--generateur d'epreuve
     public function generateur(passePartout $request){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+
         $utilisateur=auth()->user();
           if (auth()->guest()) {
               Flashy::error('Connectez vous');
               return \redirect()->route('home');
           }
+
 
           $matiere_classe=\explode('->',$request->matiere);
           $libelle=$request->libelle;
@@ -84,6 +122,13 @@ class evaluationController extends Controller
 
      //--Enregistrer epreuve
     public function enregistrer(passePartout $request){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
         if (auth()->guest()) {
             Flashy::error('Connectez vous');
             return \redirect()->route('home');
@@ -95,6 +140,7 @@ class evaluationController extends Controller
         $nomFichier=time().$fichier->getClientOriginalName();
         $stockage=$fichier->storeAs($fichierCheminPublic,$nomFichier);
         $nom=$utilisateur->nom.' '.$utilisateur->prenom;
+        $id_epreuve=explode('.',$request->matiere);
 
         for ($i=0; $i <$request->nbre ; $i++) {
             $reponse=$reponse.$_POST["kcm$i"].'.';
@@ -102,6 +148,7 @@ class evaluationController extends Controller
 
         $eval=epreuve::create([
             'compte'=>$utilisateur->id,
+            'id_matiere'=>$id_epreuve[0],
             'editeur'=>$nom,
             'matiere'=>$request->matiere,
             'classe'=>$request->classe,
@@ -115,13 +162,20 @@ class evaluationController extends Controller
             Flashy::success('épreuve crée avec succès');
             return redirect()->route('evaluation_path');
         } else {
-            Flashy::success('échec de');
+            Flashy::success('échec');
             return redirect()->route('evaluation_path');
         }
     }
 
     //--Envoyer epreuve
     public function envoyerEpreuve(passePartout $request){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
         if (auth()->guest()) {
             Flashy::error('Connectez vous');
             return \redirect()->route('home');
@@ -160,6 +214,14 @@ class evaluationController extends Controller
 
     //--supprimer epreuve
     public function supprimerEpreuve(passePartout $request){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+
         if (auth()->guest()) {
             Flashy::error('Connectez vous');
             return \redirect()->route('home');
@@ -181,6 +243,14 @@ class evaluationController extends Controller
 
      //--Créer l'évaluation dune classe
      public function evaluerClasse(){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+
         if (auth()->guest()) {
             Flashy::error('Connectez vous');
             return \redirect()->route('home');
@@ -193,7 +263,7 @@ class evaluationController extends Controller
         ->get();
 
         $classe_mat=DB::table('matieres')
-        ->select('nom','classe')
+        ->select('id','nom','classe')
         ->whereCompte($utilisateur->id)
         ->get();
 
@@ -205,6 +275,14 @@ class evaluationController extends Controller
 
      //--enregistrer une evaluation
      public function enregistrerEvalution(passePartout $request){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+
         if (auth()->guest()) {
             Flashy::error('Connectez vous');
             return \redirect()->route('home');
@@ -221,13 +299,17 @@ class evaluationController extends Controller
 
 if ($request->compteur>0) {
     $matiere='';
+    $test=false;
+    $evaluation=false;
     for ($i=0; $i <$request->compteur ; $i++) {
         if (!empty($_POST["classe$i"])) {
-            $classe_mat=explode('->',$_POST["classe$i"]);
+
+            $id_mat=explode('.',$_POST["classe$i"]);
+
             $env=evaluation::where([
                 ['libelle',$request->libelle],
                 ['compte',$utilisateur->id],
-                ['class_mat',$_POST["classe$i"] ],
+                ['matiere',$id_mat[0] ],
                 ['epreuve',$request->idEpreuve],
             ])
             ->get();
@@ -242,7 +324,7 @@ if ($request->compteur>0) {
                 $evaluation=evaluation::create([
                     'compte'=>$utilisateur->id,
                     'epreuve'=>$request->idEpreuve,
-                    'class_mat'=>$_POST["classe$i"],
+                    'matiere'=>$id_mat[0],
                     'libelle'=>$request->libelle,
                 ]);
             }
@@ -261,7 +343,7 @@ if ($request->compteur>0) {
         Flashy::success('évaluation enregistrée ,');
         return redirect()->route('evaluation_path');
     } else {
-        Flashy::error('erreur de suppression');
+        Flashy::error('erreur de création, cocher une matière.');
         return redirect()->route('evaluation_path');
     }
 
@@ -278,6 +360,14 @@ else {
 
     // supprimer une evaluation
      public function supprimerEvaluation(passePartout $request){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+
         if (auth()->guest()) {
             Flashy::error('Connectez vous');
             return \redirect()->route('home');
@@ -299,8 +389,14 @@ else {
      }
 
 
-     //--modifier une evaluation
+     //--voir une evaluation
      public function modifierEvaluation(){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
 
         if (auth()->guest()) {
@@ -312,6 +408,8 @@ else {
 
         $modif_evaluation=DB::table('evaluations')
         ->join('epreuves','epreuves.id','=','evaluations.epreuve')
+        ->join('matieres','matieres.id','=','evaluations.matiere')
+        ->select('matieres.nom','matieres.classe','evaluations.libelle','epreuves.dure','epreuves.epreuve','epreuves.editeur','evaluations.id','epreuves.reponse')
         ->where([
             ['evaluations.id',$_GET["path_directrieRetry"] ]
 
@@ -328,5 +426,18 @@ else {
 
           return view('index/epreuve',compact('utilisateur','test','test1','modif_evaluation','classe_mat'));
 
+     }
+
+     //composition d'un etudiant
+
+     public function composer(){
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+
+         return ($_GET['path_directoriesRender']);
      }
 }

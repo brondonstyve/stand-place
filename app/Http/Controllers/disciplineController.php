@@ -9,7 +9,11 @@ class disciplineController extends Controller
 {
     public function Discipline(){
 
-
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
         $utilisateur=auth()->user();
         $remplisseur=DB::table('appels')

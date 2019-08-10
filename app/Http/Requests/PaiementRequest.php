@@ -24,10 +24,10 @@ class PaiementRequest extends FormRequest
     public function rules()
     {
         return [
-            'nom'=>'required|min:6',
-            'ville'=>'required|min:6',
-            'number'=>'required|min:9',
-            'num_carte'=>'required|min:6',
+            'nom'=>'required',
+            'ville'=>'required',
+            'number'=>'required|min:6',
+            'num_carte'=>'required|min:7',
             'cvv'=>'required|min:3'
         ];
     }

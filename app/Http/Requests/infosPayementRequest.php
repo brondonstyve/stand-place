@@ -24,9 +24,9 @@ class infosPayementRequest extends FormRequest
     public function rules()
     {
         return [
-            'nom'=>'required|min:6',
-            'ville'=>'required|min:6',
-            'number'=>'required|min:9'
+            'nom'=>'required',
+            'ville'=>'required',
+            'number'=>'required|min:6'
         ];
     }
 }

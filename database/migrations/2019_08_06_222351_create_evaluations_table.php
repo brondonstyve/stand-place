@@ -17,12 +17,13 @@ class CreateEvaluationsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('epreuve')->unsigned()->default(null);
             $table->integer('compte')->index()->unsigned();
-            $table->string('class_mat',50);
+            $table->integer('matiere')->index()->unsigned();
             $table->string('libelle',3);
             $table->boolean('statut')->default(false);
             $table->timestamps();
             $table->foreign('epreuve')->references('id')->on('epreuves')->onDelete('cascade');
             $table->foreign('compte')->references('id')->on('comptes')->onDelete('cascade');
+            $table->foreign('matiere')->references('id')->on('matieres')->onDelete('cascade');
         });
     }
 

@@ -1,5 +1,5 @@
 
-<div class="row">
+<div >
     <!-- Column -->
 
 
@@ -14,14 +14,15 @@
         <div class="card-body">
             <h2 class="card-title">{{ $note[$i]->nom }}</h2>
             <div class="text-right"> <span class="text-muted">{{ $note[$i]->nom_prof }}</span></div>
-                <h5 class="font-light">Controle continu : <span style="color:@if ($note[$i]->CC<5) red @else @if ($note[$i]->CC<12) blue @else green  @endif @endif " >{{ $note[$i]->CC }}/20</span> </h5>
-                <h5 class="font-light">Session normale :  <span style="color:@if ($note[$i]->SN<5) red @else @if ($note[$i]->SN<12) blue @else green  @endif @endif " >{{ $note[$i]->SN }}/20</span></h5>
+            <h5 class="font-light">Travaux Pratiques &nbsp;&nbsp;&nbsp;&nbsp;: <span style="color:@if ($note[$i]->tp<5) red @else @if ($note[$i]->tp<12) blue @else green @endif @endif " >{{  $note[$i]->tp }}/20</span> </h5>
+                <h5 class="font-light">Controle continu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span style="color:@if ($note[$i]->CC<5) red @else @if ($note[$i]->CC<12) blue @else green @endif @endif " >{{ $note[$i]->CC }}/20</span> </h5>
+                <h5 class="font-light">Session normale &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<span style="color:@if ($note[$i]->SN<5) red @else @if ($note[$i]->SN<12) blue @else green @endif @endif" >{{ $note[$i]->SN }}/20</span></h5>
                      @php
                          $comptNote=0;
                          $comptCoef=0;
                          $final=($note[$i]->CC*30/100)+($note[$i]->SN*70/100)
                      @endphp
-                <h5 class="font-light">Note finale &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span style="color:@if ($final<5) red @else @if ($final<12) blue @else green  @endif @endif " >{{ $final }}/20</h5>
+                <h5 class="font-light">Note finale &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span style="color:@if ($final<5) red @else @if ($final<12) blue @else green  @endif @endif " >{{ $final }}/20</h5>
 
             <span class="text-success">{{ ($note[$i]->final/20)*100 }}%  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @if ($final<5) danger @else @if ($final<12) Mauvais travail @else bon travail @endif @endif </span>
             <div class="progress">
@@ -129,11 +130,11 @@
           <h3 class="card-title">erreur </h3>
        @else
        <div class="card-body" >
-            <div class="col-lg-10 col-md-6" style="color: black">
-            <div id="visitor" style="position: relative;" class="c3">
+            <div style="color: black">
+            <div id="visitor" >
 
                     <div class="table-responsive m-t-20">
-                        <form action="{{ route('inserer_note_path') }}" method="post" style="">
+                        <form action="{{ route('inserer_note_path') }}" method="post" style="padding: 5%">
                             {{ csrf_field() }}
                                 <h3 class="card-title">liste des étudiants de la {{ $liste[0]->classe}} </h3>
                             <table class="table stylish-table" >
@@ -142,6 +143,7 @@
                                             <th>Numéro</th>
                                             <th>Nom</th>
                                             <th>Prenom</th>
+                                            <th>TD</th>
                                             <th>CC</th>
                                             <th>SN</th>
                                             <th>final</th>
@@ -156,7 +158,8 @@
                                     <td>{{ $i+1 }}</td>
                                     <td>{{ $liste[$i]->nom }}</td>
                                     <td>{{ $liste[$i]->prenom }}</td>
-                                    <td><input type="text" name="cc{{ $i }}" size="7" value='@if(sizeOf($remplisseur)==0){{0}}@else @if(sizeOf($remplisseur)>$i){{$remplisseur[$i]->CC}}@else{{0}}@endif{{ $space }}@endif'></td>
+                                    <td><input type="text" size="7" value='@if(sizeOf($remplisseur)==0){{0}}@else @if(sizeOf($remplisseur)>$i){{ $remplisseur[$i]->tp }}@else{{0}}@endif{{ $space }}@endif' disabled></td>
+                                    <td><input type="text" name="cc{{ $i }}" size="7" value='@if(sizeOf($remplisseur)==0){{0}}@else @if(sizeOf($remplisseur)>$i){{ $remplisseur[$i]->CC }}@else{{0}}@endif{{ $space }}@endif'></td>
                                     <td><input type="text" name="sn{{ $i }}" size="7" value="@if(sizeOf($remplisseur)==0){{0}}@else @if(sizeOf($remplisseur)>$i){{$remplisseur[$i]->SN}}@else{{0}}@endif{{ $space }}@endif"></td>
                                     <td><input type="text" size="7" value="@if(sizeOf($remplisseur)==0){{0}}@else @if(sizeOf($remplisseur)>$i){{$remplisseur[$i]->final}}@else{{0}}@endif{{ $space }}@endif" disabled></td>
                                     <input type="hidden" size="4" name="id_matiere{{ $i }}" value="{{ $id }}">

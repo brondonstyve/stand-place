@@ -14,13 +14,16 @@ class CreateEmploiDeTempsTable extends Migration
     public function up()
     {
         Schema::create('emploi_de_temps', function (Blueprint $table) {
+            $table->integer('disponibilite')->index()->unsigned();
+            $table->integer('compte')->index()->unsigned();
             $table->string('classe',5);
             $table->string('jour',10);
-            $table->integer('compte')->index()->unsigned()->default(7);
             $table->string('matiere',30);
             $table->tinyInteger('tranche')->default(0);
-            $table->foreign('compte')->references('id')->on('comptes')->onDelete('cascade');
             $table->timestamps();
+            $table->foreign('disponibilite')->references('id')->on('disponibilites')->onDelete('cascade');
+            $table->foreign('compte')->references('id')->on('comptes')->onDelete('cascade');
+
         });
     }
 

@@ -1,10 +1,9 @@
+<!-- detail d'évaluations-->
+
 @if ($test)
 <div class="card">
-        @php
-        $classe=explode('->', $modif_evaluation[0]->class_mat);
-       @endphp
         <div class="card-body bg-info">
-            <h4 class="text-white card-title uppercase">Détails de léevaluation de {{ $classe[0] }} de la {{ $classe[1] }}</h4>
+            <h4 class="text-white card-title uppercase">Détails de léevaluation de {{ $modif_evaluation[0]->nom }} de la {{ $modif_evaluation[0]->classe }}</h4>
             <h6 class="card-subtitle text-white m-b-0 op-5">Détails</h6>
         </div>
         <div class="card-body">
@@ -38,7 +37,7 @@
                                                         <tr>
 
                                                             <td style="width: 40%" >
-                                                             {{ $classe[0] }}( {{ $classe[1] }})
+                                                             {{ $modif_evaluation[0]->nom }}( {{ $modif_evaluation[0]->classe }})
                                                             </td>
 
                                                             <td style="width: 30%">
@@ -59,15 +58,13 @@
                                                         </thead>
                                                         <tr class="centre">
                                                                 <td colspan="2">
-                                                                        <option>{{ $modif_evaluation[0]->reponse }}</option>
+                                                                        {{ $modif_evaluation[0]->reponse }}
                                                                 </td>
                                                                 <td colspan="" class="btn-sm">
                                                                         cliquez<a href="storage\epreuve\{{ $modif_evaluation[0]->epreuve }}"  style="color: brown"> ici  </a>pour voir l'épreuve
                                                                 </td>
 
                                                         </tr>
-                                                        <input type="hidden" name="idEpreuve" value="{{ $modif_evaluation[0]->id }}">
-                                                        <input type="hidden" name="compteur" value="{{ sizeOf($classe_mat) }}">
                                                     <thead>
                                                         <tr>
                                                             <td colspan="3" align="center" class="btn-sm">
@@ -87,6 +84,8 @@
         </div>
     </div>
 
+
+    <!--evaluer une salle de classe-->
 @else
 <div class="card">
         <div class="card-body bg-info">
@@ -126,7 +125,7 @@
 
                                                             <td style="width: 80%" >
                                                                     @for ($i =0 ; $i <sizeOf($classe_mat) ; $i++)
-                                                                    <input type="checkbox" name='classe{{ $i }}' value="{{ $classe_mat[$i]->nom.'->'.$classe_mat[$i]->classe }}">
+                                                                    <input type="checkbox" name='classe{{ $i }}' value="{{ $classe_mat[$i]->id.'.'.$classe_mat[$i]->nom.'->'.$classe_mat[$i]->classe }}">
                                                                         {{ $classe_mat[$i]->nom.'->'.$classe_mat[$i]->classe }}
                                                                         <br>
                                                                         @endfor
@@ -137,6 +136,7 @@
                                                                     style="min-width: 100%;text-transform: uppercase">
                                                                     <option value="cc">cc</option>
                                                                     <option value="sn">sn</option>
+                                                                    <option value="tp">tp</option>
                                                                 </select>
                                                             </td>
 
@@ -158,8 +158,8 @@
                                                             </tr>
                                                         </thead>
                                                         <tr class="centre">
-                                                                <td >
-                                                                        <option>{{ $evaluation[0]->reponse }}</option>
+                                                                <td colspan="3">
+                                                                        {{ $evaluation[0]->reponse }}
                                                                 </td>
 
                                                         </tr>

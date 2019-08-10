@@ -19,7 +19,11 @@ class ControllerConnexion extends Controller
 
     public function show(ConnexionRequest $request){
 
-
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
 
 
             $connect=Auth::attempt(['email' => $request->email, 'password' => $request->mdp]);

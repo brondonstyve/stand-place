@@ -197,7 +197,7 @@
 
                                                     @if ($utilisateur->type =='enseignant')
                                                     <li role="separator" class="divider"></li>
-                                                    <li><a href="profil.blade.php"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
+                                                    <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
                                                     <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/>Remplir notes</a></li>
                                                     <li><a href="{{ route('appel_ct_path') }}"><img src="images/blog.png" width="10%"/>Appel/cahier de texte</a></li>
                                                     <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
@@ -212,7 +212,7 @@
                                                     @else
                                                            @if ($utilisateur->type==null)
                                                            <li role="separator" class="divider"></li>
-                                                           <li><a href="profil.blade.php"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
+                                                           <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
                                                            <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="10%"/> Evaluation</a></li>
                                                            <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/> Notes</a></li>
                                                            <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
@@ -227,7 +227,7 @@
                                                             @else
                                                             @if ($utilisateur->type=='superadmin')
                                                               <li role="separator" class="divider"></li>
-                                                                    <li><a href="profil.blade.php"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
+                                                                    <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
                                                                     <li><a href="#" class="btn-sm btn-success" style="color: black;">Passer en mode Administrateur</a></li>
                                                                     <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
                                                                     <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
@@ -278,7 +278,7 @@
                         <ul id="sidebarnav" class="in">
                             <ul aria-expanded="true" class="collapse in">
                                 @if ($utilisateur->type=="enseignant")
-                                    <li><a href="profil.blade.php"><img src="images/profil.png" width="20%"/> Mon profil</a></li>
+                                    <li><a href="{{ route('profil_path') }}"><img src="images/profil.png" width="20%"/> Mon profil</a></li>
                                     <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="20%"/>Remplir notes</a></li>
                                     <li><a href="{{ route('appel_ct_path') }}"><img src="images/blog.png" width="20%"/>Appel/CT</a></li>
                                     <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
@@ -289,7 +289,7 @@
 
                                     @else
                                          @if ($utilisateur->type==null)
-                                         <li><a href="profil.blade.php"><img src="images/profil.png" width="20%"/> Mon profil</a></li>
+                                         <li><a href="{{ route('profil_path') }}"><img src="images/profil.png" width="20%"/> Mon profil</a></li>
                                          <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="20%" > Evaluation</a></li>
                                          <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="20%"/> Notes</a></li>
                                          <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
@@ -301,7 +301,7 @@
 
                                          @else
                                          @if ($utilisateur->type=='superadmin')<li role="separator" class="divider"></li>
-                                         <li><a href="profil.blade.php"><img src="images/profil.PNG" width="20%" > Mon profil</a></li>
+                                         <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="20%" > Mon profil</a></li>
                                          <li><a href="blog.blade.php"><img src="images/blog.png" width="20%"/>Blog</a></li>
                                          <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="20%"/> Vote</a></li>
                                          <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="20%" /> Inbox</a></li>

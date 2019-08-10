@@ -4,6 +4,66 @@ $reponse = array('a','b','c','d');
 
 @if ($utilisateur->type==null)
 
+@if ($test)
+<div class="card">
+        <div class="card-body bg-info">
+            @if(sizeOf($evaluation)==0)
+            <h4 class="text-white card-title uppercase">Vous n'avez pas d'évaluation pour le moment</h4>
+            <h6 class="card-subtitle text-white m-b-0 op-5">étudiez c'est pour bientôt</h6>
+            @else
+            <h4 class="text-white card-title uppercase">Liste des évaluations en cour</h4>
+            <h6 class="card-subtitle text-white m-b-0 op-5">Détails</h6>
+            @endif
+
+        </div>
+        <div class="card-body">
+            <div class="message-box contact-box">
+
+                @for ($i =0 ; $i <sizeOf($evaluation) ; $i++)
+                <span class="point">
+                        <div class="message-widget contact-widget" style="background-color: antiquewhite"
+                        title="cliquer dessus pour voir le l'épreuve">
+
+                        <a href="#" data-toggle="modal">
+                            <div class="user-img"> <img src="images/icones/modifier.png" alt="user" class="img-circle">
+                                <div class="notify">
+                                        <span class="heartbit"></span> <span class="point"></span>
+                                    </div>
+                            </div>
+
+                            <div class="mail-contnet">
+                                <h5 style="text-transform: uppercase">évaluation de {{ $evaluation[$i]->nom }}</h5>
+                                <span class="mail-desc"> édité le {{ $evaluation[$i]->created_at }}</span>
+                            </div>
+                                <span class="btn-sm" style="color:brown">durée::{{ $evaluation[$i]->dure }} min</span>
+                            </a>
+
+                    </div>
+                    <h2 class="add-ct-btn">
+                            <a href="
+                            {{ route('composition_path') }}?path_directoriesRender={{ bcrypt($evaluation[$i]->id) }}"title="commencer">
+
+                            <button type="" class="btn btn-circle btn-lg btn-success waves-effect waves-dark">
+                                            <img src="images/icones/evaluer.png" alt="commencer" width="50px">
+                            </button>
+                        </a>
+                        </h2>
+
+                </span>
+                @endfor
+
+
+            </div>
+        </div>
+    </div>
+
+@endif
+
+
+
+
+
+
 <div class="row">
     <!-- Column -->
     <div class="col-lg-3 col-md-6">
@@ -31,16 +91,15 @@ $reponse = array('a','b','c','d');
 
 
 <div class="card-box">
-
-    <object data="Fichiers/Gest-Projet-Infor.pdf" type="application/pdf" class="table m-0 " width="500" height="500">
-        alt: <a href="Fichiers/Gest-Projet-Infor.pdf">testpdf</a>
-    </object>
+<iframe src="Fichiers/Gest-Projet-Infor.pdf" frameborder="0" class="table m-0 " width="500" height="500">
+    alt: <a href="Fichiers/Gest-Projet-Infor.pdf">Cliquer ici</a>
+</iframe>
 
 </div>
 
 
 
-<div class="col-md-6">
+<div class="col-md-12">
 
     <div class="card-box">
         <div class="table-responsive">
@@ -78,8 +137,13 @@ $reponse = array('a','b','c','d');
                         </tr>
                         @endfor
                     </tbody>
+                    <tr>
+                        <td colspan="4" class="centre">
+                            <input type="submit" id="button" value="Soumettre" class="btn btn-sm btn-success">
+                        </td>
+                    </tr>
                 </table>
-                <input type="submit" id="button" value="Soumettre" class="btn btn-sm btn-success">
+
             </form>
         </div>
     </div>
@@ -87,6 +151,7 @@ $reponse = array('a','b','c','d');
 </div>
 
 @else
+
 @if ($utilisateur->type=='enseignant')
 
 <!-- creation d'épreuves -->
@@ -211,15 +276,17 @@ $reponse = array('a','b','c','d');
                     </span>
 
          <!--fin suppression-->
+
+         <!-- Message liste-->
                 <div class="message-widget contact-widget" style="background-color: antiquewhite"
                     title="cliquer dessus pour voir le l'épreuve">
-                    <!-- Message -->
+
                     <a href="storage\epreuve\{{ $epreuve[$i]->epreuve }}">
                         <div class="user-img"> <img src="images/courrs.png" alt="user" class="img-circle">
                             <span class="profile-status online pull-right"></span>
                         </div>
                         <div class="mail-contnet">
-                            <h5 style="text-transform: uppercase">épreuves de {{ $epreuve[$i]->matiere }}</h5>
+                            <h5 style="text-transform: uppercase">épreuves de {{ explode('.',$epreuve[$i]->matiere)[1] }}</h5>
                             <span class="mail-desc">@if($epreuve[$i]->editeur==$utilisateur->nom.' '.$utilisateur->prenom) édité le {{ $epreuve[$i]->created_at }} par moi pour la {{ $epreuve[$i]->classe }}@else édité par M.
                                 {{ $epreuve[$i]->editeur }} @endif</span>
 
@@ -230,12 +297,10 @@ $reponse = array('a','b','c','d');
 
                     </a>
                 </div>
-                @endfor
 
+        @endfor
 
-
-
-        </div>
+    </div>
     </div>
 </div>
 
@@ -261,13 +326,13 @@ $reponse = array('a','b','c','d');
                             <span class="profile-status online pull-right"></span>
                         </div>
                         <div class="mail-contnet">
-                            <h5 style="text-transform: uppercase">évaluation de {{ $evaluation[$i]->class_mat }}</h5>
-                            <span class="mail-desc"> En attente de validation par l'administration</span>
+                            <h5 style="text-transform: uppercase">évaluation de {{ $evaluation[$i]->nom }} en {{ $evaluation[$i]->class_mat }} pour: {{ $evaluation[$i]->libelle }}</h5>
+                            <span class="mail-desc"> En attente de validation par l'administration...</span>
 
                         </div>
 
                         <span class="btn-sm"
-                            style="text-transform: uppercase;color:brown">durée::{{ $epreuve[$i]->dure }} minutes</span>
+                            style="text-transform: uppercase;color:brown">durée::{{ $evaluation[$i]->dure }} minutes</span>
 
                     </a>
                 </div>
@@ -357,10 +422,9 @@ $reponse = array('a','b','c','d');
                                     <tr>
 
                                         <td style="width: 25%">
-                                            <select name="matiere" id=""
-                                                style="min-width: 100%;text-transform: uppercase">
+                                            <select name="matiere" required style="min-width: 100%;text-transform: uppercase">
                                                 @for ($i =0 ; $i <sizeOf($classe_mat) ; $i++) <option
-                                                    value="{{ $classe_mat[$i]->nom.'->'.$classe_mat[$i]->classe }}">
+                                                    value="{{ $classe_mat[$i]->id.'.'.$classe_mat[$i]->nom.'->'.$classe_mat[$i]->classe }}">
                                                     {{ $classe_mat[$i]->nom.'->'.$classe_mat[$i]->classe }}</option>
                                                     @endfor
                                             </select>
@@ -371,6 +435,7 @@ $reponse = array('a','b','c','d');
                                                 style="min-width: 100%;text-transform: uppercase">
                                                 <option value="cc">cc</option>
                                                 <option value="sn">sn</option>
+                                                <option value="tp">tp</option>
                                             </select>
                                         </td>
 
@@ -517,6 +582,7 @@ $reponse = array('a','b','c','d');
                                         <option value="{{ $libelle }}">{{ $libelle }}</option>
                                         <option value="cc">cc</option>
                                         <option value="sn">sn</option>
+                                        <option value="tp">tp</option>
                                     </select>
                                 </td>
                                 <th style="text-transform: uppercase;float: right">Durée</th>

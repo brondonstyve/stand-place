@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class note extends Model
 {
     public $timestamps=false;
-    protected $fillable=['compte','matiere','CC','SN','final'];
+    protected $fillable=['compte','matiere','CC','SN','final','tp'];
 }

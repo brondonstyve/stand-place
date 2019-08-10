@@ -1,10 +1,9 @@
 
-<div class="row">
     <div class="card-body">
 <!-- liste des salles de  classes -->
         <h4 class="card-title">Mes salles de classes</h4>
             @for ($i =0 ; $i <sizeOf($classe) ; $i++)
-                    <div class="col-lg-3 col-md-6" style="color: black">
+                    <div class="col-lg-3 col-md-3" style="color: black">
                             <div class="card" style="background-color: aliceblue">
                                 <div class="card-body" >
                                     <div class="row p-t-10 p-b-10">
@@ -35,13 +34,13 @@
                     <form action="" method="post" >
                         <input type="button" value="liste des absences" data-toggle="modal"
                             data-target="#add-absence" class="btn btn-danger">
-
-                        <input type="button" value="Mon cahier de texte(Taches )" data-toggle="modal"
+<hr>
+                        <input type="button" value="Mon cahier de texte" data-toggle="modal"
                             data-target="#add-cahier" class="btn btn-danger">
                     </form>
 
-                    <div class="table-responsive m-t-10">
-                    <form action="{{ route('inserer_absence_path') }}" method="post" class="col-lg-10 col-md-6">
+                    <div class="table-responsive" >
+                    <form action="{{ route('inserer_absence_path') }}" method="post" class="row" style="width: 150%;padding: 10%">
                         {{ csrf_field() }}
                         <h3 class="card-title">liste d'appel et cahier de texte de la {{ $liste[0]->classe}} </h3>
                         <span>Liste d'appel</span>
@@ -69,7 +68,7 @@
                             </tbody>
                         </table>
                                     <span>Cahier de texte</span>
-                                    <textarea name="libelle" id="" cols="65" rows="3"></textarea>
+                                    <textarea name="libelle" id="" cols="65" rows="3" style="background-color: aliceblue"></textarea>
 
                         <input type="hidden" name="compteur" value="{{ $listec }}">
                         <input type="submit" value="Soumettre" class="btn" style="background-color: darkgrey;  ">
@@ -169,5 +168,7 @@
 
 
 
+
+</div>
 
 </div>

@@ -122,6 +122,10 @@ class appelctController extends Controller
            return view('errors/errorbd');
           }
 
+          if ($_POST["id_matiere0"]=='') {
+            Flashy::success('Veuillez remplir le cahier de texte');
+            return back();
+          }
 
 
         $a=0;

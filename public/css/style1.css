@@ -1769,6 +1769,167 @@ Buttons
 }
 
 
+/* Table full colored */
+
+.table-colored-full {
+    color: #0f0f0f;
+}
+
+.table-colored-full thead th {
+    border-bottom: 0 !important;
+    padding: 10px !important;
+}
+
+.table-colored-full tbody td,
+.table-colored-full tbody th {
+    border: 0 !important;
+}
+
+.table-colored-full.table-full-primary {
+    background-color: rgba(68, 137, 228, 0.8);
+}
+
+.table-colored-full.table-full-primary thead th {
+    background-color: #4489e4;
+}
+
+.table-colored-full.table-full-primary tbody tr:hover {
+    background-color: #4489e4;
+}
+
+.table-colored-full.table-full-success {
+    background-color: rgba(50, 200, 97, 0.8);
+}
+
+.table-colored-full.table-full-success thead th {
+    background-color: #32c861;
+}
+
+.table-colored-full.table-full-success tbody tr:hover {
+    background-color: #32c861;
+}
+
+.table-colored-full.table-full-info {
+    background-color: rgba(52, 211, 235, 0.8);
+}
+
+.table-colored-full.table-full-info thead th {
+    background-color: #34d3eb;
+}
+
+.table-colored-full.table-full-info tbody tr:hover {
+    background-color: #34d3eb;
+}
+
+.table-colored-full.table-full-custom {
+    background-color: rgba(100, 197, 177, 0.8);
+}
+
+.table-colored-full.table-full-custom thead th {
+    background-color: #64c5b1;
+}
+
+.table-colored-full.table-full-custom tbody tr:hover {
+    background-color: #64c5b1;
+}
+
+.table-colored-full.table-full-warning {
+    background-color: rgba(255, 169, 28, 0.8);
+}
+
+.table-colored-full.table-full-warning thead th {
+    background-color: #ffa91c;
+}
+
+.table-colored-full.table-full-warning tbody tr:hover {
+    background-color: #ffa91c;
+}
+
+.table-colored-full.table-full-danger {
+    background-color: rgba(249, 106, 116, 0.8);
+}
+
+.table-colored-full.table-full-danger thead th {
+    background-color: #f96a74;
+}
+
+.table-colored-full.table-full-danger tbody tr:hover {
+    background-color: #f96a74;
+}
+
+.table-colored-full.table-full-inverse {
+    background-color: rgba(54, 64, 76, 0.8);
+}
+
+.table-colored-full.table-full-inverse thead th {
+    background-color: #36404c;
+}
+
+.table-colored-full.table-full-inverse tbody tr:hover {
+    background-color: #36404c;
+}
+
+.table-colored-full.table-full-pink {
+    background-color: rgba(236, 103, 148, 0.8);
+}
+
+.table-colored-full.table-full-pink thead th {
+    background-color: #ec6794;
+}
+
+.table-colored-full.table-full-pink tbody tr:hover {
+    background-color: #ec6794;
+}
+
+.table-colored-full.table-full-purple {
+    background-color: rgba(85, 83, 206, 0.8);
+}
+
+.table-colored-full.table-full-purple thead th {
+    background-color: #5553ce;
+}
+
+.table-colored-full.table-full-purple tbody tr:hover {
+    background-color: #5553ce;
+}
+
+.notif {
+    position: relative;
+    top: 10px;
+    right: -7px;
+}
+
+.notif .heartbit {
+    position: absolute;
+    top: -20px;
+    right: -4px;
+    height: 25px;
+    width: 25px;
+    z-index: 10;
+    border: 5px solid #fc4b6c;
+    border-radius: 70px;
+    -moz-animation: heartbit 1s ease-out;
+    -moz-animation-iteration-count: infinite;
+    -o-animation: heartbit 1s ease-out;
+    -o-animation-iteration-count: infinite;
+    -webkit-animation: heartbit 1s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+.notif .point {
+    width: 6px;
+    height: 6px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    background-color: #fc4b6c;
+    position: absolute;
+    right: 6px;
+    top: -10px;
+}
+
+
 /*******************
 Notify
 *******************/

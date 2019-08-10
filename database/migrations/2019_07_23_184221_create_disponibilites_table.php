@@ -14,9 +14,10 @@ class CreateDisponibilitesTable extends Migration
     public function up()
     {
         Schema::create('disponibilites', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('compte')->index()->unsigned();
             $table->string('jour');
+            $table->integer('tranche');
             $table->foreign('compte')->references('id')->on('comptes')->onDelete('cascade');
         });
     }

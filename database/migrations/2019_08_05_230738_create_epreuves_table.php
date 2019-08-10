@@ -16,6 +16,7 @@ class CreateEpreuvesTable extends Migration
         Schema::create('epreuves', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('compte')->index()->unsigned();
+            $table->integer('id_matiere')->index()->unsigned();
             $table->string('editeur',50);
             $table->string('matiere',50);
             $table->string('classe',10);
@@ -26,6 +27,7 @@ class CreateEpreuvesTable extends Migration
             $table->boolean('statut')->default(false);
             $table->timestamps();
             $table->foreign('compte')->references('id')->on('comptes')->onDelete('cascade');
+            $table->foreign('id_matiere')->references('id')->on('matieres')->onDelete('cascade');
         });
     }
 

@@ -36,7 +36,7 @@ Route::get('/coursligne.blade.php', 'PagesController@ouvrirCoursligne');
 
 Route::get('/', 'PagesController@ouvrirIndex')->name('home');
 
-Route::get('/profil.blade.php', 'PagesController@ouvrirConnex')->name('profil_path');
+Route::get('profil', 'PagesController@ouvrirConnex')->name('profil_path');
 
 Route::get('/compReg.blade.php', 'controllerCompte@index')->name('compte_path');
 
@@ -51,7 +51,7 @@ Route::get('/compSign.blade.php', 'controllerConnexion@index')->name('sign_in_pa
 
 Route::post('/compSign.blade.php', 'controllerConnexion@show')->name('connex_show');
 
-Route::post('/profil.blade.php', 'controllerCompte@edit')->name('compte_edit_path');
+Route::post('profil', 'controllerCompte@edit')->name('compte_edit_path');
 
 Route::get('/notes.blade.php', 'PagesController@ouvrirNote');
 
@@ -69,9 +69,7 @@ Route::get('/blog.blade.php', 'PagesController@ouvrirBlog');
 
 Route::get('test.blade.php', 'PagesController@test');
 
-Route::get('/vote', 'vote@membreVotes')->name('vote_path');
-
-Route::post('/vote', 'vote@membreVotes')->name('vote_path');
+Route::get('vote', 'vote@membreVotes')->name('vote_path');
 
 Route::post('/voteEnvoi', 'vote@voteEnvoi')->name('vote_envoi_path');
 
@@ -131,5 +129,6 @@ route::post('enregistrer_evaluation','evaluationController@enregistrerEvalution'
 
 route::get('supprimer_evaluation','evaluationController@supprimerEvaluation')->name('supprimer_evaluation_path');
 
-
 route::get('modofier_evaluation','evaluationController@modifierEvaluation')->name('modifier_evaluation_path');
+
+route::get('@phd@StandPlace@Fonctionne@bascule@gauche','evaluationController@composer')->name('composition_path');

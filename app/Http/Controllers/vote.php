@@ -7,11 +7,13 @@ use App\models\Matiere;
 use App\models\Compte;
 use MercurySeries\Flashy\Flashy;
 use App\Http\Requests\voteValider;
+use Illuminate\Support\Facades\Auth;
 
 class vote extends Controller
 {
 
     public function membreVotes(){
+
         $utilisateur=auth()->user();
         $niveau=$utilisateur->niveau;
         $maxVote=Matiere::max('vote');
@@ -43,7 +45,7 @@ class vote extends Controller
          if ($vote) {
              $vote_statut=auth()->user()->update(['vote_statut'=>true]);
              Flashy::success('Vote realisé avec succes');
-             return view('index/vote',compact('premier','utilisateur','liste','nombre'));
+             return redirect()->route('vote_path',compact('premier','utilisateur','liste','nombre'));
          } else {
             Flashy::error('Erreur générée pendant le processus de vote');
             return back();
