@@ -60,7 +60,7 @@
                                                         <div class="menu-footer1-container">
                                                             <ul id="menu-footer1" class="menu">
                                                                     <li id="menu-item-53" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-53"><h4>IAI Cameroun</h4></li>
-                                                                <li id="menu-item-53" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-53"><a href="Apropos.blade.php">A Propos</a></li>
+                                                                <li id="menu-item-53" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-53"><a href="{{ route('apropos_path') }}">A Propos</a></li>
                                                                 <li id="menu-item-54" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-54"><a href="#">Carières</a></li>
                                                                 <li id="menu-item-55" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-55"><a href="#">Termes</a></li>
                                                                 <li id="menu-item-56" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-56"><a href="#">Police</a></li>
@@ -82,8 +82,8 @@
                                                                     <li id="menu-item-53" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-53"><h4>Formation</h4></li>
                                                                 <li id="menu-item-57" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-57"><a href="#">Blog</a></li>
                                                                 <li id="menu-item-59" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-59"><a href="#">Filiales</a></li>
-                                                                <li id="menu-item-60" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-60"><a href="contact.blade.php">Contact</a></li>
-                                                                <li id="menu-item-211" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-211"><a href="coursfc.blade.php">Packs de la formation</a></li>
+                                                                <li id="menu-item-60" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-60"><a href="{{ route('contact_path') }}">Contact</a></li>
+                                                                <li id="menu-item-211" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-211"><a href="{{ route('cour_for_cont_path') }}">Packs de la formation</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>

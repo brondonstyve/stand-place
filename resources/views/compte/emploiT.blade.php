@@ -83,7 +83,7 @@ $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
                                                                         </p>
 
                                                                         <div class="table-responsive">
-                                                                            <table class="table m-0 table-colored-full table-full-inverse table-hover">
+                                                                            <table class="table m-0 table-colored-full table-full-inverse table-hover btn-sm" style="color: white">
                                                                                 <thead>
                                                                                 <tr>
                                                                                     <th>Jour</th>
@@ -144,8 +144,8 @@ $jour = array('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI' );
                                                                                 </tbody>
                                                                                 <tr>
                                                                                     <td colspan="4" align="center">
-                                                                                            <input type="button" value="Envoyer" class="btn btn-info" onclick="cache('confirmeur')">
-                                                                                            <input type="submit" value="COnfirmer" class="btn btn-info" id="confirmeur">
+                                                                                            <input type="button" value="Envoyer" class="btn btn-info" onclick="cache()">
+                                                                                            <input type="submit" value="confirmer" class="btn btn-info" id="confirmeur">
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>

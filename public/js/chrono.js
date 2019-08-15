@@ -35,7 +35,7 @@ var chrono = {
 window.onload = function() {
     t = document.getElementById("time");
     chrono.Start(document.getElementById("compteur").value);
-    document.getElementById('confirmeur').style.display = 'none'
+    document.getElementById('confirmeur').style.visibility = 'hidden';
 
 
 };
@@ -46,5 +46,5 @@ function reponse(rep) {
 
 
 function cache() {
-    document.getElementById('confirmeur').style.display = 'inline'
+    document.getElementById('confirmeur').style.display = 'inline';
 };

@@ -19,6 +19,8 @@ class CreateEvaluationsTable extends Migration
             $table->integer('compte')->index()->unsigned();
             $table->integer('matiere')->index()->unsigned();
             $table->string('libelle',3);
+            $table->double('dure');
+            $table->dateTime('date_evaluation')->default('2019-01-01 00:00:00');
             $table->boolean('statut')->default(false);
             $table->timestamps();
             $table->foreign('epreuve')->references('id')->on('epreuves')->onDelete('cascade');

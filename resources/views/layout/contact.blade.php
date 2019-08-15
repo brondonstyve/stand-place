@@ -46,9 +46,9 @@
         </div>
         </div>
         </section>
-        
-           
-        
+
+
+
         <section class="kc-elm kc-css-76104 kc_row"  id="border"><div class="kc-row-container  kc-container">
             <div class="kc-wrap-columns">
          <div class="kc-elm kc-css-348174 kc_col-sm-12 kc_column kc_col-sm-12">
@@ -59,10 +59,10 @@
         </div>
         <div class="kc-elm kc-css-729834 kc_row kc_row_inner"><div class="kc-elm kc-css-868853 kc_col-sm-12 kc_column_inner kc_col-sm-12"><div class="kc_wrapper kc-col-inner-container"><div class="kc-elm kc-css-467829 kc_text_block"><div role="form" class="wpcf7" id="wpcf7-f4-p129-o1" dir="ltr" lang="fr-fr">
         <div class="screen-reader-response"></div>
-        
-        
-        
-        <form action="{{ route('contact_store') }}" method="POST" class="wpcf7-form">
+
+
+
+        <form action="{{ route('contacter_path') }}" method="POST" class="wpcf7-form">
            {{ csrf_field() }}
 
         <div class="row">
@@ -74,10 +74,10 @@
                 </div>
         <div class="col-md-4 col-xs-12">
             <span class="wpcf7-form-control-wrap email-523">
-                
+
             </span>
         </div>
-        
+
         <div class="col-md-4 col-xs-12">
             <span class="wpcf7-form-control-wrap phone">
                <input type="email" name="email" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" placeholder="Mon@Email.com" required="required">
@@ -85,23 +85,22 @@
             {!! $errors->first('email',' <span class="alert"> :message </span>') !!}
         </div>
         </div>
-        
+
         <p>
             <span class="wpcf7-form-control-wrap textarea-783">
-                
+
                 <textarea name="text" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required form-control" placeholder="Ton Message*"  required="required"></textarea>
             </span>
             {!! $errors->first('text',' <span class="alert"> :message </span>') !!}
             <input type="submit" value="envoyer message" class="wpcf7-form-control wpcf7-submit btn btn-block btn-theme">
-           
+
             </p>
-            
+
         </form>
         </div>
         </div></div></div></div></div></div></div></div></section>
-        
+
         </main>
         </div>
         </div>
         </section>
-        

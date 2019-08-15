@@ -23,7 +23,6 @@ class CreateEpreuvesTable extends Migration
             $table->string('epreuve');
             $table->string('reponse');
             $table->string('libelle',3);
-            $table->integer('dure');
             $table->boolean('statut')->default(false);
             $table->timestamps();
             $table->foreign('compte')->references('id')->on('comptes')->onDelete('cascade');

@@ -11,23 +11,13 @@ class PagesController extends Controller
 {
 
     public function ouvrirIndex(){
+
         return view('index/index');
     }
-
-    public function signin(){
-        return view('index/signin');
-    }
-
-
 
     public function ouvrirApropos(){
         return view('index/Apropos');
     }
-
-    public function test(){
-        return view('index/test');
-    }
-
     public function ouvrirEvenement(){
         return view('index/evenement');
     }

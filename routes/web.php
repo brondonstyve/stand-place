@@ -1,38 +1,21 @@
 <?php
 
-use App\Mail\ContactMessageCreated;
-/*
-|Les routes de mon site
- */
 
-Route::get('/index.blade.php', 'PagesController@ouvrirIndex');
+//|Les routes de mon site
 
-Route::get('/contact.blade.php',
-[
-    'as'=>'contact_create',
-    'uses'=>'ContactsController@create',
-]);
+Route::get('/contact', 'ContactsController@create')->name('contact_path');
 
-Route::post('/contact.blade.php',
-[
-    'as'=>'contact_store',
-    'uses'=>'ContactsController@store',
-]);
+Route::post('/contact.blade.php','ContactsController@store')->name('contacter_path');
 
-route::get('/text',function(){
-    return new ContactMessageCreated($nom,$email,$text);
-});
+Route::get('/A propos', 'PagesController@ouvrirApropos')->name('apropos_path');
 
+Route::get('/evenement', 'PagesController@ouvrirEvenement')->name('evenment_path');
 
-Route::get('/Apropos.blade.php', 'PagesController@ouvrirApropos');
+Route::get('/cours de la formation initialle', 'PagesController@ouvrirCoursfc')->name('cour_for_INI_path');
 
-Route::get('/evenement.blade.php', 'PagesController@ouvrirEvenement');
+Route::get('/cours de la formation continu', 'PagesController@ouvrirCoursfi')->name('cour_for_cont_path');
 
-Route::get('/coursfc.blade.php', 'PagesController@ouvrirCoursfc');
-
-Route::get('/coursfi.blade.php', 'PagesController@ouvrirCoursfi');
-
-Route::get('/coursligne.blade.php', 'PagesController@ouvrirCoursligne');
+Route::get('/cours en ligne', 'PagesController@ouvrirCoursligne')->name('cour_ligne_path');
 
 Route::get('/', 'PagesController@ouvrirIndex')->name('home');
 
@@ -45,7 +28,6 @@ Route::post('storeCompte', 'controllerCompte@store')->name('compte_store_path');
 Route::post('Matricule', 'controllerCompte@findMatricule')->name('find_matricule_path');
 
 Route::get('signin.blade.php', 'PagesController@signin')->name('signin_path');
-
 
 Route::get('/compSign.blade.php', 'controllerConnexion@index')->name('sign_in_path');
 
@@ -65,9 +47,7 @@ Route::post('/modification_avatar', 'controllerCompte@modifAvatar')->name('avata
 
 Route::post('/supprimer_avatar', 'controllerCompte@suppAvatar')->name('avatar_supp_path');
 
-Route::get('/blog.blade.php', 'PagesController@ouvrirBlog');
-
-Route::get('test.blade.php', 'PagesController@test');
+Route::get('/blog', 'PagesController@ouvrirBlog')->name('blog_path');
 
 Route::get('vote', 'vote@membreVotes')->name('vote_path');
 
@@ -75,9 +55,7 @@ Route::post('/voteEnvoi', 'vote@voteEnvoi')->name('vote_envoi_path');
 
 Route::get('/emploi.blade.php', 'PagesController@ouvrirEmploi')->name('edt_path');
 
-Route::get('/inbox.blade.php', 'PagesController@ouvrirInbox');
-
-Route::get('/gestEmploi.blade.php', 'PagesController@ouvrirGestEmploi');
+Route::get('/inbox', 'PagesController@ouvrirInbox')->name('inbox_path');
 
 Route::post('/paiement', 'PaiementController@Paiement')->name('paiement_path');
 
@@ -94,8 +72,6 @@ Route::get('note', 'noteController@afficherNote')->name('note_path');
 Route::post('ajouter_les_notes', 'noteController@remplirNotes')->name('remplir_note_path');
 
 Route::post('insertion_de_notes', 'noteController@insererNotes')->name('inserer_note_path');
-
-Route::get('appel/ct', 'appel_ctController@afficher')->name('appel_ct_path');
 
 Route::get('appelct', 'appelctController@afficher')->name('appel_ct_path');
 
@@ -131,4 +107,21 @@ route::get('supprimer_evaluation','evaluationController@supprimerEvaluation')->n
 
 route::get('modofier_evaluation','evaluationController@modifierEvaluation')->name('modifier_evaluation_path');
 
-route::get('@phd@StandPlace@Fonctionne@bascule@gauche','evaluationController@composer')->name('composition_path');
+route::post('modofier_dure_evaluation','evaluationController@modifierDureEvaluation')->name('modifier_evaluation_dure_path');
+
+route::get('/composer','evaluationController@composer')->name('composition_path');
+
+route::post('/modifierRep','evaluationController@modifier')->name('modifier_reponses_path');
+
+//test
+
+route::get('/test','test@afficher')->name('test_afficher_path');
+
+route::post('/inserer','test@inserer')->name('test_inserer_path');
+
+//ens test
+Route::post('/composition','evaluationController@composition')->name('compose_path');
+
+Route::get('/Tout supprimer','evaluationController@supprimerToutEvaluation')->name('supprimer_tout_evaluation_path');
+
+Route::get('/Tout supprime','evaluationController@supprimerToutEpreuve')->name('supprimer_tout_epreuve_path');

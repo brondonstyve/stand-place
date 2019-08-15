@@ -488,7 +488,7 @@ try {
         Flashy::success('Emploi de temps enregistré avec succès');
         return redirect()->route('generer_edt_path',compact('resultat','passe','nombre','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
             }else {
-        Flashy::error('Emploi de temps vidé avec succès');
+        Flashy::success('Emploi de temps vidé avec succès');
         return redirect()->route('generer_edt_path',compact('resultat','passe','nombre','utilisateur','niveau','filiere','init','classe','remplisseur','classe'));
 
                 }

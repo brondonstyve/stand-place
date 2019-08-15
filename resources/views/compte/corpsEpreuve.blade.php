@@ -3,7 +3,7 @@
 @if ($test)
 <div class="card">
         <div class="card-body bg-info">
-            <h4 class="text-white card-title uppercase">Détails de léevaluation de {{ $modif_evaluation[0]->nom }} de la {{ $modif_evaluation[0]->classe }}</h4>
+            <h4 class="text-white card-title uppercase">Détails de l'évaluation de {{ $modif_evaluation[0]->nom }} de la {{ $modif_evaluation[0]->classe }}</h4>
             <h6 class="card-subtitle text-white m-b-0 op-5">Détails</h6>
         </div>
         <div class="card-body">
@@ -26,6 +26,8 @@
 
                             <div class="table-responsive">
                                                 <table class=" table m-0 table-colored-bordered table-bordered-primary " style="font-size: 15px">
+                                                    <form action="{{ route('modifier_evaluation_dure_path') }}" method="post">
+                                                        {{ csrf_field() }}
                                                     <thead>
                                                         <tr>
                                                             <th>Matière (classe)</th>
@@ -46,10 +48,20 @@
 
                                                             <td style="width: 30%">
                                                              {{ $modif_evaluation[0]->dure }} (Minutes)
+                                                             <select name="dure">
+                                                                    <option value="0.5">0.5</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="25">25</option>
+                                                                    <option value="30">30</option>
+                                                                    <option value="45">45</option>
+                                                                    <option value="60">60</option>
+                                                                </select>
+                                                                <input type="submit" value="modifier?" class="btn btn-success">
                                                             </td>
                                                         </tr>
                                                     </tbody>
-
+                                                    <input type="hidden" name="di" value="{{ encrypt($modif_evaluation[0]->id) }}">
+                                                </form>
                                                     <thead>
                                                             <tr>
                                                                 <th colspan="2" class="centre uppercas">Réponses</th>
@@ -134,14 +146,15 @@
                                                             <td style="width: 10%">
                                                                 <select name="libelle" id=""
                                                                     style="min-width: 100%;text-transform: uppercase">
-                                                                    <option value="cc">cc</option>
-                                                                    <option value="sn">sn</option>
+                                                                    <option value="CC">CC</option>
+                                                                    <option value="SN">SN</option>
                                                                     <option value="tp">tp</option>
                                                                 </select>
                                                             </td>
 
                                                             <td style="width: 10%">
                                                                 <select name="dure" id="" style="min-width: 80%">
+                                                                    <option value="0.5">0.5</option>
                                                                     <option value="10">10</option>
                                                                     <option value="25">25</option>
                                                                     <option value="30">30</option>

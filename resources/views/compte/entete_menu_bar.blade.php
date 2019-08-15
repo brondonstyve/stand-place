@@ -21,9 +21,6 @@
     <link rel="stylesheet" id="campress-style-css" href="css/style.css" type="text/css" media="all">
     <link rel="stylesheet" id="kc-general-css" href="css/kingcomposer.css" type="text/css" media="all">
 
-    <script src="js/jquery.js"></script>
-    <script href=" http://projects.erikzaadi.com/jQueryPlugins/jQuery.printElement/"></script>
-
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -63,11 +60,13 @@
                     <!-- ============================================================== -->
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><img src="" class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"></a> </li>
+                        <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"></a> </li>
 
 
                     </ul>
+
+
                     <ul class="navbar-nav my-lg-0">
                         <!-- ============================================================== -->
                         <!-- Comment -->
@@ -178,76 +177,70 @@
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
-                             <div style="position: relative;margin-top: 8%">                                        <!-- Profile -->
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark " href="" data-toggle="dropdown">
-                                                <img src=" @if ($utilisateur->photo==null) images/profilDef.jpg @else  /storage/avatars/{{ $utilisateur->photo }}  @endif" alt="user" class="profile-pic">
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right scale-up" >
-                                                <ul class="dropdown-user btn-sm " >
-                                                    <li style="width: 120%">
-                                                        <div class="dw-user-box">
-                                                            <div class="u-img"><img src=" @if ($utilisateur->photo==null) images/profilDef.jpg @else  /storage/avatars/{{ $utilisateur->photo }}  @endif" alt="user"></div>
-                                                            <div class="u-text">
-                                                                <h4>{{ $utilisateur->prenom }}</h4>
-                                                                <p class="">{{ $utilisateur->email }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
+                     <div style="margin-top: 8%">
+                        <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark " href="" data-toggle="dropdown">
+                                        <img src=" @if ($utilisateur->photo==null) images/profilDef.jpg @else  /storage/avatars/{{ $utilisateur->photo }}  @endif" alt="user" class="profile-pic">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right scale-up" >
+                                        <ul class="dropdown-user btn-sm " >
+                                            <li style="width: 120%">
+                                                <div class="dw-user-box">
+                                                    <div class="u-img"><img src=" @if ($utilisateur->photo==null) images/profilDef.jpg @else  /storage/avatars/{{ $utilisateur->photo }}  @endif" alt="user"></div>
+                                                    <div class="u-text">
+                                                        <h4>{{ $utilisateur->prenom }}</h4>
+                                                        <p class="">{{ $utilisateur->email }}</p>
+                                                    </div>
+                                                </div>
+                                            </li>
 
-                                                    @if ($utilisateur->type =='enseignant')
-                                                    <li role="separator" class="divider"></li>
-                                                    <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
-                                                    <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/>Remplir notes</a></li>
-                                                    <li><a href="{{ route('appel_ct_path') }}"><img src="images/blog.png" width="10%"/>Appel/cahier de texte</a></li>
-                                                    <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
-                                                    <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>blog</a></li>
-                                                    <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
-                                                    <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="10%"/> Evaluation</a></li>
-                                                    <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
-                                                    <li role="separator" class="divider"></li>
-                                                    <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
-                                                    <li><a href="deconnexion.blade.php"><img src="images/power.png" width="10%"/>Déconnexion</a></li>
+                                            @if ($utilisateur->type =='enseignant')
+                                            <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
+                                            <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/>Remplir notes</a></li>
+                                            <li><a href="{{ route('appel_ct_path') }}"><img src="images/blog.png" width="10%"/>Appel/cahier de texte</a></li>
+                                            <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
+                                            <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>blog</a></li>
+                                            <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
+                                            <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="10%"/> Evaluation</a></li>
+                                            <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
+                                            <li><a href="deconnexion.blade.php"><img src="images/power.png" width="10%"/>Déconnexion</a></li>
 
+                                            @else
+                                                   @if ($utilisateur->type==null)
+                                                   <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
+                                                   <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="10%"/> Evaluation</a></li>
+                                                   <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/> Notes</a></li>
+                                                   <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
+
+                                                   <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
+                                                   <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
+                                                   <li><a href="{{ route('discipline_path') }}"><img src="images/discipline.png" width="10%"/> Discipline</a></li>
+                                                   <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
+                                                   <li role="separator" class="divider"></li>
+                                                   <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
+                                                   <li><a href="deconnexion.blade.php"><img src="images/power.png" width="10%"/>Déconnexion</a></li>
                                                     @else
-                                                           @if ($utilisateur->type==null)
-                                                           <li role="separator" class="divider"></li>
-                                                           <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
-                                                           <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="10%"/> Evaluation</a></li>
-                                                           <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/> Notes</a></li>
-                                                           <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
+                                                    @if ($utilisateur->type=='superadmin')
+                                                            <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
+                                                            <li><a href="#" class="btn-sm btn-success" style="color: black;">Passer en mode Administrateur</a></li>
+                                                            <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
+                                                            <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
+                                                            <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
+                                                            <li role="separator" class="divider"></li>
+                                                            <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
+                                                            <li><a href="deconnexion.blade.php"><img src="images/power.png" width="10%"/>Déconnexion</a></li>
 
-                                                           <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
-                                                           <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
-                                                           <li><a href="{{ route('discipline_path') }}"><img src="images/discipline.png" width="10%"/> Discipline</a></li>
-                                                           <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
-                                                           <li role="separator" class="divider"></li>
-                                                           <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
-                                                           <li><a href="deconnexion.blade.php"><img src="images/power.png" width="10%"/>Déconnexion</a></li>
-                                                            @else
-                                                            @if ($utilisateur->type=='superadmin')
-                                                              <li role="separator" class="divider"></li>
-                                                                    <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
-                                                                    <li><a href="#" class="btn-sm btn-success" style="color: black;">Passer en mode Administrateur</a></li>
-                                                                    <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
-                                                                    <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
-                                                                    <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
-                                                                    <li role="separator" class="divider"></li>
-                                                                    <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
-                                                                    <li><a href="deconnexion.blade.php"><img src="images/power.png" width="10%"/>Déconnexion</a></li>
-
-                                                            @endif
-                                                           @endif
                                                     @endif
-                                                </ul>
-                                            </div>
-                                        </li>
+                                                   @endif
+                                            @endif
+                                        </ul>
                                     </div>
-
-                                    </div>
-
-                    </ul>
-                </div>
+                                </li>
+                            </div>
+                            </ul>
+                        </div>
             </nav>
  </header>
 
@@ -336,7 +329,7 @@
             <div class="container-fluid">
 
 
-                <div class="row page-titles" style=" min-width: 100%">
+                <div class="row page-titles" style=" min-width: 100%;">
 
                     <div class="col-md-5  align-self-center">
                         <h3 class="text-themecolor">Tableau de bord</h3>
@@ -407,3 +400,4 @@
                         </div>
                     </div>
                 </div>
+

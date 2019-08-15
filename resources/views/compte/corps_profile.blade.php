@@ -1,5 +1,5 @@
 <!-- Debut page -->
-<h3 class="card-title">Communiqués</h3>
+<h3 class="card-title"></h3>
 <div class="row">
     <!-- Column -->
 
@@ -15,10 +15,10 @@
                         <div class="ml-auto">
                             <ul class="list-inline">
                                 <li>
-                                    <a href="" class="text-muted text-success">Journalier</a>
+                                    <a href="" class="text-muted text-success">Annones</a>
                                 </li>
                                 <li>
-                                    <a href="" class="text-muted  text-info">Semaine</a>
+                                    <a href="" class="text-muted  text-info">Communiqués</a>
                                 </li>
                             </ul>
                         </div>

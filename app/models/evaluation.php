@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class evaluation extends Model
 {
-    protected $fillable=['epreuve','compte','matiere','statut','libelle'];
+    protected $fillable=['epreuve','compte','dure','matiere','statut','libelle','date_evaluation'];
 }

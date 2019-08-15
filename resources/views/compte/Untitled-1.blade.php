@@ -1,1 +1,0 @@
-& path_directories2= {{ bcrypt($evaluation[$i]->reponse)}} & path_directories3={{ bcrypt($evaluation[$i]->dure)}} & path_directories4={{ bcrypt($evaluation[$i]->compte)}} & path_directories5={{ encrypt($evaluation[$i]->matiere)}} & path_directories6={{ bcrypt($evaluation[$i]->libelle)}}

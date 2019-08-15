@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\passePartout;
 use App\models\epreuve;
 use App\models\evaluation;
-
+use App\models\Matiere;
+use App\models\note;
+use App\models\statutEvaluation;
+use Carbon\Carbon;
 
 class evaluationController extends Controller
 {
@@ -51,19 +54,27 @@ class evaluationController extends Controller
                      ])
                  ->get();
 
+                 //dd($prof);
+
                  $evaluation=DB::table('evaluations')
                  ->join('epreuves','epreuves.id','=','evaluations.epreuve')
                  ->join('matieres','matieres.id','=','evaluations.matiere')
                  ->select('evaluations.id','evaluations.compte','evaluations.matiere','evaluations.libelle','evaluations.statut',
-                 'epreuves.editeur','epreuves.matiere','epreuves.reponse','epreuves.epreuve','epreuves.dure'
-                 ,'matieres.classe as class_mat','matieres.nom')
+                 'epreuves.editeur','epreuves.matiere','epreuves.reponse','epreuves.epreuve','evaluations.dure' ,'matieres.classe as class_mat','matieres.nom')
                  ->where([
                     ['evaluations.compte',$utilisateur->id],
                     ])
                 ->orderBy('evaluations.updated_at','desc')
                 ->get();
                //return $evaluation;
+
+               $classe_a_evaluer=DB::table('matieres')
+               ->distinct()
+               ->select('classe')
+               ->whereCompte($utilisateur->id)
+               ->get();
             }
+            //return $classe_a_evaluer;
 
      //Changement déetats
      $createForm=true;
@@ -72,20 +83,30 @@ class evaluationController extends Controller
 
      //cas de l'etudiant
             if ($utilisateur->type==null) {
+
               $evaluation=DB::table('evaluations')
                 ->join('epreuves','epreuves.id','=','evaluations.epreuve')
                 ->join('matieres','matieres.id','=','evaluations.matiere')
-                ->select('matieres.nom','matieres.classe','evaluations.compte','evaluations.matiere','evaluations.libelle','epreuves.dure','epreuves.epreuve',
-                'epreuves.editeur','evaluations.id','epreuves.reponse','evaluations.created_at')
+                ->select('matieres.nom','matieres.classe','evaluations.compte','evaluations.matiere','evaluations.libelle','evaluations.dure','epreuves.epreuve',
+                'epreuves.editeur','evaluations.id','epreuves.reponse','evaluations.created_at','evaluations.updated_at')
                 ->where([
                     ['matieres.classe',$utilisateur->classe]
                     ])
-                ->get();
+                ->paginate(2);
+
+                $heure_de_debut=array();
+                for ($i=0; $i <sizeOf($evaluation) ; $i++) {
+                    $date= Carbon::create($evaluation[$i]->updated_at);
+                    $heure_de_debut[$i]=$date->format('Y-m-d').'  de '.$date->format('H:i').' à '.$date->addMinutes($evaluation[$i]->dure)->format('H:i');
+
+                }
+
               $test=true;
+
             }
 
 
-      return view('index/evaluation',compact('utilisateur','classe_mat','test','createForm','createEpreuve','epreuve','prof','evaluation'));
+      return view('index/evaluation',compact('utilisateur','heure_de_debut','classe_mat','classe_a_evaluer','test','createForm','createEpreuve','epreuve','prof','evaluation'));
     }
 
 
@@ -105,6 +126,28 @@ class evaluationController extends Controller
               return \redirect()->route('home');
           }
 
+          $classe_a_evaluer=DB::table('matieres')
+               ->distinct()
+               ->select('classe')
+               ->whereCompte($utilisateur->id)
+               ->get();
+
+               $epreuve=DB::table('epreuves')
+               ->where([
+                   ['compte',$utilisateur->id],
+                   ])
+               ->orderBy('updated_at','desc')
+               ->get();
+
+               $prof=DB::table('comptes')
+                 ->select('id','nom','prenom')
+                 ->where([
+                     ['type','enseignant'],
+                     ['id','<>',$utilisateur->id]
+                     ])
+                 ->get();
+
+
 
           $matiere_classe=\explode('->',$request->matiere);
           $libelle=$request->libelle;
@@ -117,7 +160,7 @@ class evaluationController extends Controller
           $createForm=false;
           $createEpreuve=true;
           //dd($matiere.$libelle.$dure.$nbre_K);
-          return view('index/evaluation',compact('utilisateur','createForm','createEpreuve','libelle','dure','nbre_k','matiere_classe'));
+          return view('index/evaluation',compact('utilisateur','createForm','prof','epreuve','classe_a_evaluer','createEpreuve','libelle','dure','nbre_k','matiere_classe'));
     }
 
      //--Enregistrer epreuve
@@ -155,7 +198,6 @@ class evaluationController extends Controller
             'epreuve'=>$nomFichier,
             'reponse'=>$reponse,
             'libelle'=>$request->libelle,
-            'dure'=>$request->dure,
         ]);
 
         if ($eval && $stockage) {
@@ -167,6 +209,50 @@ class evaluationController extends Controller
         }
     }
 
+
+    //modifier les epreuve
+    public function modifier(passePartout $request){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+        if (auth()->guest()) {
+            Flashy::error('Connectez vous');
+            return \redirect()->route('home');
+        }
+
+        $reponse='';
+        $utilisateur=auth()->user();
+        $compteur=0;
+
+        for ($i=0; $i <$request->nbre ; $i++) {
+            $reponse=$reponse.$_POST["reponse$i"].'.';
+        }
+
+        $id_epreuve=explode('.',$request->matiere);
+        $matiere=explode('->',$request->matiere)[0];
+        $classe=explode('->',$id_epreuve[1])[1];
+
+        $modif=epreuve::whereId($request->id_epreuve)
+        ->update([
+            'id_matiere'=>$id_epreuve[0],
+            'reponse'=>$reponse,
+            'classe'=>$classe,
+            'matiere'=>$matiere,
+        ]);
+
+        if ($modif) {
+            Flashy::success('épreuve modifié avec succès');
+            return redirect()->route('evaluation_path');
+        } else {
+            Flashy::success('échec de modification');
+            return redirect()->route('evaluation_path');
+        }
+
+    }
     //--Envoyer epreuve
     public function envoyerEpreuve(passePartout $request){
 
@@ -226,6 +312,7 @@ class evaluationController extends Controller
             Flashy::error('Connectez vous');
             return \redirect()->route('home');
         }
+
         $id=$_GET["path_directori"];
         $epreuveSup=DB::table('epreuves')
         ->whereId($id)
@@ -262,9 +349,11 @@ class evaluationController extends Controller
         ->whereId($_GET["path_directori"])
         ->get();
 
+        $matiere=explode('.',$_GET['path_directoric'])[1];
+
         $classe_mat=DB::table('matieres')
         ->select('id','nom','classe')
-        ->whereCompte($utilisateur->id)
+        ->whereCompteAndNom($utilisateur->id,$matiere)
         ->get();
 
         $test=false;
@@ -289,15 +378,22 @@ class evaluationController extends Controller
         }
         $utilisateur=auth()->user();
 
-        DB::table('epreuves')
-        ->whereId($request->idEpreuve)
-        ->update([
-                 'libelle'=>$request->libelle,
-                 'dure'=>$request->dure,
-        ]);
+        for ($i=0; $i <$request->compteur ; $i++) {
+            if (!empty($_POST["classe$i"])) {
+               $id_mat=explode('.',$_POST["classe$i"]);
+               $env=evaluation::whereCompteAndMatiereAndLibelle($utilisateur->id,$id_mat[0],$request->libelle)
+               ->get();
+
+               if(sizeOf($env)==1){
+                Flashy::error('l\'évaluation de '.$id_mat[1].' existe deja');
+                return redirect()->route('evaluation_path');
+               }
+        }
+    }
 
 
-if ($request->compteur>0) {
+
+  if ($request->compteur>0) {
     $matiere='';
     $test=false;
     $evaluation=false;
@@ -310,7 +406,8 @@ if ($request->compteur>0) {
                 ['libelle',$request->libelle],
                 ['compte',$utilisateur->id],
                 ['matiere',$id_mat[0] ],
-                ['epreuve',$request->idEpreuve],
+                ['epreuve',$request->idEpreuve]
+
             ])
             ->get();
 
@@ -326,6 +423,7 @@ if ($request->compteur>0) {
                     'epreuve'=>$request->idEpreuve,
                     'matiere'=>$id_mat[0],
                     'libelle'=>$request->libelle,
+                    'dure'=>$request->dure,
                 ]);
             }
 
@@ -340,7 +438,7 @@ if ($request->compteur>0) {
     }
 
     if($evaluation){
-        Flashy::success('évaluation enregistrée ,');
+        Flashy::success('évaluation enregistrée avec succès');
         return redirect()->route('evaluation_path');
     } else {
         Flashy::error('erreur de création, cocher une matière.');
@@ -409,7 +507,7 @@ else {
         $modif_evaluation=DB::table('evaluations')
         ->join('epreuves','epreuves.id','=','evaluations.epreuve')
         ->join('matieres','matieres.id','=','evaluations.matiere')
-        ->select('matieres.nom','matieres.classe','evaluations.libelle','epreuves.dure','epreuves.epreuve','epreuves.editeur','evaluations.id','epreuves.reponse')
+        ->select('matieres.nom','matieres.classe','evaluations.libelle','evaluations.dure','epreuves.epreuve','epreuves.editeur','evaluations.id','epreuves.reponse')
         ->where([
             ['evaluations.id',$_GET["path_directrieRetry"] ]
 
@@ -428,6 +526,90 @@ else {
 
      }
 
+     //modifier duree evaluation
+
+     public function modifierDureEvaluation(passePartout $request){
+
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+
+        if (auth()->guest()) {
+            Flashy::error('Connectez vous');
+            return \redirect()->route('home');
+        }
+
+        $id=decrypt($request->di);
+        $mod=Evaluation::whereId($id)
+        ->update([
+            'dure'=>$request->dure,
+        ]);
+
+        if ($mod) {
+            Flashy::success('modification réalisé avec succèss');
+            return redirect()->route('evaluation_path');
+        } else {
+            Flashy::error('erreur');
+            return redirect()->route('evaluation_path');
+        }
+
+     }
+
+     //supprimer toutes les evaluations
+
+     public function supprimerToutEvaluation(){
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+
+        if (auth()->guest()) {
+            Flashy::error('Connectez vous');
+            return \redirect()->route('home');
+        }
+        $utilisateur=auth()->user();
+
+        $supp=evaluation::whereCompte($utilisateur->id)
+        ->delete();
+
+        if($supp){
+            Flashy::success('Toutes vos évaluations on été effacé avec succèss!!');
+            return redirect()->route('evaluation_path');
+        }
+     }
+
+
+      //supprimer toutes les epreuves
+
+      public function supprimerToutEpreuve(){
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+
+        if (auth()->guest()) {
+            Flashy::error('Connectez vous');
+            return \redirect()->route('home');
+        }
+        $utilisateur=auth()->user();
+
+        $supp=epreuve::whereCompte($utilisateur->id)
+        ->delete();
+
+        if($supp){
+            Flashy::success('Toutes vos épreuves on été effacé avec succèss!!');
+            return redirect()->route('evaluation_path');
+        }
+     }
+
+
      //composition d'un etudiant
 
      public function composer(){
@@ -437,7 +619,198 @@ else {
            return view('errors/errorbd');
           }
 
+          if(auth()->guest()){
+            Flashy::error('Connectez vous!');
+            return redirect()->route('home');
+          }
 
-         return ($_GET['path_directoriesRender']);
+
+          $utilisateur=auth()->user();
+          $id= decrypt($_GET['path_directoriesRender']);
+          $date_actuelle=Carbon::now();
+
+          $stat=statutEvaluation::whereCompteAndEvaluation($utilisateur->id,$id)
+          ->select('statut')
+          ->get();
+
+          //dd($stat);
+          for ($i=0; $i < sizeOf($stat); $i++) {
+            if($stat[0]->statut){
+                Flashy::error($utilisateur->prenom.' vous avez déjà composé cette matière!!');
+                return redirect()->route('evaluation_path');
+            }
+          }
+
+
+         $evaluation= DB::table('evaluations')
+          ->join('epreuves','epreuves.id','=','evaluations.epreuve')
+          ->join('matieres','matieres.id','=','evaluations.matiere')
+          ->select('evaluations.id as evaluation_id','epreuves.id as id_epreuve','epreuves.epreuve as fichier','evaluations.libelle',
+          'epreuves.id_matiere', 'epreuves.classe','evaluations.dure', 'evaluations.updated_at','matieres.nom as matiere')
+          ->where([
+              ['evaluations.id',$id],
+          ])
+          ->get();
+
+          $nbre_k=DB::table('evaluations')
+          ->join('epreuves','epreuves.id','=','evaluations.epreuve')
+          ->select('epreuves.reponse')
+          ->where([
+              ['evaluations.id',$id],
+          ])
+          ->get();
+
+          $nbre_k=sizeOf(explode('.',$nbre_k[0]->reponse))-1;
+
+          if(sizeOf($evaluation)!=0){
+
+              //date de debut
+            $date_de_debut = Carbon::create($evaluation[0]->updated_at);
+              //temps ecoulé
+            $date_de_fin   =Carbon::create($evaluation[0]->updated_at)->addMinutes($evaluation[0]->dure);
+              //$chrono=
+            $temps_ecoule_minute=$date_de_debut->diffInMinutes($date_actuelle);
+            $temps_restant=$evaluation[0]->dure-$temps_ecoule_minute;
+
+            if ($date_actuelle < $date_de_debut) {
+                Flashy::error('ce n \'est pas encore l\'heure de l\'évaluation.!!');
+                return redirect()->route('evaluation_path');
+            }else {
+                if ($date_actuelle > $date_de_fin) {
+                    Flashy::error('l\'évaluation est terminée!!');
+                    return redirect()->route('evaluation_path');
+                } else {
+
+                    $stat=statutEvaluation::whereCompteAndEvaluation($utilisateur->id,$id) ->get();
+
+                    if (sizeOf($stat)==0) {
+                       //signature kil a lancé la composition
+                     statutEvaluation::create([
+                        'compte'=>$utilisateur->id,
+                        'evaluation'=>$id,
+                        'statut'=>false,
+                     ]);
+                    }
+
+
+                    $reponse = array('a','b','c','d');
+                    $compo=true;
+                    return view('index/composition',compact('utilisateur','evaluation','reponse','nbre_k','compo','temps_restant'));
+                }
+
+            }
+
+
+          }else {
+            echo 'l évaluation est deja terminée!!';
+        }
+
+
+
      }
+
+     public function composition(passePartout $request){
+        try {
+            DB::connection()->getPdo();
+          } catch (\Throwable $th) {
+           return view('errors/errorbd');
+          }
+
+          if(auth()->guest()){
+            Flashy::error('Connectez vous!');
+            return redirect()->route('home');
+          }
+          $utilisateur=auth()->user();
+          $id_evaluation=decrypt($request->evaluation);
+
+          $stat=statutEvaluation::whereCompteAndEvaluation($utilisateur->id,$id_evaluation)
+          ->select('statut')
+          ->get();
+
+          for ($i=0; $i < sizeOf($stat); $i++) {
+            if($stat[0]->statut){
+                Flashy::error($utilisateur->prenom.' vous avez déjà composé cette matière!!');
+                return redirect()->route('evaluation_path');
+            }
+          }
+        $nbre_k=decrypt($request->nbre_rep);
+
+        $reponse_etudiant='';
+
+        $reponse_prof=evaluation::join('epreuves','epreuves.id','=','evaluations.epreuve')
+        ->select('epreuves.reponse','evaluations.libelle','evaluations.matiere','evaluations.libelle','epreuves.matiere')
+        ->where([
+            ['evaluations.id',$id_evaluation]
+        ])
+        ->get();
+
+
+        for ($i=0; $i < $nbre_k ; $i++) {
+            $reponse_etudiant=$reponse_etudiant.$_POST["kcm$i"].'.';
+        }
+
+        $libelle=$reponse_prof[0]->libelle;
+        $matiere=explode('.',$reponse_prof[0]->matiere)[1];
+        $id_mat=explode('.',$reponse_prof[0]->matiere)[0];
+        $reponse_prof=$reponse_prof[0]->reponse;
+        $rep_etud=$reponse_etudiant;
+        $rep_prof=$reponse_prof;
+
+        //si tout trouvé
+        if($reponse_prof == $reponse_etudiant){
+            $note=20;
+            $compteur=sizeOf(explode('.',$reponse_prof))-1;
+        }
+        //si non
+        else{
+          $note=0;
+          $reponse_prof=explode('.',$reponse_prof);
+          $reponse_etudiant=explode('.',$reponse_etudiant);
+          for ($i=0; $i <sizeOf($reponse_prof)-1 ; $i++) {
+            if ($reponse_prof[$i]==$reponse_etudiant[$i]) {
+                $note=$note+1;
+            } else {
+          //mise a jour avec les system -0.25
+            }
+
+          }
+        //sortie du for
+        $compteur=$note;
+        $note=( $note / (sizeOf($reponse_prof)-1) ) *20;
+        $note=number_format($note,2);
+
+        }
+
+        statutEvaluation::whereCompteAndEvaluation($utilisateur->id,$id_evaluation)
+        ->update([
+           'statut'=>true,
+        ]);
+
+        $note_rech=note::whereCompteAndMatiere($utilisateur->id,$id_mat)->get();
+
+        if(sizeOf($note_rech)==0){
+            $maj=note::create([
+                'compte'=>$utilisateur->id,
+                'matiere'=>$id_mat,
+                "$libelle"=>$note,
+            ]);
+        }else{
+            $maj=note::whereCompteAndMatiere($utilisateur->id,$id_mat)
+            ->update([
+                "$libelle"=>$note,
+            ]);
+        }
+
+        if ($maj) {
+            $compo=false;
+            Flashy::success('Votre note en '.$matiere.' pour : '.$libelle.' à été mis a jour');
+            return view('index/composition',compact('note','utilisateur','rep_prof','rep_etud','compo','compteur','libelle','matiere'));
+
+        } else {
+            Flashy::error('Erreur');
+            return redirect()->route('evaluation_path');
+        }
+
+        }
+
 }

@@ -1,11 +1,8 @@
 <!-- menu flottant    -->
-
-<div class="table-responsive ">
     <div id="add-suite-paiement" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         style="display: none;" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content col-xs-9">
-                <div class="modal-title">
                     <form action="{{ route('suite_paiement_path') }}" method="POST" class="form-horizontal form-material " enctype="multipart/form-data">
                         {{ csrf_field() }}
 
@@ -29,22 +26,14 @@
 
                             </div>
                         </div>
-
-
-
-
-
-                </div>
                 </form>
-            </div>
             <!-- /.modal-content -->
         </div>
     </div>
+    </div>
 
-</div>
 
 
-<div class="table-responsive ">
     <div id="add-paiement" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         style="display: none;" aria-hidden="true">
         <div class="modal-dialog">
@@ -400,14 +389,12 @@
         </div>
     </div>
 
-</div>
 
 
-<div class="table-responsive">
     <div id="add-matricule" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         style="display: none;" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content col-xs-6">
+            <div class="modal-content col-xs-6" style="width: 60%">
                 <div class="modal-header">
                     <h4 class="modal-title centre" id="myModalLabel">Votre Matricule</h4>
                 </div>
@@ -432,13 +419,11 @@
             </form>
         </div>
     </div>
-</div>
 
 
 <!--add con -->
-<div class="table-responsive" >
     <div id="add-con" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        style="display: none;" aria-hidden="true" >
+        style="display: none;" aria-hidden="true" style="width: 40%">
         <div class="modal-dialog" >
             <div class="modal-content col-xs-6" >
                 <div class="modal-header">
@@ -482,72 +467,63 @@
             </form>
         </div>
     </div>
-</div>
 
 
 <div id="fond-2" class="header-mobile hidden-lg hidden-md clearfix">
 
+        <div id="apus-header-mobile" class="header-mobile hidden-lg hidden-md clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3" style="max-width: 100%;top: 15px">
+                            <div class="logo logo-theme">
+                                <a href="">
+                                    <img src="images/logo.png" alt="standplace" >
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="action-right clearfix">
+                                <div class="active-mobile pull-right">
+                                    <button class="btn btn-sm btn-danger btn-offcanvas btn-toggle-canvas offcanvas" data-toggle="offcanvas"  title="Sign Up" style="max-width: 40px;">
+                                    MENU <img src="images/menu-noir.png" class="fa fa-bars">
+                                   </button>
+                                </div>
+                                <div class="active-mobile top-cart pull-right">
+                                    <div class="dropdown">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-    <div class="active-mobile pull-right">
+    <div class="active-mobile pull-right" style="margin-right: 20px">
 
-        <div class="pull-right accept-account ">
-            <div class="login-topbar">
-                <a class="login btn btn-sm btn-reverse couleur" href="" data-toggle="modal" data-target="#add-matricule"
-                    title="Login"><img src="/images/comte.png" class="mn-icon-47"> Créer Compte</a>
-                <a class="register btn btn-sm btn-reverse couleur" href="" data-toggle="modal" data-target="#add-con"
-                    title="Sign Up"><img src="/images/connexion.png" class="mn-icon-47"> connexion</a>
-                <a data-toggle="offcanvas" class="fa fa-bars" title="Sign Up"><button type="button"><img
-                            src="/images/menu.PNG"></button></a>
+        <div class="pull-right accept-account " style="display: inline-block;color: white">
+            <div class="login-topbar" >
+
+                <a class="login  btn-sm" href="" data-toggle="modal" data-target="#add-matricule"
+                    title="Login" style="color: white">
+                    <img src="/images/comte.PNG" class="mn-icon-47">
+                    Créer compte
+                </a>
+                <a class="register  btn-sm" href="" data-toggle="modal" data-target="#add-con" title="Sign Up" style="color: white">
+                    <img src="/images/connexion.PNG" class="mn-icon-47">
+                    Connexion
+                </a>
             </div>
 
 
         </div>
 
     </div>
-
-
-
-
-
-    <div class="left-topbar clearfix pull-left">
-        <aside id="apus_socials_widget-2" class="widget widget_apus_socials_widget">
-            <ul class="social list-unstyled list-inline bo-sicolor">
-                <li>
-                    <a href="#">
-                        <img src="/images/fb.png" class="couleur">
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="/images/in.png" class="couleur">
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="/images/goo.png" class="couleur">
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="/images/tw.png" class="couleur">
-                    </a>
-                </li>
-                <li class="couleur">
-                    contact@iaicameroun.com
-                </li>
-
-                <li class="couleur">
-                    Tél. (237) 242 72 99 58
-                </li>
-
-
-            </ul>
-        </aside>
-    </div>
-
-
 </div>
+
+
+
 <div id="wrapper-container" class="wrapper-container">
     <div id="apus-mobile-menu" class="apus-offcanvas hidden-lg hidden-md">
         <div class="apus-offcanvas-body">
@@ -571,13 +547,13 @@
 
             <h3 class="input" style="color:green"><i class="fa fa-cog" aria-hidden="true"></i> Menu</h3>
             <hr>
-            <nav class="navbar navbar-offcanvas navbar-static" role="navigation">
+            <nav class="navbar navbar-offcanvas navbar-static " role="navigation">
                 <div>
-                    <ul id="main-mobile-menu" class="nav navbar-nav">
+                    <ul id="main-mobile-menu" class="nav navbar-nav btn-sm">
 
                         <ul class="sub-menu">
 
-                            <li id="menu-item-318" class="menu-item-318"><a href="index.blade.php"
+                            <li id="menu-item-318" class="menu-item-318"><a href="{{ route('home') }}"
                                     style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Accueil
                                     <hr></a></li>
 
@@ -591,25 +567,26 @@
                                 Cours<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li class="menu-item-69 aligned-">
-                                        <a href="coursfc.blade.php"  style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">
+                                        <a href="{{ route('cour_for_cont_path') }}"  style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">
                                             Cours de la FC</a>
                                     </li>
                                     <hr>
                                     <li class="menu-item-390 aligned-">
-                                        <a href="coursfi.blade.php"  style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">
+                                        <a href="{{ route('cour_for_INI_path') }}"  style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">
                                         Cours de la FI</a>
                                     </li>
                                     <hr>
                                     <li class="menu-item-351 aligned-">
-                                        <a href="coursligne.blade.php"  style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">
+                                        <a href="{{ route('cour_ligne_path') }}"  style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">
                                             Cours en ligne</a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
+
                         <hr>
                         <ul class="sub-menu">
-                            <li id="menu-item-318" class="menu-item-318"><a href="evenement.blade.php"
+                            <li id="menu-item-318" class="menu-item-318"><a href="{{ route('evenment_path') }}"
                                     style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">évènement
                                     <hr></a></li>
                             <li id="menu-item-205" class="menu-item-205"><a href="#"
@@ -618,10 +595,10 @@
                             <li id="menu-item-234" class="menu-item-234"><a href="marche.blade.php"
                                     style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Gallery
                                     <hr></a></li>
-                            <li id="menu-item-125" class="menu-item-125"><a href="Apropos.blade.php"
+                            <li id="menu-item-125" class="menu-item-125"><a href="{{ route('apropos_path') }}"
                                     style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Apropos
                                     <hr></a></li>
-                            <li id="menu-item-134" class="menu-item-134"><a href="contact.blade.php"
+                            <li id="menu-item-134" class="menu-item-134"><a href="{{ route('contact_path') }}"
                                     style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Contact
                                     <hr></a></li>
 
@@ -643,33 +620,22 @@
 
 
 <!-- logo et menu flottant   -->
-<div id="apus-header-mobile" class="header-mobile hidden-lg hidden-md clearfix">
-    <div class="container" style="float: left;">
-        <div class="row">
-            <div class="col-xs-5">
-                <div class="logo logo-theme">
-                    <a href="index.blade.php">
-                        <img src="/images/logo.png" alt="IAI">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="collapse navbar-collapse centre" >
+<div id="apus-header-mobile" class="header-mobile hidden-lg hidden-md clearfix" style="text-align: center">
+    <div class="container" style="">
             <ul id="primary-menu" class="nav navbar-nav megamenu">
 
 
-                            <li class="dropdown active menu-item-69 aligned-">
-                                    <a data-hover="dropdown" data-toggle="dropdown" style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Paiements <b class="caret"></b></a>
-                                       <ul class="dropdown-menu">
-                                           <li class=" menu-item-389 aligned-">
-                                               <a  data-toggle="modal" data-target="#add-paiement" style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Nouvel étudiant</a></li>
-                                           <li class=" menu-item-389 aligned-">
-                                               <a  data-toggle="modal" data-target="#add-suite-paiement" style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Ancien étudiant</a></li>
-                                       </ul>
-                                   </li>
-            </ul>
-        </div>
+                    <li class="dropdown active menu-item-69 aligned-">
+                            <a data-hover="dropdown" data-toggle="dropdown" style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Paiements <b class="caret"></b></a>
+                               <ul class="dropdown-menu">
+                                   <li class=" menu-item-389 aligned-">
+                                       <a  data-toggle="modal" data-target="#add-paiement" style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Nouvel étudiant</a></li>
+                                   <li class=" menu-item-389 aligned-">
+                                       <a  data-toggle="modal" data-target="#add-suite-paiement" style="font-weight: bold; color:black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:17px;">Ancien étudiant</a></li>
+                               </ul>
+                           </li>
+    </ul>
+    </div>
 
 </div>
 
@@ -743,7 +709,7 @@
                             <div class="col-md-2">
                                 <div class="logo-in-theme text-center">
                                     <div class="logo logo-theme">
-                                        <a href="index.blade.php">
+                                        <a href="{{ route('home') }}">
                                             <img src="/images/logo.png" alt="IAIStandPace">
                                         </a>
                                     </div>
@@ -762,7 +728,7 @@
                                     role="navigation">
                                     <div class="collapse navbar-collapse">
                                         <ul id="primary-menu" class="nav navbar-nav megamenu">
-                                            <li class="dropdown menu-item-64 aligned-"><a href="index.blade.php"
+                                            <li class="dropdown menu-item-64 aligned-"><a href="{{ route('home') }}"
                                                     class="dropdown-toggle" data-hover="dropdown"
                                                     data-toggle="dropdown">Accueil </a></li>
 
@@ -775,15 +741,15 @@
                                                         class="caret"></b></a>
                                                 <ul class="dropdown-menu">
                                                     <li class=" menu-item-389 aligned-"><a
-                                                            href="coursfc.blade.php">Cours de la FC</a></li>
-                                                    <li class="menu-item-390 aligned-"><a href="coursfi.blade.php">Cours
+                                                            href="{{ route('cour_for_cont_path') }}">Cours de la FC</a></li>
+                                                    <li class="menu-item-390 aligned-"><a href="{{ route('cour_for_INI_path') }}">Cours
                                                             de la FI</a></li>
                                                     <li class="menu-item-351 aligned-"><a
-                                                            href="coursligne.blade.php">Cours en ligne</a></li>
+                                                            href="{{ route('cour_ligne_path') }}">Cours en ligne</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-item-318 aligned-left"><a
-                                                    href="evenement.blade.php">évènements</a></li>
+                                                    href="{{ route('evenment_path') }}">évènements</a></li>
                                             <li class="menu-item-205 aligned-left"><a href="blog.blade.php">Forum</a>
                                             </li>
                                             <li class="dropdown  menu-item-69 aligned-"><a class="dropdown-toggle"
@@ -798,10 +764,10 @@
                                             </li>
 
 
-                                            <li class="menu-item-125 aligned-left"><a href="Apropos.blade.php">A
+                                            <li class="menu-item-125 aligned-left"><a href="{{ route('apropos_path') }}">A
                                                     propos</a></li>
                                             <li class="menu-item-134 aligned-left"><a
-                                                    href="contact.blade.php">Contact</a></li>
+                                                    href="{{ route('contact_path') }}">Contact</a></li>
                                             </li>
                                         </ul>
                                     </div>
