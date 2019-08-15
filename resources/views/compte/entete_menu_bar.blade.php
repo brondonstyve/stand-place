@@ -332,7 +332,7 @@
                 <div class="row page-titles" style=" min-width: 100%;">
 
                     <div class="col-md-5  align-self-center">
-                        <h3 class="text-themecolor">Tableau de bord</h3>
+                        <h3 class="text-themecolor">Tableau de bord </h3>
                         <ol class="breadcrumb btn-sm">
                             <li class="breadcrumb-item"><a href="#"> Compte  </a> </li>
                             <li class="">{{ $etat }}</li>

@@ -436,7 +436,7 @@
                         <br>
 
                         <div class="form-group btn-sm" >
-                            <div class="col-xs-12 " >
+                            <div class="col-xs-12">
                                 <input class="form-control" type="email" name='email' placeholder="Email" required>
                                 {{ $errors->first('email',':message') }}
                             </div>
