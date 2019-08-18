@@ -8,8 +8,6 @@
 
                 <!--nos Formations-->
                 @include('layout/formations')
-
-                <script src="//code.jquery.com/jquery.min.js"></script>
                 @include('flashy::message')
                 <!-- remonter  -->
                 @include('layout/go-up')

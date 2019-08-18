@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
+use MercurySeries\Flashy\Flashy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
 
     }
 }

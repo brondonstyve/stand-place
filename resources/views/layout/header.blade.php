@@ -477,7 +477,7 @@
                         <div class="col-xs-3" style="max-width: 100%;top: 15px">
                             <div class="logo logo-theme">
                                 <a href="">
-                                    <img src="images/logo.png" alt="standplace" >
+                                    <img src="images/logo-icon.png" alt="standplace" >
                                 </a>
                             </div>
                         </div>
@@ -710,7 +710,7 @@
                                 <div class="logo-in-theme text-center">
                                     <div class="logo logo-theme">
                                         <a href="{{ route('home') }}">
-                                            <img src="/images/logo.png" alt="IAIStandPace">
+                                            <img src="/images/logo1.png" alt="IAIStandPace">
                                         </a>
                                     </div>
                                 </div>

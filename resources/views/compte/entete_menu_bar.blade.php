@@ -11,15 +11,13 @@
 
     <link href="css/style1.css" rel="stylesheet">
     <link rel="stylesheet" href="css/newsletter.css" type="text/css" media="all">
-    <link rel="stylesheet" id="rs-plugin-settings-css" href="css/settings.css" type="text/css" media="all">
 
-    <link rel="stylesheet" id="woocommerce-layout-css" href="css/woocommerce-layout.css" type="text/css" media="all">
-    <link rel="stylesheet" id="woocommerce-smallscreen-css" href="css/woocommerce-smallscreen.css" type="text/css" media="only screen and (max-width: 768px)">
-    <link rel="stylesheet" id="woocommerce-general-css" href="css/woocommerce_002.css" type="text/css" media="all">
     <link rel="stylesheet" id="bootstrap-css" href="css/bootstrap.css" type="text/css" media="all">
     <link rel="stylesheet" id="campress-template-css" href="css/template.css" type="text/css" media="all">
     <link rel="stylesheet" id="campress-style-css" href="css/style.css" type="text/css" media="all">
-    <link rel="stylesheet" id="kc-general-css" href="css/kingcomposer.css" type="text/css" media="all">
+
+    <script src="js/jquery.js"></script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
 
 </head>
 
@@ -40,8 +38,7 @@
 
                             <ul class="navbar-nav my-lg-0">
                             <li class="nav-item dropdown">
-                                    <img src="images/logo-light-icon.png" width="45px" class="flag-icon flag-icon-us dark-logo">
-                                    <img src="images/logo-light-text.png" width="150px" class="flag-icon flag-icon-us dark-logo">
+                                    <img src="images/logo.png" width="150px" class="flag-icon flag-icon-us dark-logo" style="margin-top: -9%">
                                 </li>
                             </ul>
 
@@ -195,13 +192,13 @@
                                             </li>
 
                                             @if ($utilisateur->type =='enseignant')
-                                            <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
-                                            <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/>Remplir notes</a></li>
-                                            <li><a href="{{ route('appel_ct_path') }}"><img src="images/blog.png" width="10%"/>Appel/cahier de texte</a></li>
-                                            <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
-                                            <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>blog</a></li>
-                                            <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
-                                            <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="10%"/> Evaluation</a></li>
+                                            <li><a href="{{ route('profil_path') }}"><img src="images/icones/compt.PNG" width="10%" > Mon profil</a></li>
+                                            <li><a href="{{ route('note_path') }}"><img src="images/icones/stat.png" width="10%"/>Remplir notes</a></li>
+                                            <li><a href="{{ route('appel_ct_path') }}"><img src="images/icones/appel.png" width="10%"/>Appel/cahier de texte</a></li>
+                                            <li><a href="{{ route('vote_path') }}"><img src="images/icones/vote.png" width="10%"/> Vote</a></li>
+                                            <li><a href="blog.blade.php"><img src="images/icones/blog.png" width="10%"/>blog</a></li>
+                                            <li><a href="{{ route('generer_edt_path') }}"><img src="images/icones/edt.png" width="10%"/> Emploi de temps</a></li>
+                                            <li><a href="{{ route('evaluation_path') }}"><img src="images/icones/evaluation.png" width="10%"/> Evaluation</a></li>
                                             <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
@@ -209,25 +206,25 @@
 
                                             @else
                                                    @if ($utilisateur->type==null)
-                                                   <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
-                                                   <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="10%"/> Evaluation</a></li>
-                                                   <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="10%"/> Notes</a></li>
-                                                   <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
+                                                   <li><a href="{{ route('profil_path') }}"><img src="images/icones/compt.PNG" width="10%" > Mon profil</a></li>
+                                                   <li><a href="{{ route('evaluation_path') }}"><img src="images/icones/evaluation.png" width="10%"/> Evaluation</a></li>
+                                                   <li><a href="{{ route('note_path') }}"><img src="images/icones/stat.png" width="10%"/> Notes</a></li>
+                                                   <li><a href="blog.blade.php"><img src="images/icones/blog.png" width="10%"/>Blog</a></li>
 
-                                                   <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
-                                                   <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="10%"/> Emploi de temps</a></li>
+                                                   <li><a href="{{ route('vote_path') }}"><img src="images/icones/vote.png" width="10%"/> Vote</a></li>
+                                                   <li><a href="{{ route('generer_edt_path') }}"><img src="images/icones/edt.png" width="10%"/> Emploi de temps</a></li>
                                                    <li><a href="{{ route('discipline_path') }}"><img src="images/discipline.png" width="10%"/> Discipline</a></li>
-                                                   <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
+                                                   <li><a href="inbox.blade.php"><img src="images/sms1.png" width="10%" /> Inbox</a></li>
                                                    <li role="separator" class="divider"></li>
                                                    <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
                                                    <li><a href="deconnexion.blade.php"><img src="images/power.png" width="10%"/>Déconnexion</a></li>
                                                     @else
                                                     @if ($utilisateur->type=='superadmin')
-                                                            <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="10%" > Mon profil</a></li>
-                                                            <li><a href="#" class="btn-sm btn-success" style="color: black;">Passer en mode Administrateur</a></li>
-                                                            <li><a href="blog.blade.php"><img src="images/blog.png" width="10%"/>Blog</a></li>
-                                                            <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="10%"/> Vote</a></li>
-                                                            <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="10%" /> Inbox</a></li>
+                                                            <li><a href="{{ route('profil_path') }}"><img src="images/icones/compt.PNG" width="10%" > Mon profil</a></li>
+                                                            <li><a href="{{ route('accueil_index_path') }}" class="btn-sm btn-success" style="color: black;">Passer en mode Administrateur</a></li>
+                                                            <li><a href="blog.blade.php"><img src="images/icones/blog.png" width="10%"/>Blog</a></li>
+                                                            <li><a href="{{ route('vote_path') }}"><img src="images/icones/vote.png" width="10%"/> Vote</a></li>
+                                                            <li><a href="inbox.blade.php"><img src="images/sms1.png" width="10%" /> Inbox</a></li>
                                                             <li role="separator" class="divider"></li>
                                                             <li><a href="#"><img src="images/setting.png" width="10%"/> Paramètre</a></li>
                                                             <li><a href="deconnexion.blade.php"><img src="images/power.png" width="10%"/>Déconnexion</a></li>
@@ -271,33 +268,33 @@
                         <ul id="sidebarnav" class="in">
                             <ul aria-expanded="true" class="collapse in">
                                 @if ($utilisateur->type=="enseignant")
-                                    <li><a href="{{ route('profil_path') }}"><img src="images/profil.png" width="20%"/> Mon profil</a></li>
-                                    <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="20%"/>Remplir notes</a></li>
-                                    <li><a href="{{ route('appel_ct_path') }}"><img src="images/blog.png" width="20%"/>Appel/CT</a></li>
-                                    <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
-                                    <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="20%"/> Evaluation</a></li>
-                                    <li><a href="blog.blade.php"><img src="images/blog.png" width="20%"/>Blog</a></li>
-                                    <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="20%"/> Vote</a></li>
-                                    <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="20%"/> Inbox</a></li>
+                                    <li><a href="{{ route('profil_path') }}"><img src="images/icones/compt.png" width="20%"/> Mon profil</a></li>
+                                    <li><a href="{{ route('note_path') }}"><img src="images/icones/stat.png" width="20%"/>Remplir notes</a></li>
+                                    <li><a href="{{ route('appel_ct_path') }}"><img src="images/icones/blog.png" width="20%"/>Appel/CT</a></li>
+                                    <li><a href="{{ route('generer_edt_path') }}"><img src="images/icones/edt.png" width="20%"/> Emploi de temps</a></li>
+                                    <li><a href="{{ route('evaluation_path') }}"><img src="images/icones/evaluation.png" width="20%"/> Evaluation</a></li>
+                                    <li><a href="blog.blade.php"><img src="images/icones/blog.png" width="20%"/>Blog</a></li>
+                                    <li><a href="{{ route('vote_path') }}"><img src="images/icones/vote.png" width="20%"/> Vote</a></li>
+                                    <li><a href="inbox.blade.php"><img src="images/sms1.png" width="20%"/> Inbox</a></li>
 
                                     @else
                                          @if ($utilisateur->type==null)
-                                         <li><a href="{{ route('profil_path') }}"><img src="images/profil.png" width="20%"/> Mon profil</a></li>
-                                         <li><a href="{{ route('evaluation_path') }}"><img src="images/discipline.png" width="20%" > Evaluation</a></li>
-                                         <li><a href="{{ route('note_path') }}"><img src="images/note.png" width="20%"/> Notes</a></li>
-                                         <li><a href="{{ route('generer_edt_path') }}"><img src="images/emploi.png" width="20%"/> Emploi de temps</a></li>
-                                         <li><a href="{{ route('discipline_path') }}"><img src="images/discipline.png" width="20%"/> Discipline</a></li>
-                                         <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="20%"/> Inbox</a></li>
-                                         <li><a href="blog.blade.php"><img src="images/blog.png" width="20%"/>Blog</a></li>
-                                         <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="20%"/> Vote</a></li>
-                                         <li><a href="coursfc.blade.php" ><img src="images/note.png" width="20%"/> Cours de la FC</a> </li>
+                                         <li><a href="{{ route('profil_path') }}"><img src="images/icones/compt.png" width="20%"/> Mon profil</a></li>
+                                         <li><a href="{{ route('evaluation_path') }}"><img src="images/icones/evaluation.png" width="20%" > Evaluation</a></li>
+                                         <li><a href="{{ route('note_path') }}"><img src="images/icones/stat.png" width="20%"/> Notes</a></li>
+                                         <li><a href="{{ route('generer_edt_path') }}"><img src="images/icones/edt.png" width="20%"/> Emploi de temps</a></li>
+                                         <li><a href="{{ route('discipline_path') }}"><img src="images/icones/discipline.png" width="20%"/> Discipline</a></li>
+                                         <li><a href="inbox.blade.php"><img src="images/sms1.png" width="20%"/> Inbox</a></li>
+                                         <li><a href="blog.blade.php"><img src="images/icones/blog.png" width="20%"/>Blog</a></li>
+                                         <li><a href="{{ route('vote_path') }}"><img src="images/icones/vote.png" width="20%"/> Vote</a></li>
+                                         <li><a href="coursfc.blade.php" ><img src="images/icones/stat.png" width="20%"/> Cours de la FC</a> </li>
 
                                          @else
                                          @if ($utilisateur->type=='superadmin')<li role="separator" class="divider"></li>
-                                         <li><a href="{{ route('profil_path') }}"><img src="images/profil.PNG" width="20%" > Mon profil</a></li>
-                                         <li><a href="blog.blade.php"><img src="images/blog.png" width="20%"/>Blog</a></li>
-                                         <li><a href="{{ route('vote_path') }}"><img src="images/vote.png" width="20%"/> Vote</a></li>
-                                         <li><a href="inbox.blade.php"><img src="images/messagerie.png" width="20%" /> Inbox</a></li>
+                                         <li><a href="{{ route('profil_path') }}"><img src="images/icones/compt.PNG" width="20%" > Mon profil</a></li>
+                                         <li><a href="blog.blade.php"><img src="images/icones/blog.png" width="20%"/>Blog</a></li>
+                                         <li><a href="{{ route('vote_path') }}"><img src="images/icones/vote.png" width="20%"/> Vote</a></li>
+                                         <li><a href="inbox.blade.php"><img src="images/sms1.png" width="20%" /> Inbox</a></li>
                                          <li role="separator" class="divider"></li>
                                          <li><a href="#"><img src="images/setting.png" width="20%"/> Paramètre</a></li>
                                          <li><a href="deconnexion.blade.php"><img src="images/power.png" width="20%"/>Déconnexion</a></li>
@@ -388,7 +385,11 @@
                                      @if ($utilisateur->type=='superadmin')
                                      <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                                             <div class="chart-text m-r-10">
-                                                    <h4 class="btn-sm btn-success" style="font-size: 20px;text-transform: uppercase"><small><a href="#" >Passer en mode Administrateur</a></small></h4>
+                                                    <h4 class="btn-sm btn-success" style="font-size: 20px;text-transform: uppercase">
+                                                        <small>
+                                                           <a href="{{ route('accueil_index_path') }}" >Passer en mode Administrateur</a>
+                                                        </small>
+                                                </h4>
                                             </div>
                                         </div>
                                      @endif

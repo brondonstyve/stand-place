@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="js/jQuery.js"></script>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <script src="js/jQuery.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- App css -->
+        <link href="css/admin/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="css/admin/style.css" rel="stylesheet" type="text/css">
+        <link href="css/admin/metismenu.css" rel="stylesheet" type="text/css">
+
+        <script src="js/admin/modernizr.js"></script>
     <title>test</title>
 </head>
 <body>
@@ -40,7 +47,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="" value="envoyer">
+                    <input type="submit" value="envoyer">
                 </td>
             </tr>
         </form>
@@ -56,23 +63,10 @@
 
 
 </body>
+
+</html>
+
 <script type="text/javascript ">
-
-
-function decompte(zetime) {
-                if (zetime>0) {
-                    var minutes = Math.floor(((zetime / 3600) - Math.floor(zetime / 3600)) * 60);
-                    var secondes = zetime - ((Math.floor(zetime / 60)) * 60);
-                            minutes = ((minutes < 10) ? "0" : "") + minutes;
-                            secondes = ((secondes < 10) ? "0" : "") + secondes;
-                    document.write("00:" + minutes + ":" + secondes + " restants");
-                    var restant = zetime - 1;
-                    setTimeout("decompte(" + restant + ")", 1000);
-                }
-                else {
-                            // temps écoulé
-                }
-            }
     //------------------token
     $.ajaxSetup({
         headers: {
@@ -93,26 +87,26 @@ function decompte(zetime) {
           data : data,
           dataTy:'json',
           success:function(data){
-              var newLine= $('<tr\>');
-                newLine.append($("<td\>",{
-                    text:data.id
-                })).append($("<td\>",{
-                    text:data.nom
-                })).append($("<td\>",{
-                    text:data.classe
-                })).append($("<td\>",{
-                    html:'<a href="">edit</a> '+
-                    '<a href="">suprimer</a> '+
-                    '<a href="">modifier</a>'
-                }))
-
-                $('#tbody').append(newLine);
+                alert('ok');
           }
       })
 
     })
 
     </script>
-</html>
 
+            <script src="js/admin/popper.js"></script>
+            <!-- Popper for Bootstrap -->
+            <script src="js/admin/bootstrap.js"></script>
+            <script src="js/admin/metisMenu.js"></script>
+            <script src="js/admin/waves.js"></script>
+            <script src="js/admin/jquery_005.js"></script>
+
+            <!-- Counterjs  -->
+            <script src="js/admin/jquery_004.js"></script>
+            <script src="js/admin/jquery_002.js"></script>
+
+            <!-- App js -->
+            <script src="js/admin/jquery_003.js"></script>
+            <script src="js/admin/jquery.js"></script>
 

@@ -16,7 +16,6 @@
 </div>
 </section>
 
-<script src="//code.jquery.com/jquery.min.js"></script>
 @include('flashy::message')
 
 @include('layout/footer')

@@ -2686,7 +2686,6 @@ File: scss
 }
 
 .page-titles .breadcrumb .breadcrumb-item+.breadcrumb-item::before {
-    content: "\e649";
     font-family: themify;
     color: #a6b7bf;
     font-size: 11px;

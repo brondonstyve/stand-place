@@ -12,12 +12,6 @@
     <title>IAI</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bt.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/st.css" rel="stylesheet">
-    <!-- You can change the theme colors from here -->
-    <link href="css/colorr.css" id="theme" rel="stylesheet">
-
-
 </head>
 
 <body>
@@ -104,31 +98,6 @@
 
     <script src="//code.jquery.com/jquery.min.js"></script>
     @include('flashy::message')
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="js/jquery.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="js/popper.js"></script>
-    <script src="js/bt.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="js/jquery_003.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
-    <!--stickey kit -->
-    <script src="js/sticky-kit.js"></script>
-    <script src="js/jquery_002.js"></script>
-    <!--Custom JavaScript -->
-    <script src="js/custom.js"></script>
-    <!-- ============================================================== -->
-    <!-- Style switcher -->
-    <!-- ============================================================== -->
-    <script src="js/jQuery.js"></script>
 
 
 </body>

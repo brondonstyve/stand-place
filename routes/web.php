@@ -124,4 +124,35 @@ Route::post('/composition','evaluationController@composition')->name('compose_pa
 
 Route::get('/Tout supprimer','evaluationController@supprimerToutEvaluation')->name('supprimer_tout_evaluation_path');
 
-Route::get('/Tout supprime','evaluationController@supprimerToutEpreuve')->name('supprimer_tout_epreuve_path');
+Route::get('/Tout/supprimer/epreuve','evaluationController@supprimerToutEpreuve')->name('supprimer_tout_epreuve_path');
+
+
+//administration
+Route::get('/Administration','adminController@index')->name('accueil_index_path');
+
+//filiere
+Route::get('/filiere','filiereController@afficherFiliere')->name('afficher_filiere_path');
+
+Route::post('/Enregistrer/filiere','filiereController@enregistrerFiliere')->name('enregistrer_filiere_path');
+
+Route::post('/Supprimer/Filiere','filiereController@supprimerFiliere')->name('supp_filiere_path');
+
+Route::post('/Chercheur/filiere','filiereController@chercheurFiliere')->name('chercher_filiere_path');
+
+Route::post('/modifier/Filiere','filiereController@modifierFiliere')->name('modifier_filiere_path');
+
+Route::post('/voir/Filiere','filiereController@voirFiliere')->name('voir_filiere_path');
+
+//classe
+
+Route::get('/adminstrerclasse','classeController@index')->name('afficher_classe_path');
+
+Route::post('/Enregistrer/classe','classeController@enregistrerclasse')->name('enregistrer_classe_path');
+
+Route::post('/Supprimer/classe','classeController@supprimerClasse')->name('supp_classe_path');
+
+Route::post('/Chercheur/classe','classeController@chercheurclasse')->name('chercher_classe_path');
+
+Route::post('/modifier/classe','classeController@modifierclasse')->name('modifier_classe_path');
+
+Route::post('/voir/classe','classeController@voirclasse')->name('voir_classe_path');
