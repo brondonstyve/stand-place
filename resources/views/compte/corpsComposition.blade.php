@@ -34,9 +34,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="card-box">
-                    <iframe src="Fichiers/Gest-Projet-Infor.pdf" frameborder="0" class="table m-0 " width="490"
+                    <iframe src="storage/epreuve/{{ $evaluation[0]->fichier }}" frameborder="0" class="table m-0 " width="490"
                         height="500">
-                        alt: <a href="Fichiers/Gest-Projet-Infor.pdf">Cliquer ici</a>
+                        alt: <a href="storage/epreuve/{{ $evaluation[0]->fichier }}">Cliquer ici</a>
                     </iframe>
 
                 </div>

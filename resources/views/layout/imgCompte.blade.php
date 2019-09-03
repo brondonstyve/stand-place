@@ -1,4 +1,4 @@
-<section id="apus-breadscrumb" class="apus-breadscrumb no-page " style="background-image:url('/images/imgcompte.jpg')">
+<section id="apus-breadscrumb" class=" " style="background-image:url('/images/imgcompte.jpg')">
     <div class="container">
         <div class="wrapper-breads">
             <div class="breadscrumb-inner">

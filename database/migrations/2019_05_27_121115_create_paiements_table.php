@@ -16,25 +16,21 @@ class CreatePaiementsTable extends Migration
 
         Schema::create('paiements', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('matricule')->nullable();
+            $table->string('matricule',200)->nullable();
             $table->string('nom',50);
             $table->string('prenom',50)->nullable();
-            $table->string('filiere',10);
-            $table->integer('niveau');
+            $table->string('classe',10);
             $table->string('sexe',10);
             $table->string('email',50);
             $table->string('adresse',100)->nullable();
             $table->string('pays',25);
             $table->string('ville',50);
             $table->string('numero',15);
-            $table->integer('preinscription')->nullable();
-            $table->integer('tranche1')->nullable();
-            $table->integer('tranche2')->nullable();
-            $table->integer('tranche3')->nullable();
-            $table->integer('tranche4')->nullable();
+            $table->string('libelle',25);
+            $table->double('montant');
             $table->string('numero_carte',25);
-
-            $table->timestamps();
+            $table->date('date');
+            $table->date('date_limite');
         });
     }
 

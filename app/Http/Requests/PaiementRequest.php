@@ -26,9 +26,7 @@ class PaiementRequest extends FormRequest
         return [
             'nom'=>'required',
             'ville'=>'required',
-            'number'=>'required|min:6',
-            'num_carte'=>'required|min:7',
-            'cvv'=>'required|min:3'
+            'number'=>'required|min:3',
         ];
     }
 }

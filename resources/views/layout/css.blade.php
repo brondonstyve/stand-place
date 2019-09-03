@@ -5,7 +5,6 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <title>IAI</title>
-    <link rel="stylesheet" href="css/newsletter.css" type="text/css" media="all">
     <link rel="stylesheet" id="rs-plugin-settings-css" href="css/settings.css" type="text/css" media="all">
 
     <link rel="stylesheet" id="bootstrap-css" href="css/bootstrap.css" type="text/css" media="all">

@@ -1,5 +1,5 @@
 @component('mail::message')
-# Hey admin <br>
+# Monsieur / Madame <br>
 <ul>
       <li>  {{ $nom }}
       <li>  {{ $email }}
@@ -11,6 +11,6 @@
 
 @endcomponent
 
-Thanks,<br>
+Merci,<br>
 {{ config('app.name') }}
 @endcomponent

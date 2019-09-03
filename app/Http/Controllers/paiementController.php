@@ -9,45 +9,33 @@ use App\models\Paiement;
 use App\models\Matricule;
 use App\Http\Requests\PaiementRequest;
 use App\Http\Requests\paiementSuiteRequest;
+use App\Http\Requests\passePartout;
+use App\Mail\ContactMessageCreated;
+use App\models\classe;
+use App\models\taux_paiement;
 use MercurySeries\Flashy\Flashy;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class paiementController extends Controller
 {
     public function Paiement(infosPayementRequest $request){
 
 
+    $reponse=taux_paiement::whereFiliereAndNiveau($request->filiere,$request->niv)
+    ->select('libelle','montant','date','penalite')
+    ->get();
+    //return $reponse;
 
-        $t4=null;
-        if ($request->niv==1) {
-            $preinscrip=76000;
-            $t1=176000;
-            $t2=100000;
-            $t3=100000;
-            $total=$preinscrip+$t1+$t2=$t3;
-        }
-        else{
-            if ($request->niv==2) {
-                $preinscrip=80000;
-                $t1=190000;
-                $t2=15000;
-                $t3=150000;
-                $total=$preinscrip+$t1+$t2=$t3;
-            }
-            else {
-                $preinscrip=90000;
-                $t1=250000;
-                $t2=200000;
-                $t3=190000;
-                $t4=100000;
-                $total=$preinscrip+$t1+$t2=$t3+$t4;
-            }
-
+        if(!auth()->guest()){
+            $type=auth()->user()->type;
+        }else {
+            $type='';
         }
 
         $filiere=$request->filiere;
         $niveau=$request->niv;
-        $classe=$request->filiere.$request->niv;
+        $classe=$request->classe;
         $nom=$request->nom;
         $prenom=$request->prenom;
         $sexe=$request->sexe;
@@ -56,40 +44,20 @@ class paiementController extends Controller
         $ville=$request->ville;
         $numero=$request->number;
         $email=$request->email;
+        $naissance=$request->naissance;
         $test=false;
-        return view('index/paiement',compact('test','niveau','filiere','classe','nom','prenom','sexe','pays','adresse','ville','numero','email','preinscrip','t1','t2','t3','t4','total'));
+        return view('index/paiement',compact('test','niveau','naissance','filiere','type','classe','nom','prenom','sexe','pays','adresse','ville','numero','email','reponse'));
 
     }
 
     public function validerPaiement(PaiementRequest $request){
-
-
-        $t4=null;
-        if ($request->niv==1) {
-            $preinscrip=76000;
-            $t1=176000;
-            $t2=100000;
-            $t3=100000;
-            $total=$preinscrip+$t1+$t2=$t3;
+        if(!auth()->guest()){
+            $type=auth()->user()->type;
+        }else {
+            $type='';
         }
-        else{
-            if ($request->niv==2) {
-                $preinscrip=80000;
-                $t1=190000;
-                $t2=15000;
-                $t3=150000;
-                $total=$preinscrip+$t1+$t2=$t3;
-            }
-            else {
-                $preinscrip=90000;
-                $t1=250000;
-                $t2=200000;
-                $t3=190000;
-                $t4=100000;
-                $total=$preinscrip+$t1+$t2=$t3+$t4;
-            }
 
-        }
+        $nbPaiement=$request->nbpaiement;
         $nom=$request->nom;
         $prenom=$request->prenom;
         $sexe=$request->sexe;
@@ -98,81 +66,99 @@ class paiementController extends Controller
         $ville=$request->ville;
         $numero=$request->number;
         $email=$request->email;
-        $preinscription=$request->pre;
-        $tranche1=$request->tranche1;
-        $tranche2=$request->tranche2;
-        $tranche3=$request->tranche3;
-        $tranche4=$request->tranche4;
         $numero_carte=$request->num_carte;
         $filiere=$request->filiere;
         $niveau=$request->niv;
+        $classe=$request->classe;
+        $naissance=$request->naissance;
         $date=date('Y');
         $dates=$date+1;
+        $identifiant='';
 
-        if ($preinscription==null) {
-            Flashy::error('erreur!Cochez la case a payer.au moins les préinscriptions');
-            return view('index/paiement',compact('niveau','filiere','classe','nom','prenom','sexe','pays','adresse','ville','numero','email','preinscrip','t1','t2','t3','t4','total'));
-        }
+        //dd($request->date);
+        $passeur=false;
+           for ($i=1; $i <= $nbPaiement; $i++) {
+               if (!empty($_POST["tranche$i"])) {
+                $id= Paiement::create(
+                    [
+                        'nom'=>$nom,
+                        'prenom'=>$prenom,
+                        'classe'=>$classe,
+                        'sexe'=>$sexe,
+                        'email'=>$email,
+                        'adresse'=>$adresse,
+                        'pays'=>$pays,
+                        'ville'=>$ville,
+                        'numero'=>$numero,
+                        'libelle'=>'tranche'.$i,
+                        'montant'=>$_POST["tranche$i"],
+                        'numero_carte'=>$numero_carte,
+                        'date'=>$_POST["date_pay$i"],
+                        'date_limite'=>$_POST["date_L$i"],
 
-        else {
+                    ] );
+                      $identifiant=$identifiant.'.'.$id->id;
 
-            $id= Paiement::create(
-                [
-                    'nom'=>$nom,
-                    'prenom'=>$prenom,
-                    'filiere'=>$filiere,
-                    'niveau'=>$niveau,
-                    'sexe'=>$sexe,
-                    'email'=>$email,
-                    'adresse'=>$adresse,
-                    'pays'=>$pays,
-                    'ville'=>$ville,
-                    'numero'=>$numero,
-                    'preinscription'=>$preinscription,
-                    'tranche1'=>$tranche1,
-                    'tranche2'=>$tranche2,
-                    'tranche3'=>$tranche3,
-                    'tranche4'=>$tranche4,
-                    'numero_carte'=>$numero_carte,
+                      $passeur=true;
+               }
 
-                ]
-                );
-                $identifiant=$id->id;
-                $matricule=$filiere.'_'.$date.'_'.$dates.'_'.$identifiant;
-                $post = Paiement::where('id', $identifiant)->update(['matricule'=>$matricule]);
+           }
+
+           if(!$passeur){
+               Flashy::error('erreur aucune case n\'as été cochez! ');
+               return redirect()->route('accueil_index_path');
+           }
+
+           $ident=explode('.',$identifiant);
+           $idMat=$ident[1];
+                $randon1=rand(1,99);
+                $matricule=$classe.'_'.$date.'_'.$dates.'-'.$randon1.'_'.$idMat;
+
+                    $post = Paiement::whereIn('id', $ident)
+                    ->update([
+                        'matricule'=>$matricule
+                        ]);
+
                 if ($post) {
                     $insert= Matricule::create(
                         [
                             'matricule'=>$matricule,
                             'nom'=>$nom,
                             'prenom'=>$prenom,
-                            'filiere'=>$filiere,
-                            'niveau'=>$niveau,
-                            'annee_accademique'=>$date.'-'.$dates
+                            'classe'=>$classe,
+                            'sexe'=>$sexe,
+                            'email'=>$email,
+                            'adresse'=>$adresse,
+                            'pays'=>$pays,
+                            'ville'=>$ville,
+                            'numero'=>$numero,
+                            'naissance'=>$request->naissance,
+                            'annee_accademique'=>$date.'-'.$dates,
 
                         ]
                         );
-                    Flashy::success('Inscription réalisé avec succes. votre matricule est :'.$matricule);
-                    return redirect()->route('home');
+
+
+                            try {
+
+                                sleep(0);
+                                $mailable=new ContactMessageCreated($insert->nom,$insert->email,'Bienvenu dans notre etablissement. Votre matricule est: '. $matricule.'  ceci vous servira pour créer votre compte');
+                                Mail::to('Scolaire@gmail.com')->send($mailable);
+
+                                } catch (\Throwable $th) {
+                                }
+
+                            Flashy::success('Payement éffectué avec success.le matricule a été envoyé par mail');
+                            return redirect()->route('accueil_index_path');
+
                 }
                 else {
                     dd('echec');
                 }
 
-
-        }
-
     }
 
     public function suite_Paiement(paiementSuiteRequest $request){
-
-
-
-        try {
-            DB::connection()->getPdo();
-          } catch (\Throwable $th) {
-           return view('errors/errorbd');
-          }
 
 
         $matricule=$request->matricule;
@@ -183,7 +169,11 @@ class paiementController extends Controller
             return back();
         }
         else {
-
+            if(!auth()->guest()){
+                $type=auth()->user()->type;
+            }else {
+                $type='';
+            }
 
         $nom=$recherche->nom;
         $prenom=$recherche->prenom;
@@ -194,89 +184,92 @@ class paiementController extends Controller
         $numero=$recherche->numero;
         $email=$recherche->email;
         $preinscription=$recherche->preinscription;
-        $tranche1=$recherche->tranche1;
-        $tranche2=$recherche->tranche2;
-        $tranche3=$recherche->tranche3;
-        $tranche4=$recherche->tranche4;
         $numero_carte=$recherche->numero_carte;
-        $filiere=$recherche->filiere;
-        $niveau=$recherche->niveau;
-        $classe=$filiere.$niveau;
+        $classe=$recherche->classe;
         $test=true;
         $matri=$recherche->matricule;
 
-        if ($preinscription!=null) { $grise='checked disabled'; }else{ $grise='checked'; }
-        if ($tranche1!=null) { $griset1='checked disabled'; }else{ $griset1='checked'; }
-        if ($tranche2!=null) { $griset2='checked disabled'; }else{ $griset2='checked'; }
-        if ($tranche3!=null) { $griset3='checked disabled'; }else{ $griset3='checked'; }
-        if ($tranche4!=null) { $griset4='checked disabled'; }else{ $griset4='checked'; }
+        $naissance=Matricule::whereMatricule($matri)->get('naissance');
+        $naissance=$naissance[0]->naissance;
+        $reponse=classe::where('nom_classe',$recherche->classe)
+        ->select('filiere','niveau')
+        ->get();
+        $niveau=$reponse[0]->niveau;
+        $filiere=$reponse[0]->filiere;
+        $reponse=$reponse[0]->filiere;
 
-        $t4=null;
-        if ($niveau==1) {
-            $preinscrip=76000;
-            $t1=176000;
-            $t2=100000;
-            $t3=100000;
-            $total=$preinscrip+$t1+$t2=$t3;
-        }
-        else{
-            if ($niveau==2) {
-                $preinscrip=80000;
-                $t1=190000;
-                $t2=15000;
-                $t3=150000;
-                $total=$preinscrip+$t1+$t2=$t3;
-            }
-            else {
-                $preinscrip=90000;
-                $t1=250000;
-                $t2=200000;
-                $t3=190000;
-                $t4=100000;
-                $total=$preinscrip+$t1+$t2=$t3+$t4;
-            }
+        $reponse=taux_paiement::join('filieres','filieres.id','=','taux_paiements.filiere')
+        ->select('filieres.id','filieres.nom','filieres.niveau','taux_paiements.libelle','taux_paiements.montant','taux_paiements.date')
+        ->where([
+            ['taux_paiements.filiere',$filiere],
+            ['taux_paiements.niveau',$niveau]
+        ])
+        ->get();
 
-        }
+        $paiement_effectue=Paiement::whereMatricule($matri)
+        ->select('libelle','montant')
+        ->get();
+       // return $paiement_effectue;
 
-
-        return view('index/paiement',compact('grisebouton','grise','griset1','griset2','griset3','griset4','matri','test','niveau','filiere','classe','nom','prenom','sexe','pays','adresse','ville','numero','email','preinscrip','t1','t2','t3','t4','total'));
+        return view('index/paiement',compact('type','matri','test','naissance','classe','nom','prenom','sexe','pays','adresse','ville','numero','numero_carte','email','preinscrip','reponse','paiement_effectue'));
     }
 }
 
      public function validerSuitePaiement(paiementSuiteRequest $request){
 
+          if(!auth()->guest()){
+            $type=auth()->user()->type;
+        }else {
+            $type='';
+        }
+        $passeur=false;
 
-        try {
-            DB::connection()->getPdo();
-          } catch (\Throwable $th) {
-           return view('errors/errorbd');
-          }
+        for ($i=1; $i <= $request->nbpaiement; $i++) {
 
-        $matricule=$request->matricule;
-        $recherche=Paiement::whereMatricule($matricule)->first();
+            if (!empty($_POST["tranche$i"])) {
+             $reponse= Paiement::create(
+                 [
+                     'nom'=>$request->nom,
+                     'prenom'=>$request->prenom,
+                     'classe'=>$request->classe,
+                     'sexe'=>$request->sexe,
+                     'matricule'=>$request->matricule,
+                     'email'=>$request->email,
+                     'adresse'=>$request->adresse,
+                     'pays'=>$request->pays,
+                     'ville'=>$request->ville,
+                     'numero'=>$request->number,
+                     'libelle'=>'tranche'.$i,
+                     'montant'=>$_POST["tranche$i"],
+                     'numero_carte'=>$request->num_carte,
+                     'date'=>$_POST["date_pay$i"],
+                     'date_limite'=>$_POST["date_L$i"],
+
+                 ] );
+                 $passeur=true;
+            }
 
 
-        $preinscription=$recherche->preinscription;
-        $tranche1=$recherche->tranche1;
-        $tranche2=$recherche->tranche2;
-        $tranche3=$recherche->tranche3;
-        $tranche4=$recherche->tranche4;
-        $paiementp=''; $paiementt1=''; $paiementt2=''; $paiementt3=''; $paiementt4='';
-        if ($preinscription!=null) {  }else{  $paiementp=Paiement::whereMatricule($matricule)->update(['preinscription'=>$request->pre,] ); }
-        if ($tranche1!=null) {  }else{  $paiementt1=Paiement::whereMatricule($matricule)->update(['tranche1'=>$request->tranche1,] ); }
-        if ($tranche2!=null) {  }else{  $paiementt2=Paiement::whereMatricule($matricule)->update(['tranche2'=>$request->tranche2,] ); }
-        if ($tranche3!=null) {  }else{  $paiementt3=Paiement::whereMatricule($matricule)->update(['tranche3'=>$request->tranche3,] ); }
-        if ($tranche4!=null) {  }else{  $paiementt4=Paiement::whereMatricule($matricule)->update(['tranche4'=>$request->tranche4,] ); }
+        }
 
+        if(!$passeur){
+            Flashy::error('erreur aucune case n\'as été cochez! ');
+            return redirect()->route('accueil_index_path');
+        }
+        if ($reponse) {
+            if($type==''){
+                Flashy::success('Payement éffectué avec success');
+                return redirect()->route('home');
+            }else{
+                Flashy::success('Payement éffectué avec success');
+                return redirect()->route('accueil_index_path');
+            }
 
-
-
-        if ($paiementp || $paiementt1 || $paiementt2 || $paiementt3 || $paiementt4) {
-            Flashy::success('Payement éffectué avec success');
-            return redirect()->route('home');
         }
 
      }
+
+
 
 }
 

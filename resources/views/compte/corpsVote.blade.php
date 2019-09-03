@@ -8,7 +8,7 @@
                 <h4 class="card-title">Les Candidats</h4>
 
                 <ul class="nav nav-pills m-t-30 m-b-30" style="margin-top: -10px">
-                        @for ($i =0 ; $i <$nombre ; $i++)
+                        @for ($i =0 ; $i <sizeOf($resultat) ; $i++)
                         <li class="nav-item"> <a
                             class="nav-link @if($i==0) active @endif" data-toggle="tab"
                             href="#candisat{{ $i }}" role="tab" title=""> Candidat {{ $i+1 }} </a> </li>
@@ -18,7 +18,7 @@
             <hr>
             <div class="tab-content br-n pn" >
 
-                @for ($k =0 ; $k <$nombre ; $k++)
+                @for ($k =0 ; $k <sizeOf($resultat) ; $k++)
 
                 <div id="candisat{{ $k }}" class="tab-pane @if($k==0) active @endif">
                         <div class="row">
@@ -26,11 +26,12 @@
                             <form action="{{ route('vote_envoi_path') }}" method="post">
                                 {{ csrf_field() }}
                             <input type="submit" value="Voter" class="btn btn-info active" style="float: right;">
-                            <div class="col-md-8"><h3>{{ $resultat[$k]->nom_prof }}</h3>
-                            <p>{{ $resultat[$k]->nom }} ({{ $utilisateur->filiere }}{{ $utilisateur->niveau }})<br>
-                            <h5 style="font-size: 15px;">Voter pour Monsieur {{ $resultat[$k]->nom_prof }} de la {{ $utilisateur->filiere }}{{ $utilisateur->niveau }}</h5>
-                            <input type="hidden" name="id" value="{{ $k+1 }}">
-                            <input type="hidden" name="nbreVote" value="{{ $resultat[$k]->vote }}">
+                            <div class="col-md-8">
+                            <h3>{{ $resultat[$k]->nom }}</h3>
+                            <p>{{ $resultat[$k]->nom.' '.$resultat[$k]->prenom }}<br>
+                            <h5 style="font-size: 15px;">Voter pour @if($resultat[$k]->type=='enseignant') M.@endif {{ $resultat[$k]->nom }} @if($resultat[$k]->type=='etudiant') de la {{ $resultat[$k]->classe }}@endif</h5>
+                            <input type="hidden" name="id" value="{{ $resultat[$k]->id }}">
+                            <input type="hidden" name="nbreVote" value="{{ $resultat[$k]->voix }}">
                             </p>
                             </div>
                         </form>
@@ -50,7 +51,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 
@@ -88,12 +89,12 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                            @for ($i = 0; $i < $nombre; $i++)
+                                            @for ($i = 0; $i < sizeOf($resultat); $i++)
                                             <tr class="">
                                                     <td><span class="round"><img src="images/2.jpg" alt="user" width="50"></span><td>
-                                                        <h6> {{ $liste[$i]->nom_prof }} </h6><small class="text-muted">{{ $liste[$i]->nom }}  </small></td>
-                                                    <td> {{ $liste[$i]->vote }} voix <br><div class="progress-bar bg-success" role="progressbar" style="width: {{ $liste[$i]->vote }}%; height:25px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> </td>
-                                                    <td><span class="label label-info"> {{ $i+1 }} ieme </span></td>
+                                                        <h6> {{ $liste[$i]->nom }} </h6><small class="text-muted">{{ $liste[$i]->prenom }}  </small></td>
+                                                    <td> {{ $liste[$i]->voix }} voix <br><div class="progress-bar bg-success" role="progressbar" style="width: {{ $liste[$i]->vote }}%; height:25px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> </td>
+                                                    <td><span class="label label-info"> {{ $i+1 }}@if($i==0) ier @else ieme @endif  </span></td>
                                                 </tr>
                                             @endfor
 
@@ -118,7 +119,7 @@
                                     @if (sizeOf($premier)==0)
 
                                     @else
-                                    @if ( $premier[0]->vote ==0)
+                                    @if ( $premier[0]->voix ==0)
                                     <h3 class="title"> Pas de meilleur enseignant pour les moment </h3>
                                 @else
 
@@ -127,7 +128,7 @@
                                 <div class="col-md-4 col-sm-4 col-xs-12" >
 
                                         <div class="widget-heading-title center_color">
-                                                <h3 class="title"> le vainqueur est {{ $premier[0]->nom_prof }} </h3>
+                                                <h3 class="title"> le vainqueur est {{ $premier[0]->nom }} </h3>
                                             </div>
                                         <div class="apus-teacher-inner text-center style2">
                                             <div class="author-avatar">
@@ -138,7 +139,7 @@
                                             <div class="infor">
                                                 <h3 class="name">
                                                     <a href="">
-                                                        {{ $premier[0]->nom_prof }}
+                                                        {{ $premier[0]->nom }}
                                                     </a>
                                                 </h3>
                                                 <div class="socials">
@@ -150,10 +151,10 @@
 
                                         <div class="dl m-l-10" style="margin-top: -20px;">
                                             <h3 class="card-title">Meilleur enseignant</h3>
-                                            <h6 class="card-subtitle">{{ $premier[0]->vote }} Voix</h6>
+                                            <h6 class="card-subtitle">{{ $premier[0]->voix }} Voix</h6>
                                         </div>
                                         <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ $premier[0]->vote }}%; height:25px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ $premier[0]->voix }}%; height:25px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
 

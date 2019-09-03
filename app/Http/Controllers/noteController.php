@@ -44,7 +44,7 @@ class noteController extends Controller
 
             $classe=DB::table('matieres')
             ->join('comptes','comptes.id','=','matieres.compte')
-            ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id','comptes.filiere','comptes.niveau')
+            ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id')
             ->whereCompte($utilisateur->id)
             ->get();
 
@@ -115,7 +115,7 @@ class noteController extends Controller
 
          $classe=DB::table('matieres')
             ->join('comptes','comptes.id','=','matieres.compte')
-            ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id','comptes.filiere','comptes.niveau')
+            ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id')
             ->whereCompte($utilisateur->id)
             ->get();
 
@@ -175,7 +175,7 @@ class noteController extends Controller
 
         $classe=DB::table('matieres')
         ->join('comptes','comptes.id','=','matieres.compte')
-        ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id','comptes.filiere','comptes.niveau')
+        ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id')
         ->whereCompte($utilisateur->id)
         ->get();
 

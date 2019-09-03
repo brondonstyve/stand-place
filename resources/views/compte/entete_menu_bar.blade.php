@@ -355,7 +355,7 @@
 
                                             <div class="chart-text m-r-10">
                                                     <h4 class="m-b-0"><small>CLASSE</small></h4>
-                                                    <h6 class="m-t-0 text-info btn-sm" style="text-transform: uppercase; font-size: 15px;">{{ $utilisateur->filiere.$utilisateur->niveau }}</h6>
+                                                    <h6 class="m-t-0 text-info btn-sm" style="text-transform: uppercase; font-size: 15px;">{{ $utilisateur->classe }}</h6>
                                                 </div>
 
                                                 <div class="spark-chart">

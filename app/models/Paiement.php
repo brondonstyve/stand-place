@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Paiement extends Model
 {
-    public $timestamps=true;
-    protected $fillable=['matricule','nom','prenom','filiere','niveau','sexe','email','adresse','pays','ville','numero','preinscription',
-    'tranche1','tranche2','tranche3','tranche4','numero_carte','filiere','niveau'];
+    public $timestamps=false;
+    protected $fillable=['matricule','nom','prenom','classe','sexe','email','adresse','pays','ville','numero',
+    'montant','libelle','numero_carte','date','date_limite'];
 }

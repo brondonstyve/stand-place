@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\filiere;
 use App\Http\Requests\passePartout;
 use App\models\classe;
+use App\models\Compte;
+use App\models\Matricule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use MercurySeries\Flashy\Flashy;
@@ -44,10 +46,12 @@ class classeController extends Controller
                 if ($rep) {
                     return response('Cette classe existe déjà');
                 } else {
+                    $classe=filiere::whereId($request->filiere)->first();
                     $reponse=classe::create([
                         'filiere'=>$request->filiere,
                         'niveau'=>$request->code_filiere,
                         'code_classe'=>$request->code_classe,
+                        'nom_classe'=>$classe->code.$request->code_filiere.$request->code_classe,
                     ]);
 
                     $rep=classe::join('filieres','filieres.id','=','classes.filiere')
@@ -100,4 +104,13 @@ class classeController extends Controller
             return response($request->all());
         }
     }
+
+    //lister toutes les salles
+
+    public function listeTouteClasse(){
+        $reponse=classe::get('nom_classe');
+        return response($reponse);
+    }
+
+
 }

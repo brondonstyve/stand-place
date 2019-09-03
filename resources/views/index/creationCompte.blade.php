@@ -45,10 +45,10 @@
                                     </div>
                                 <div class="form-group">
                                             <div class="col-xs-12">
-                                                <input class="form-control"  type="text"  disabled value="{{ $filiere.$niveau }}" style="text-align: left;">
-                                                <input type="hidden" name='' value="{{ $filiere.$niveau }}">
-                                                <input type="hidden" name='filiere' value="{{ $filiere }}">
-                                                <input type="hidden" name='niveau' value="{{ $niveau }}">
+                                                <input class="form-control"  type="text"  disabled value="@if($type==null) {{ $classe }} @else XX @endif" style="text-align: left;">
+                                                <input type="hidden" name='classe' value="@if($type==null) {{ $classe }} @else XX @endif">
+                                                <input type="hidden" name='type' value="{{ $type }}">
+
                                                 {{ $errors->first('classe',':message') }}
                                             </div>
                                         </div>

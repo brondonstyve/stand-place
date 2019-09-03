@@ -26,7 +26,7 @@ class infosPayementRequest extends FormRequest
         return [
             'nom'=>'required',
             'ville'=>'required',
-            'number'=>'required|min:6'
+            'number'=>'required|min:3'
         ];
     }
 }

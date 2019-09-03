@@ -36,357 +36,99 @@
 
     <div id="add-paiement" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         style="display: none;" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content col-xs-9">
-                <div class="modal-title">
-                    <form action="{{ route('paiement_path') }}" method="POST" class="form-horizontal form-material "
-                        enctype="multipart/form-data">
-                        {{ csrf_field() }}
 
-
-                        <div class="panel panel-info">
-                            <div class="panel-heading">Informations de l'etudiant</div>
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-xs-12">
+                    <!-- contenu-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Nouveau Paiement</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('paiement_path') }}" method="post" class="form-horizontal form-material "
+                                id="formulaire">
+                                {{ csrf_field() }}
+                                <div class="form-group ">
+                                    <div class="">
                                         <strong>Filière:</strong>
-                                        <select name="filiere" id="" class="form-control">
-                                            <option>gl</option>
-                                            <option>sr</option>
-                                            <option>se</option>
+                                        <select name="filiere" class="form-control" id="liste-filier">
                                         </select>
                                     </div>
-                                    <div class="span1"></div>
-                                    <div class="col-md-6 col-xs-12">
+
+                                    <div class="">
                                         <strong>Niveau:</strong>
-                                        <select name="niv" id="" class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option disabled>3</option>
+                                        <select name="niv" id="liste-niveau" class="form-control">
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group ">
+                                    <div class="">
+                                        <strong>classe:</strong>
+                                        <select name="classe" class="form-control" id="liste-classe">
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
-                                    <div class="col-md-6 col-xs-12">
+                                    <div class="">
                                         <strong>Nom:</strong>
                                         <input type="text" name="nom" class="form-control" required />
                                         {!! $errors->first('nom',' <p style="color: red;font-family: italic"> :message
                                         </p> ') !!}
                                     </div>
-                                    <div class="span1"></div>
-                                    <div class="col-md-6 col-xs-12">
+
+                                    <div class="">
                                         <strong>Prenom:</strong>
                                         <input type="text" name="prenom" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-md-12"><strong>Sexe</strong></div>
-                                    <div class="col-md-12">
-                                        <select name="sexe" id="" class="form-control">
-                                            <option>Masculin</option>
-                                            <option>Féminin</option>
-                                        </select>
-                                    </div>
+                                    <div class=""><strong>Sexe</strong></div>
+                                    <select name="sexe" id="" class="form-control">
+                                        <option>Masculin</option>
+                                        <option>Féminin</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12"><strong>Pays</strong></div>
-                                    <div class="col-md-12">
-                                        <select name="pays" id="" class="form-control">
-                                            <option>Afghanistan</option>
-                                            <option>Îles Åland</option>
-                                            <option>Albanie</option>
-                                            <option>Algérie</option>
-                                            <option>Samoa américaines</option>
-                                            <option>Andorre</option>
-                                            <option>Angola</option>
-                                            <option>Anguilla</option>
-                                            <option>Antarctique</option>
-                                            <option>Antigua et Barbuda</option>
-                                            <option>Argentine</option>
-                                            <option>Arménie</option>
-                                            <option>Aruba</option>
-                                            <option>Australie</option>
-                                            <option>Autriche</option>
-                                            <option>Azerbaïdjan</option>
-                                            <option>Bahamas</option>
-                                            <option>Bahreïn</option>
-                                            <option>Bangladesh</option>
-                                            <option>Barbade</option>
-                                            <option>Biélorussie</option>
-                                            <option>Belgique</option>
-                                            <option>Belize</option>
-                                            <option>Bénin</option>
-                                            <option>Bermudes</option>
-                                            <option>Bhoutan</option>
-                                            <option>Bolivie</option>
-                                            <option>Bosnie-Herzégovine</option>
-                                            <option>Botswana</option>
-                                            <option>Île Bouvet</option>
-                                            <option>Brésil</option>
-                                            <option>Territoire britannique de l'Océan Indien</option>
-                                            <option>Brunei Darussalam</option>
-                                            <option>Bulgarie</option>
-                                            <option>Burkina Faso</option>
-                                            <option>Burundi</option>
-                                            <option>Cambodge</option>
-                                            <option selected="selected">Cameroun</option>
-                                            <option>Canada</option>
-                                            <option>Cap-Vert</option>
-                                            <option>Îles Caïmans</option>
-                                            <option>République Centrafricaine</option>
-                                            <option>Tchad</option>
-                                            <option>Chili</option>
-                                            <option>Chine</option>
-                                            <option>Île Christmas</option>
-                                            <option>Îles Cocos (Keeling)</option>
-                                            <option>Colombie</option>
-                                            <option>Comores</option>
-                                            <option>Congo (Brazzaville)</option>
-                                            <option>Congo (Kinshasa)</option>
-                                            <option>Îles Cook</option>
-                                            <option>Costa Rica</option>
-                                            <option>Côte d'Ivoire</option>
-                                            <option>Croatie</option>
-                                            <option>Cuba</option>
-                                            <option>Chypre</option>
-                                            <option>République tchèque</option>
-                                            <option>Danemark</option>
-                                            <option>Djibouti</option>
-                                            <option>Dominique</option>
-                                            <option>République dominicaine</option>
-                                            <option>Équateur</option>
-                                            <option>Égypte</option>
-                                            <option>Salvador</option>
-                                            <option>Guinée équatoriale</option>
-                                            <option>Érythrée</option>
-                                            <option>Estonie</option>
-                                            <option>Éthiopie</option>
-                                            <option>Îles Malouines</option>
-                                            <option>Îles Féroé</option>
-                                            <option>Fidji</option>
-                                            <option>Finlande</option>
-                                            <option>France</option>
-                                            <option>Guyane française</option>
-                                            <option>Polynésie française</option>
-                                            <option>Terres australes françaises</option>
-                                            <option>Gabon</option>
-                                            <option>Gambie</option>
-                                            <option>Géorgie</option>
-                                            <option>Allemagne</option>
-                                            <option>Ghana</option>
-                                            <option>Gibraltar</option>
-                                            <option>Grèce</option>
-                                            <option>Groenland</option>
-                                            <option>Grenade</option>
-                                            <option>Guadeloupe</option>
-                                            <option>Guam</option>
-                                            <option>Guatemala</option>
-                                            <option>Guernesey</option>
-                                            <option>Guinée</option>
-                                            <option>Guinée-Bissau</option>
-                                            <option>Guyane française</option>
-                                            <option>Haïti</option>
-                                            <option>Îles Heard et McDonald</option>
-                                            <option>Honduras</option>
-                                            <option>Hong-Kong</option>
-                                            <option>Hongrie</option>
-                                            <option>Islande</option>
-                                            <option>Inde</option>
-                                            <option>Indonésie</option>
-                                            <option>Iran</option>
-                                            <option>Irak</option>
-                                            <option>Irlande</option>
-                                            <option>Île de Man</option>
-                                            <option>Israël</option>
-                                            <option>Italie</option>
-                                            <option>Jamaïque</option>
-                                            <option>Japon</option>
-                                            <option>Jersey</option>
-                                            <option>Jordanie</option>
-                                            <option>Kazakhstan</option>
-                                            <option>Kenya</option>
-                                            <option>Kiribati</option>
-                                            <option>Corée du Nord</option>
-                                            <option>Corée du Sud</option>
-                                            <option>Koweït</option>
-                                            <option>Kirghizistan</option>
-                                            <option>Laos</option>
-                                            <option>Lettonie</option>
-                                            <option>Liban</option>
-                                            <option>Lesotho</option>
-                                            <option>Liberia</option>
-                                            <option>Libye</option>
-                                            <option>Liechtenstein</option>
-                                            <option>Lituanie</option>
-                                            <option>Luxembourg</option>
-                                            <option>Macao</option>
-                                            <option>Macédoine</option>
-                                            <option>Madagascar</option>
-                                            <option>Malawi</option>
-                                            <option>Malaisie</option>
-                                            <option>Maldives</option>
-                                            <option>Mali</option>
-                                            <option>Malte</option>
-                                            <option>Îles Marshall</option>
-                                            <option>Martinique</option>
-                                            <option>Mauritanie</option>
-                                            <option>Île Maurice</option>
-                                            <option>Mayotte</option>
-                                            <option>Mexique</option>
-                                            <option>Micronésie</option>
-                                            <option>Moldavie</option>
-                                            <option>Monaco</option>
-                                            <option>Mongolie</option>
-                                            <option>Monténégro</option>
-                                            <option>Montserrat</option>
-                                            <option>Maroc</option>
-                                            <option>Mozambique</option>
-                                            <option>Myanmar</option>
-                                            <option>Namibie</option>
-                                            <option>Nauru</option>
-                                            <option>Népal</option>
-                                            <option>Pays-Bas</option>
-                                            <option>Antilles néerlandaises</option>
-                                            <option>Nouvelle-Calédonie</option>
-                                            <option>Nouvelle-Zélande</option>
-                                            <option>Nicaragua</option>
-                                            <option>Niger</option>
-                                            <option>Nigeria</option>
-                                            <option>Niue</option>
-                                            <option>Île Norfolk</option>
-                                            <option>Îles Mariannes du Nord</option>
-                                            <option>Norvège</option>
-                                            <option>Oman</option>
-                                            <option>Pakistan</option>
-                                            <option>Palau</option>
-                                            <option>Palestine</option>
-                                            <option>Panama</option>
-                                            <option>Papouasie-Nouvelle-Guinée</option>
-                                            <option>Paraguay</option>
-                                            <option>Pérou</option>
-                                            <option>Philippines</option>
-                                            <option>Pitcairn</option>
-                                            <option>Pologne</option>
-                                            <option>Portugal</option>
-                                            <option>Porto Rico</option>
-                                            <option>Qatar</option>
-                                            <option>Réunion</option>
-                                            <option>Roumanie</option>
-                                            <option>Fédération de Russie</option>
-                                            <option>Rwanda</option>
-                                            <option>Saint-Barthélemy</option>
-                                            <option>Sainte-Hélène</option>
-                                            <option>Saint-Christophe-et-Niévès</option>
-                                            <option>Sainte-Lucie</option>
-                                            <option>Saint Martin</option>
-                                            <option>Saint-Pierre-et-Miquelon</option>
-                                            <option>Saint-Vincent-et-les Grenadines</option>
-                                            <option>Samoa</option>
-                                            <option>Saint-Marin</option>
-                                            <option>Sao Tomé et Principe</option>
-                                            <option>Arabie Saoudite</option>
-                                            <option>Sénégal</option>
-                                            <option>Serbie</option>
-                                            <option>Seychelles</option>
-                                            <option>Sierra Leone</option>
-                                            <option>Singapour</option>
-                                            <option>Slovaquie</option>
-                                            <option>Slovénie</option>
-                                            <option>Îles Salomon</option>
-                                            <option>Somalie</option>
-                                            <option>Afrique du Sud</option>
-                                            <option>Géorgie du Sud et Îles Sandwich du Sud</option>
-                                            <option>Espagne</option>
-                                            <option>Sri Lanka</option>
-                                            <option>Soudan</option>
-                                            <option>Surinam</option>
-                                            <option>Îles Svalbard et Jan Mayen</option>
-                                            <option>Swaziland</option>
-                                            <option>Suède</option>
-                                            <option>Suisse</option>
-                                            <option>Syrie</option>
-                                            <option>Taïwan</option>
-                                            <option>Tadjikistan</option>
-                                            <option>Tanzanie</option>
-                                            <option>Thaïlande</option>
-                                            <option>Timor oriental</option>
-                                            <option>Togo</option>
-                                            <option>Tokelau</option>
-                                            <option>Tonga</option>
-                                            <option>Trinidad et Tobago</option>
-                                            <option>Tunisie</option>
-                                            <option>Turquie</option>
-                                            <option>Turkménistan</option>
-                                            <option>Îles Turks-et-Caïques</option>
-                                            <option>Tuvalu</option>
-                                            <option>Ouganda</option>
-                                            <option>Ukraine</option>
-                                            <option>Émirats arabes unis</option>
-                                            <option>Royaume-Uni</option>
-                                            <option>Îles mineures éloignées des États-Unis</option>
-                                            <option>États-Unis d'Amérique</option>
-                                            <option>Uruguay</option>
-                                            <option>Ouzbékistan</option>
-                                            <option>Vanuatu</option>
-                                            <option>Cité du Vatican</option>
-                                            <option>Venezuela</option>
-                                            <option>Vietnam</option>
-                                            <option>Îles Vierges britanniques</option>
-                                            <option>Îles Vierges américaines</option>
-                                            <option>Wallis et Futuna</option>
-                                            <option>Sahara occidental</option>
-                                            <option>Yémen</option>
-                                            <option>Zambie</option>
-                                            <option>Zimbabwe</option>
-                                        </select>
-                                    </div>
+                                    <select name="pays" id="" class="form-control">
+                                        <option >Cameroun</option>
+                                                            <option >Gabon</option>
+                                                            <option >Tchad</option>
+                                                            <option >Algérie</option>
+                                                            <option >France</option>
+                                                            <option >Guinée</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-md-12"><strong>Adresse:</strong></div>
-                                    <div class="col-md-12">
-                                        <input type="text" name="adresse" class="form-control" />
-                                    </div>
+                                    <input type="text" name="adresse" class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12"><strong>Ville:</strong></div>
-                                    <div class="col-md-12">
-                                        <input type="text" name="ville" class="form-control" required />
-                                        {!! $errors->first('ville',' <p style="color: red;font-family: italic"> :message
-                                        </p> ') !!}
-                                    </div>
+                                    <input type="text" name="ville" class="form-control" required />
+                                    {!! $errors->first('ville',' <p style="color: red;font-family: italic"> :message
+                                    </p> ') !!}
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12"><strong>Numéro de téléphone:</strong></div>
-                                    <div class="col-md-12">
-                                        <input type="number" name="number" class="form-control" required />
-                                        {!! $errors->first('number',' <p style="color: red;font-family: italic">
-                                            :message</p> ') !!}
-                                    </div>
+                                    <input type="number" name="number" class="form-control" required />
+                                    {!! $errors->first('number',' <p style="color: red;font-family: italic">
+                                        :message</p> ') !!}
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12"><strong>Email:</strong></div>
-                                    <div class="col-md-12"><input type="email" name="email" class="form-control"
-                                            required /></div>
+                                    <input type="email" name="email" class="form-control" required />
                                 </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <button type="submit" class="bouton btn-success">Envoyer</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-
-
-
-
+                        <div class="modal-footer">
+                            <input type="submit" value="Envoyer" class="left btn btn-success">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        </div>
+                        </form>
+                    </div>
 
                 </div>
-                </form>
-            </div>
-            <!-- /.modal-content -->
-        </div>
     </div>
 
 

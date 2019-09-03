@@ -39,13 +39,10 @@ class filiereController extends Controller
 
         if ($request->ajax()) {
 
-            $rep=filiere::where([
-                ['nom',$request->nom],
-                ['code',$request->code],
-            ])
+            $rep=filiere::whereNomOrCode($request->nom,$request->code)
             ->first();
             if ($rep) {
-                return response('Cette filière existe déjà');
+                return response('Cette filière ou ce code de filière existe déjà');
             } else {
             $reponse = filiere::Create([
                 'nom' => $request->nom,
@@ -107,6 +104,28 @@ class filiereController extends Controller
             ->whereFiliere($request->id)
             ->select('filieres.id','filieres.code','filieres.nom','classes.niveau','classes.code_classe')
             ->get();
+            return response($reponse);
+        }
+    }
+
+    public function listeFiliere(passePartout $request){
+        if($request->ajax()){
+           $reponse=filiere::select('nom','id','code')->get();
+           return response($reponse);
+        }
+    }
+
+    public function chercheurFiliereClasse(passePartout $request){
+
+        if($request->ajax()){
+            $reponse=classe::join('filieres','filieres.id','=','classes.filiere')
+            ->where([
+                ['classes.filiere',$request->id],
+                ['classes.niveau',$request->niveau]
+            ])
+            ->select('classes.id','filieres.code','classes.niveau','classes.code_classe')
+            ->get();
+
             return response($reponse);
         }
     }

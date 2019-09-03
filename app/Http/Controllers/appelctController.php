@@ -27,15 +27,16 @@ class appelctController extends Controller
 
          $classe=DB::table('matieres')
          ->join('comptes','comptes.id','=','matieres.compte')
-         ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id','comptes.filiere','comptes.niveau')
+         ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id')
          ->whereCompte($utilisateur->id)
          ->get();
 
 
         $ouverture=false;
         $absence=false;
+        $tab_appel=true;
 
-            return view ('index/appelCt',compact('utilisateur','note','nombre','classe','nombreclasse','ouverture','absence'));
+            return view ('index/appelCt',compact('utilisateur','tab_appel','note','nombre','classe','nombreclasse','ouverture','absence'));
 
 
     }
@@ -62,18 +63,18 @@ class appelctController extends Controller
 
          $classe=DB::table('matieres')
             ->join('comptes','comptes.id','=','matieres.compte')
-            ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id','comptes.filiere','comptes.niveau')
+            ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id')
             ->whereCompte($utilisateur->id)
             ->get();
 
             $remplisseur=DB::table('appels')
-            ->join('comptes','comptes.id','=','appels.compte')
+            ->join('matricules','matricules.id','=','appels.matricule')
             ->join('matieres','appels.matiere','=','matieres.id')
-            ->select('matieres.nom','comptes.nom as nom_prof',DB::raw('sum(absence) as abs'),'comptes.nom as nomE','comptes.prenom','comptes.classe')
-            ->groupBy('appels.compte','appels.matiere')
+            ->select('matieres.nom','matricules.nom as nom_prof',DB::raw('sum(absence) as abs'),'matricules.nom as nomE','matricules.prenom','matricules.classe')
+            ->groupBy('appels.matricule','appels.matiere')
             ->where([
                 ['appels.matiere',$id  ],
-                ['comptes.classe',$class],
+                ['matricules.classe',$class],
 
                 ])
             ->get();
@@ -93,23 +94,18 @@ class appelctController extends Controller
 
 
 
-            $liste=DB::table('comptes')
+            $liste=DB::table('matricules')
             ->where([
 
-                ['comptes.classe',$request->classe]
+                ['matricules.classe',$request->classe]
                 ])
                 ->get();
-
-            $listec=DB::table('comptes','appels')
-            ->where([
-                ['comptes.classe',$request->classe]
-                ])
-            ->count();
 
 
             $ouverture=true;
             $absence=true;
-            return view('index/appelCt',compact('utilisateur','absence','class','note','nombre','classe','nombreclasse','liste','listec','ouverture','id','remplisseur','remplisseurCahier'));
+            $tab_appel=false;
+            return view('index/appelCt',compact('utilisateur','tab_appel','absence','class','note','nombre','classe','nombreclasse','liste','listec','ouverture','id','remplisseur','remplisseurCahier'));
 
     }
 
@@ -135,7 +131,7 @@ class appelctController extends Controller
 
           $classe=DB::table('matieres')
           ->join('comptes','comptes.id','=','matieres.compte')
-          ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id','comptes.filiere','comptes.niveau')
+          ->select('matieres.nom','matieres.classe','matieres.semestre','matieres.compte','matieres.id')
           ->whereCompte($utilisateur->id)
           ->get();
 
@@ -149,7 +145,7 @@ class appelctController extends Controller
 
             if (isset($_POST["absence$a"])) {
                 $enregistrement=Appel::create([
-                    'compte'=>$_POST["id_compte$a"],
+                    'matricule'=>$_POST["id_compte$a"],
                     'matiere'=>$_POST["id_matiere$a"],
                     'nom_prof'=>$nom,
                     'absence'=>$_POST["absence$a"],

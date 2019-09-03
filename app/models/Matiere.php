@@ -9,5 +9,5 @@ class Matiere extends Model
 {
     public $timestamps=false;
 
-    protected $fillable=['nom','nom_prof','semestre','niveau','nombre_heure','vote'];
+    protected $fillable=['nom','semestre','niveau','nombre_heure','vote','compte','classe','coef'];
 }

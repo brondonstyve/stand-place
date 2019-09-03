@@ -7,6 +7,8 @@ use App\Http\Requests\CompteRequest;
 use App\Http\Requests\modiCompteRequest;
 use App\Http\Requests\avatarRequest;
 use App\Http\Requests\matriculeRequest;
+use App\Http\Requests\passePartout;
+use App\models\classe;
 use App\models\Compte;
 use App\models\Matricule;
 use MercurySeries\Flashy\Flashy;
@@ -51,16 +53,20 @@ class ControllerCompte extends Controller
      if($test_email==null){
         $compte=new Compte();
         if ($request->mdp==$request->mdpconf) {
-
+            $matric=Matricule::whereMatricule($request->matricule)->get('id');
+            $matric=$matric[0]->id;
             $enreg=Compte::create([
+                'mat'=>$matric,
                 'matricule'=>$request->matricule,
                 'nom'=>$request->nom,
                 'prenom'=>$request->prenom,
-                'filiere'=>$request->filiere,
-                'niveau'=>$request->niveau,
-                'classe'=>$request->filiere.$request->niveau,
+                'classe'=>$request->classe,
                 'email'=>$request->email,
-                'mot_de_passe'=>bcrypt($request->mdpconf)]);
+                'mot_de_passe'=>bcrypt($request->mdpconf),
+                'type'=>$request->type,
+                'date'=>date('Y-mm-dd')
+                ]);
+
 
             if($enreg){
 
@@ -197,16 +203,18 @@ class ControllerCompte extends Controller
             return redirect()->route('home');
         }
         else{
+
             $test_matri=compte::whereMatricule( $request->matricule)->first();
 
             if ($test_matri==null) {
+
                 $matricules=$matri->matricule;
                 $nom=$matri->nom;
                 $prenom=$matri->prenom;
-                $filiere=$matri->filiere;
-                $niveau=$matri->niveau;
+                $classe=$matri->classe;
                 $anne_acc=$matri->annee_accademique;
-                return \view('index/creationCompte',compact('matricules','nom','prenom','filiere','niveau'));
+                $type=$matri->type;
+                return \view('index/creationCompte',compact('matricules','nom','prenom','classe','type'));
             }
             else {
                 Flashy::error('Le matricule entré est deja utilisé');
@@ -261,4 +269,44 @@ class ControllerCompte extends Controller
 
     }
 
+
+    public function gerer_compte(){
+        if (auth()->guest()) {
+            Flashy::error('Connectez vouz');
+            return redirect()->route('home');
+            }
+            $utilisateur=auth()->user();
+
+            $classe=Compte::where([
+                ['type','<>',null],
+                ['type','<>','superadmin'],
+
+                ])
+                    ->paginate(5);
+        return view('administration/comptes',compact('utilisateur','classe'));
+    }
+
+    public function droit_des_compte(passePartout $request){
+        if($request->ajax()){
+            if($request->type=='donner'){
+                $reponse=Compte::whereMatricule($request->matricule)
+                ->update([
+                    'droit'=>'admin'
+                ]);
+
+            }else{
+                $reponse=Compte::whereMatricule($request->matricule)
+                ->update([
+                    'droit'=>null
+                ]);
+            }
+
+            if ($reponse) {
+                return 1;
+            } else {
+                return 0;
+            }
+
+        }
+    }
 }

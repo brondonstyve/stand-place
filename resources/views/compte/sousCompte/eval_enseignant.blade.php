@@ -727,60 +727,44 @@
                 style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" style="min-width: 90%">
 
-                    <div class="col-md-6 modal-content" style="">
+                    <div class="col-md-4 modal-content" style="">
 
                         <div class="card-box">
                             <h4 class="m-t-0 header-title"><b>Détails de l'évaluation</b></h4>
                             <div class="table-responsive">
                                     <form action="{{ route('generer_epreuve_path') }}" method="post">
                                             {{ csrf_field() }}
-                                            <table class="table-colored-full table-full-inverse table-hover">
-                                                <thead>
-                                                    <tr style="color: white">
-                                                        <th>Matière</th>
-                                                        <th>Libellé</th>
-                                                        <th>nombre de question</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
 
-                                                        <td style="width: 25%">
-                                                            <select name="matiere" required style="min-width: 100%;text-transform: uppercase">
+                                            <div class="form-group">
+                                                        <div class="col-md-7"><strong>Matièere:</strong></div>
+                                                            <select name="matiere" required class="form-control" style="text-transform: uppercase">
                                                                 @for ($i =0 ; $i <sizeOf($classe_mat) ; $i++) <option
                                                                     value="{{ $classe_mat[$i]->id.'.'.$classe_mat[$i]->nom.'->'.$classe_mat[$i]->classe }}">
                                                                     {{ $classe_mat[$i]->nom.'->'.$classe_mat[$i]->classe }}</option>
                                                                     @endfor
                                                             </select>
-                                                        </td>
+                                                        </div>
 
-                                                        <td style="width: 25%">
-                                                            <select name="libelle" id=""
-                                                                style="min-width: 100%;text-transform: uppercase">
+                                                        <div class="form-group">
+                                                                <div class="col-md-7"><strong>Libelle:</strong></div>
+
+                                                            <select name="libelle" id="" class="form-control"
+                                                                style="text-transform: uppercase">
                                                                 <option value="CC">CC</option>
                                                                 <option value="SN">SN</option>
                                                                 <option value="tp">tp</option>
                                                             </select>
-                                                        </td>
-                                                        <td style="width: 25%">
-                                                            <select name="nbre_kuestion" id="" style="min-width: 100%">
+                                                        </div>
+                                                            <div class="form-group">
+                                                                    <div class="col-md-7"><strong>nombre de questions :</strong></div>
+
+                                                            <select name="nbre_kuestion" id="" class="form-control">
                                                                 <option value="10">10</option>
                                                                 <option value="20">20</option>
                                                                 <option value="30">30</option>
                                                                 <option value="40">40</option>
                                                             </select>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                            <td colspan="4" align="center" class="btn-sm">
-
-                                                            </td>
-                                                        </tr>
-                                                </tbody>
-
-
-                                            </table>
+                                                        </div>
                                             <input type="submit" class=" btn-sm btn-info pull-left" value="Valider">
                                             <button type="button" class="btn-sm btn-default pull-right" data-dismiss="modal">Annuler</button>
                                         </form>

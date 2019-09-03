@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use MercurySeries\Flashy\Flashy;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\passePartout;
+use App\models\classe;
 use App\models\epreuve;
 use App\models\evaluation;
 use App\models\Matiere;
@@ -813,4 +814,18 @@ else {
 
         }
 
+
+        public function programmer_eval(){
+            if (auth()->guest()) {
+                Flashy::error('connectez vous!!');
+                return redirect()->route('home');
+            }
+
+            $utilisateur=auth()->user();
+
+            return view('administration/evaluation',compact('utilisateur'));
+        }
 }
+
+
+

@@ -12,8 +12,8 @@ class Compte extends Model implements Authenticatable
     use basicAuthenticatable;
 
 
-    public $timestamps=true;
-    protected $fillable=['matricule','nom','prenom','filiere','niveau','classe','email','mot_de_passe','téléphone','ville' ,'photo','vote_statut'];
+    public $timestamps=false;
+    protected $fillable=['mat','matricule','nom','prenom','classe','email','mot_de_passe','téléphone','ville' ,'photo','vote_statut','type','droit'];
 
    /**
      * Get the password for the user.

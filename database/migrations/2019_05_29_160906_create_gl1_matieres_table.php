@@ -17,12 +17,12 @@ class CreateGl1MatieresTable extends Migration
             $table->increments('id');
             $table->integer('compte')->unsigned()->default(null);
             $table->string('nom',50);
-            $table->integer('semestre');
+            $table->integer('semestre')->nullable();;
             $table->string('classe',4);
             $table->integer('nombre_heure');
-            $table->date('periode');
-            $table->integer('vote');
-            $table->integer('niveau');
+            $table->date('periode')->nullable();
+            $table->integer('vote')->nullable();;
+            $table->integer('niveau')->nullable();;
             $table->integer('coef');
             $table->foreign('compte')->references('id')->on('comptes')->onDelete('cascade');
 

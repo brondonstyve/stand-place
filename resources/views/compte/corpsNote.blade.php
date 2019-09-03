@@ -28,7 +28,6 @@
             <div class="progress">
                 <div class="progress-bar bg-success" role="progressbar" style="width: {{ ((($note[$i]->CC*30/100)+($note[$i]->SN*70/100))/20)*100 }}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <input type="button" class="btn-danger" value="Révendications">
         </div>
     </div>
 </div>

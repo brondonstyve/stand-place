@@ -87,7 +87,7 @@
                             </a>
 
                             <!-- menu-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="{{ route('profil_path') }}" class="dropdown-item notify-item">
                                 <i class="mdi mdi-lock-open"></i> <span>verouiller</span>
                             </a>
 
@@ -141,9 +141,9 @@
                                     <span class="menu-arrow"><b class="caret"></b></span>
                                 </a>
                                 <ul class="nav-second-level collapse" aria-expanded="false">
-                                    <li><a href="#">étudiants</a></li>
-                                    <li><a href="#">professeurs</a></li>
-                                    <li><a href="#">notes</a></li>
+                                    <li><a href="https://coderthemes.com/adminox/default/icons-materialdesign.html">étudiants</a></li>
+                                    <li><a href="https://coderthemes.com/adminox/default/icons-materialdesign.html">professeurs</a></li>
+                                    <li><a href="https://coderthemes.com/adminox/default/icons-materialdesign.html">notes</a></li>
 
                                 </ul>
                             </li>
@@ -155,8 +155,17 @@
                                     <span> Comptes </span> <span class="menu-arrow"><b class="caret"></b></span>
                                 </a>
                                 <ul class="nav-second-level collapse" aria-expanded="false">
-                                    <li><a href="https://coderthemes.com/adminox/default/icons-materialdesign.html">Genérer un matricule</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/icons-materialdesign.html">Gerer les comptes</a></li>
+                                    <li><a href="{{ route('matricule_path') }}">Genérer un matricule</a></li>
+                                        <li>
+                                                <a href="javascript: void(0);">
+                                                    <img src="images/admin/privileges.png" class="fi-briefcase" style="max-width: 10%">
+                                                    <span> Gerer les comptes </span><b class="caret"></b>
+                                                </a>
+                                                <ul class="nav-second-level collapse" aria-expanded="false">
+                                                        <li><a href="{{ route('gerer_compte_path') }}">Compte professionel</a></li>
+
+                                                </ul>
+                                            </li>
                                 </ul>
                             </li>
 
@@ -176,31 +185,32 @@
                                     <span> Etudiant </span> <span class="menu-arrow"><b class="caret"></b></span>
                                 </a>
                                 <ul class="nav-second-level collapse" aria-expanded="false">
-                                    <li><a href="https://coderthemes.com/adminox/default/icons-colored.html">Gérer les étudiants</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/icons-materialdesign.html">Transfert d'étudiant</a></li>
+                                    <li><a href="{{ route('etudiants_path') }}">Gérer les étudiants</a></li>
+                                    <li><a href="{{ route('etudiants_path') }}">Transfert d'étudiant</a></li>
                                 </ul>
                             </li>
 
-                            <li>
+                            <li id="caisse">
                                 <a href="javascript: void(0);">
                                     <img src="images/admin/caisse.png" class="fi-briefcase" style="max-width: 10%">
                                     <span> Caisse </span> <span class="menu-arrow"><b class="caret"></b></span>
                                 </a>
                                 <ul class="nav-second-level collapse" aria-expanded="false">
-                                    <li><a href="https://coderthemes.com/adminox/default/chart-morris.html">Payer un enseignant</a></li>
+                                    <li><a href="https://coderthemes.com/adminox/default/chart-morris.html" data-toggle="modal" data-target="#paie-ens">Payer un enseignant</a></li>
                                     <li>
                                         <a href="javascript: void(0);">
-                                        <span> Enregistrer un paiement </span> <b class="caret"></b>
+                                        <img src="images/admin/caisse.png" class="fi-briefcase" style="max-width: 10%">
+                                        <span> Paiement </span> <b class="caret"></b>
                                     </a>
                                         <ul class="nav-second-level collapse" aria-expanded="false">
-                                                <li><a href="" data-toggle="modal" data-target="#paiement-ancien">Ancien étudiant</a></li>
-                                                <li><a href="" data-toggle="modal" data-target="#paiement-nouveau">Nouvel étudiant</a></li>
+                                                <li><a href="com/adminox/default/chart-echart.html" data-toggle="modal" data-target="#paiement-ancien">Ancien étudiant</a></li>
+                                                <li><a href="com/adminox/default/chart-echart.html" data-toggle="modal" data-target="#paiement-nouveau" id="new-etudiant">Nouvel étudiant</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="https://coderthemes.com/adminox/default/chart-morris.html">Solvabilité</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/chart-google.html">Pénalités</a></li>
+                                    <li><a href="{{ route('solvabilite_path') }}">Solvabilité</a></li>
+                                    <li><a href="{{ route('penalite_path') }}">Pénalités</a></li>
                                     <li><a href="https://coderthemes.com/adminox/default/chart-echart.html">Moratoires</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/chart-chartist.html">Fixer les taux/Dates</a></li>
+                                    <li><a href="com/adminox/default/chart-echart.html" data-toggle="modal" data-target="#fixer-les-taux" id="new-taux" >Fixer les taux/Dates</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -209,7 +219,7 @@
                                     <span> Emplois de temps </span><span class="menu-arrow"><b class="caret"></b></span>
                                 </a>
                                 <ul class="nav-second-level collapse" aria-expanded="false">
-                                    <li><a href="https://coderthemes.com/adminox/default/form-elements.html">Gérer les EDT</a></li>
+                                    <li><a href="{{ route('emploi_admin_path') }}">Gérer les EDT</a></li>
                                 </ul>
                             </li>
 
@@ -219,10 +229,20 @@
                                     <span> Evaluations </span> <span class="menu-arrow"><b class="caret"></b></span>
                                 </a>
                                 <ul class="nav-second-level collapse" aria-expanded="false">
-                                    <li><a href="https://coderthemes.com/adminox/default/tables-basic.html">Programmer</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/tables-layouts.html">Suspendre</a></li>
+                                    <li><a href="{{ route('progrommer_eval_admin_path') }}">Programmer</a></li>
+                                    <li><a href="{{ route('progrommer_eval_admin_path') }}">Suspendre</a></li>
                                 </ul>
                             </li>
+
+                            <li>
+                                    <a href="javascript: void(0);">
+                                        <img src="images/admin/evaluation.png" class="fi-briefcase" style="max-width: 10%">
+                                        <span> Matiéres </span> <span class="menu-arrow"><b class="caret"></b></span>
+                                    </a>
+                                    <ul class="nav-second-level collapse" aria-expanded="false">
+                                        <li><a href="{{ route('matiere_path') }}">Gérer matiéres</a></li>
+                                    </ul>
+                                </li>
 
                             <li>
                                 <a href="javascript: void(0);">
@@ -230,10 +250,10 @@
                                     <span> Discipline </span> <span class="menu-arrow"><b class="caret"></b></span>
                                 </a>
                                 <ul class="nav-second-level collapse" aria-expanded="false">
-                                    <li><a href="https://coderthemes.com/adminox/default/maps-google.html">Ajouter un C/D</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/maps-google-full.html">Voir les Dates d'un C/D</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/maps-vector.html">Jugement d'un C/D</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/maps-mapael.html">Casier Judiciaire</a></li>
+                                    <li><a href="{{ route('discipline_admin_path') }}">Ajouter un C/D</a></li>
+                                    <li><a href="{{ route('voir_conseil_discipline_admin_path') }}">Voir Date / Juger CD</a></li>
+                                    <li><a href="{{ route('voir_conseil_discipline_juge_admin_path') }}">Décision des C/D</a></li>
+                                    <li><a href="{{ route('discipline_admin_path') }}">Casier Judiciaire</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -242,9 +262,9 @@
                                     <span> Vote </span> <span class="menu-arrow"><b class="caret"></b></span>
                                 </a>
                                 <ul class="nav-second-level collapse" aria-expanded="false">
-                                    <li><a href="https://coderthemes.com/adminox/default/page-starter.html">Lancer un vote</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/page-login.html">Suspendre un vote</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/page-login.html">Réinitialiser un vote</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#vote">Lancer un vote</a></li>
+                                    <li><a href="https://coderthemes.com/adminox/default/page-login.html">Suspendre le vote</a></li>
+                                    <li><a href="https://coderthemes.com/adminox/default/page-login.html">Réinitialiser le vote</a></li>
                                 </ul>
                             </li>
 
@@ -254,7 +274,7 @@
                                     <span> Blog </span> <span class="menu-arrow"><b class="caret"></b></span>
                                 </a>
                                 <ul class="nav-second-level collapse" aria-expanded="false">
-                                    <li><a href="https://coderthemes.com/adminox/default/extras-about.html">Gérer les sujets</a></li>
+                                    <li><a href="{{ route('blog_path') }}">Gérer les sujets</a></li>
                                 </ul>
                             </li>
 
@@ -265,18 +285,6 @@
                                 </a>
                                 <ul class="nav-second-level collapse" aria-expanded="false">
                                     <li><a href="https://coderthemes.com/adminox/default/email-inbox.html">Enregistrer les conctacts</a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <img src="images/admin/privileges.png" class="fi-briefcase" style="max-width: 10%">
-                                    <span> Privilèges </span> <span class="menu-arrow"><b class="caret"></b></span>
-                                </a>
-                                <ul class="nav-second-level collapse" aria-expanded="false">
-                                    <li><a href="https://coderthemes.com/adminox/default/email-inbox.html">privilèges d'étudiants</a></li>
-                                    <li><a href="https://coderthemes.com/adminox/default/email-inbox.html">privilèges d'administrateur</a></li>
-
                                 </ul>
                             </li>
 

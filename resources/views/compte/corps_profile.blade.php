@@ -1,5 +1,107 @@
 <!-- Debut page -->
-<h3 class="card-title"></h3>
+<!-- Row-->
+<div class="row">
+
+        <!-- Column -->
+
+        <div class="col-lg-4 col-md-4">
+            <div class="card card-inverse card-primary">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="m-r-20 align-self-center">
+                            <h1 class="text-white"><i class="ti-pie-chart"></i></h1>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <h3 class="card-title">Evenement 1</h3>
+                                <h6 class="card-subtitle">Titre</h6>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8 p-t-10 p-b-20 align-self-center">
+                            <div class="usage chartist-chart" style="height:65px">
+                                <div class="spark-count" style="height:65px">
+                                    <h2 class="font-light text-white">Date et lieu</h2>
+                                    <canvas style="display: inline-block; width: 146px; height: 70px; vertical-align: top;"
+                                        width="146" height="70"></canvas>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+
+        <div class="col-lg-4 col-md-4">
+            <div class="card card-inverse card-success">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="m-r-20 align-self-center">
+                            <h1 class="text-white"><i class="icon-cloud-download"></i></h1>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <h3 class="card-title">Evènement 2</h3>
+                                <h6 class="card-subtitle">Titre</h6>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 align-self-center">
+
+                        </div>
+                        <div class="col-8 p-t-10 p-b-20 text-right">
+                            <div class="spark-count" style="height:65px">
+                                <h2 class="font-light text-white">Date et lieu</h2>
+                                <canvas style="display: inline-block; width: 146px; height: 70px; vertical-align: top;"
+                                    width="146" height="70"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-4 col-md-4">
+            <div class="card card-size3">
+                <img class="" src="images/weatherbg.jpg" alt="Card image cap">
+                <div class="card-img-overlay" style="height:110px;">
+                    <h3 class="card-title text-white m-b-0 dl">Absence globale </h3>
+                    <p class="card-text text-white font-light">Discipline</p>
+                </div>
+                <div class="card-body weather-small ">
+                    <div class="row ">
+                        <div class="col-8 b-r align-self-center">
+                            <div class="d-flex">
+                                <div class="display-6 text-info"><i class="wi wi-day-rain-wind"></i></div>
+                                <div class="m-l-20">
+                                    <h1 class="font-light text-info m-b-0">75<sup>%</sup></h1>
+                                    <small>present au cour</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 text-center">
+                            <h1 class="font-light m-b-0">25<sup>%</sup></h1>
+                            <small>absenteiste</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+    <!-- Row -->
+
+
+
 <div class="row">
     <!-- Column -->
 
@@ -124,106 +226,7 @@
         </div>
     </div>
 </div>
-<!-- Row-->
-<div class="row">
 
-    <!-- Column -->
-
-    <div class="col-lg-4 col-md-4">
-        <div class="card card-inverse card-primary">
-            <div class="card-body">
-                <div class="d-flex">
-                    <div class="m-r-20 align-self-center">
-                        <h1 class="text-white"><i class="ti-pie-chart"></i></h1>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <h3 class="card-title">Evenement 1</h3>
-                            <h6 class="card-subtitle">Titre</h6>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-8 p-t-10 p-b-20 align-self-center">
-                        <div class="usage chartist-chart" style="height:65px">
-                            <div class="spark-count" style="height:65px">
-                                <h2 class="font-light text-white">Date et lieu</h2>
-                                <canvas style="display: inline-block; width: 146px; height: 70px; vertical-align: top;"
-                                    width="146" height="70"></canvas>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Column -->
-    <!-- Column -->
-
-    <div class="col-lg-4 col-md-4">
-        <div class="card card-inverse card-success">
-            <div class="card-body">
-                <div class="d-flex">
-                    <div class="m-r-20 align-self-center">
-                        <h1 class="text-white"><i class="icon-cloud-download"></i></h1>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <h3 class="card-title">Evènement 2</h3>
-                            <h6 class="card-subtitle">Titre</h6>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4 align-self-center">
-
-                    </div>
-                    <div class="col-8 p-t-10 p-b-20 text-right">
-                        <div class="spark-count" style="height:65px">
-                            <h2 class="font-light text-white">Date et lieu</h2>
-                            <canvas style="display: inline-block; width: 146px; height: 70px; vertical-align: top;"
-                                width="146" height="70"></canvas>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Column -->
-    <!-- Column -->
-    <div class="col-lg-4 col-md-4">
-        <div class="card card-size3">
-            <img class="" src="images/weatherbg.jpg" alt="Card image cap">
-            <div class="card-img-overlay" style="height:110px;">
-                <h3 class="card-title text-white m-b-0 dl">Absence globale </h3>
-                <p class="card-text text-white font-light">Discipline</p>
-            </div>
-            <div class="card-body weather-small ">
-                <div class="row ">
-                    <div class="col-8 b-r align-self-center">
-                        <div class="d-flex">
-                            <div class="display-6 text-info"><i class="wi wi-day-rain-wind"></i></div>
-                            <div class="m-l-20">
-                                <h1 class="font-light text-info m-b-0">75<sup>%</sup></h1>
-                                <small>present au cour</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 text-center">
-                        <h1 class="font-light m-b-0">25<sup>%</sup></h1>
-                        <small>absenteiste</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Column -->
-</div>
-<!-- Row -->
 <!-- Row -->
 <div class="row">
     <!-- Column -->

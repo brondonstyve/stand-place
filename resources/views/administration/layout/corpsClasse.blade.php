@@ -80,7 +80,8 @@
                   <div class="col-md-12">
                       <div class="form-group">
                             <label for="">Filière</label>
-                            <select name="filiere" class="form-control" id="">
+                            <select name="filiere" class="form-control" id="classe-filiere" required>
+                            <option></option>
                                @foreach ($filiere as$key=>$item)
                                    <option value="{{ $key }}" id="fil-change">{{ $item }}</option>
                                @endforeach
@@ -91,10 +92,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                               <label for="">Niveau</label>
-                              <select name="code_filiere" class="form-control" id="">
-                                 @for ($i = 1; $i <6; $i++)
-                                    <option value="{{ $i }}">{{ $i }}</option>
-                                 @endfor
+                              <select name="code_filiere" class="form-control" id="class-niveau" required>
                               </select>
                         </div>
 

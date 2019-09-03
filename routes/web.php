@@ -59,6 +59,8 @@ Route::get('/inbox', 'PagesController@ouvrirInbox')->name('inbox_path');
 
 Route::post('/paiement', 'PaiementController@Paiement')->name('paiement_path');
 
+Route::get('/paiement', 'PaiementController@Paiement_error')->name('paiement_error_path');
+
 Route::post('/valider_paiement', 'PaiementController@validerPaiement')->name('valider_paiement_path');
 
 Route::post('/paiement_suite', 'PaiementController@suite_Paiement')->name('suite_paiement_path');
@@ -131,6 +133,8 @@ Route::get('/Tout/supprimer/epreuve','evaluationController@supprimerToutEpreuve'
 Route::get('/Administration','adminController@index')->name('accueil_index_path');
 
 //filiere
+Route::get('/liste/filiere','filiereController@listeFiliere')->name('liste_filiere_path');
+
 Route::get('/filiere','filiereController@afficherFiliere')->name('afficher_filiere_path');
 
 Route::post('/Enregistrer/filiere','filiereController@enregistrerFiliere')->name('enregistrer_filiere_path');
@@ -139,11 +143,15 @@ Route::post('/Supprimer/Filiere','filiereController@supprimerFiliere')->name('su
 
 Route::post('/Chercheur/filiere','filiereController@chercheurFiliere')->name('chercher_filiere_path');
 
+Route::post('/Chercheur/filiere/classe','filiereController@chercheurFiliereClasse')->name('chercher_filiere_classe_path');
+
 Route::post('/modifier/Filiere','filiereController@modifierFiliere')->name('modifier_filiere_path');
 
 Route::post('/voir/Filiere','filiereController@voirFiliere')->name('voir_filiere_path');
 
 //classe
+
+Route::get('/toute/classe','classeController@listeTouteClasse')->name('toute_classe_path');
 
 Route::get('/adminstrerclasse','classeController@index')->name('afficher_classe_path');
 
@@ -156,3 +164,107 @@ Route::post('/Chercheur/classe','classeController@chercheurclasse')->name('cherc
 Route::post('/modifier/classe','classeController@modifierclasse')->name('modifier_classe_path');
 
 Route::post('/voir/classe','classeController@voirclasse')->name('voir_classe_path');
+
+//solvabilité
+
+Route::get('/solvabilité','solvabiliteController@solvabilite')->name('solvabilite_path');
+
+Route::post('/Salaire','solvabiliteController@payerEns')->name('payer_ens_path');
+
+Route::post('/Listesolvabilité','solvabiliteController@listeSolvabilite')->name('liste_solvabilite_path');
+
+Route::post('/totalApayer','solvabiliteController@totalApayer')->name('total_solvabilite_path');
+
+Route::post('/Fixersolvabilité','solvabiliteController@fixer_Solvabilite')->name('Fixer_solvabilite_path');
+
+//Penalite
+
+Route::get('/Pénalités','penaliteController@penalite')->name('penalite_path');
+
+Route::get('/Listepenalite','penaliteController@listePenalite')->name('liste_penalite_path');
+
+Route::post('/Date_de_paiement','solvabiliteController@dateDePaiement')->name('date_penalite_path');
+
+//payer enseignant
+Route::post('/pppppppppppp','solvabiliteController@valider_paie')->name('valider_paie');
+
+
+//etudiants
+
+Route::get('/Gérer_les_étudiants','etudiantController@etudiant')->name('etudiants_path');
+
+Route::post('/Liste_etudiants','etudiantController@listeEtudiant')->name('liste_etudiant_path');
+
+Route::post('/rechercher_etudiants','etudiantController@rechercherEtudiant')->name('rechercher_etudiant_path');
+
+Route::post('/modifier_etudiants','etudiantController@modifierEtudiant')->name('modifier_etudiant_path');
+
+Route::post('/supprimer_etudiants','etudiantController@supprimerEtudiant')->name('supprimer_etudiant_path');
+
+Route::post('/transferer_etudiants','etudiantController@transfererEtudiant')->name('transferer_etudiant_path');
+
+//Matricule
+
+Route::get('/Gérer_les_Matricules','matriculeController@matricule')->name('matricule_path');
+
+Route::post('/Génerer_les_Matricules','matriculeController@generer_matricule')->name('_genere_matricule_path');
+
+
+//matieres
+
+
+Route::get('/Gérer_les_matieres','matiereController@matiere')->name('matiere_path');
+
+Route::post('/enregistrer_les_matieres','matiereController@enregistrer_matiere')->name('enregistrer_matiere_path');
+
+Route::post('/liste_des_matieres','matiereController@liste_matiere')->name('liste_matiere_path');
+
+Route::post('/rechercher_matieres','matiereController@rechercher_matiere')->name('rechercher_matiere_path');
+
+Route::post('/modifier_des_matieres','matiereController@modifier_matiere')->name('modifier_matiere_path');
+
+Route::post('/supprimer_matieres','matiereController@supprimer_matiere')->name('supprimer_matiere_path');
+
+//gerer edt
+
+Route::get('/Emploi_de_temps','emploiDeTempsController@Liste_emploi_temps')->name('emploi_admin_path');
+
+Route::post('/sup_EmploiDeTemps','emploiDeTempsController@sup_emploi_temps')->name('sup_admin_path');
+
+//evaluation admin
+
+Route::get('/Programmer_eval','evaluationController@programmer_eval')->name('progrommer_eval_admin_path');
+
+Route::post('/liste_eval','evaluationController@liste_eval')->name('liste_eval_admin_path');
+
+//discipline
+
+Route::get('/liste_discipline','disciplineController@liste_classe')->name('discipline_admin_path');
+
+Route::post('/ajouter_discipline','disciplineController@ajouter_discipline')->name('ajouter_discipline_admin_path');
+
+Route::get('/voir_conseil_discipline','disciplineController@voir_conseil_discipline')->name('voir_conseil_discipline_admin_path');
+
+Route::post('/juger_conseil_discipline','disciplineController@juger_conseil_discipline')->name('juger_conseil_discipline_admin_path');
+
+Route::get('/voir_conseil_discipline_jugé','disciplineController@voir_conseil_discipline_juge')->name('voir_conseil_discipline_juge_admin_path');
+
+Route::post('/caisier_judiaciaire','disciplineController@caisier_judiaciaire')->name('caisier_judiaciaire_admin_path');
+
+Route::post('/liste_d_absence','disciplineController@liste_d_absence')->name('liste_d_absence_path');
+
+//gerer comptes
+
+Route::get('/gestion_des_comptes','ControllerCompte@gerer_compte')->name('gerer_compte_path');
+
+Route::post('/droit_des_comptes','ControllerCompte@droit_des_compte')->name('droit_compte_path');
+
+//vote
+Route::post('/lancer_vote','vote@lancerVote')->name('Lancer_vote_path');
+
+Route::post('/lancer_vote_etudiant','vote@lancerVoteEtudiant')->name('Lancer_vote_etudiant_path');
+
+
+// blog
+
+Route::get('/Blog','blogController@accueiBlog')->name('blog_path');
