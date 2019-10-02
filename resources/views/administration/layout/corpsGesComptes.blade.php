@@ -27,6 +27,8 @@
                                 <td tabindex="1">{{ $classe[$i]->type }}</td>
                                 <td tabindex="1">
 
+
+                                    @if ($utilisateur->type=="superadmin")
                                     <a href="#"  id="supp-comptes" data-id="{{ $classe[$i]->matricule }}">
                                             <code class="badge badge-danger">Supprimer  </code>
                                     </a>
@@ -40,6 +42,8 @@
                                             <code class="badge badge-default">Retirer Les Droits</code>
                                     </a>
                                     @endif
+                                    @endif
+
 
                                 </td>
                             </tr>

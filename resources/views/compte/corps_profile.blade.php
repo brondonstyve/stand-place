@@ -13,8 +13,8 @@
                         </div>
                         <div>
                             <a href="#">
-                                <h3 class="card-title">Evenement 1</h3>
-                                <h6 class="card-subtitle">Titre</h6>
+                                <h3 class="card-title">Evènement: Défilé(1)</h3>
+                                <h6 class="card-subtitle badge badge-success">Voir</h6>
                             </a>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                         <div class="col-8 p-t-10 p-b-20 align-self-center">
                             <div class="usage chartist-chart" style="height:65px">
                                 <div class="spark-count" style="height:65px">
-                                    <h2 class="font-light text-white">Date et lieu</h2>
+                                    <h2 class="font-light text-white">10-11-2020</h2>
                                     <canvas style="display: inline-block; width: 146px; height: 70px; vertical-align: top;"
                                         width="146" height="70"></canvas>
 
@@ -46,8 +46,8 @@
                         </div>
                         <div>
                             <a href="#">
-                                <h3 class="card-title">Evènement 2</h3>
-                                <h6 class="card-subtitle">Titre</h6>
+                                <h3 class="card-title">Evènement: Diplômes</h3>
+                                <h6 class="card-subtitle badge badge-success">Voir</h6>
                             </a>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-8 p-t-10 p-b-20 text-right">
                             <div class="spark-count" style="height:65px">
-                                <h2 class="font-light text-white">Date et lieu</h2>
+                                <h2 class="font-light text-white">14-11-2020</h2>
                                 <canvas style="display: inline-block; width: 146px; height: 70px; vertical-align: top;"
                                     width="146" height="70"></canvas>
 
@@ -70,6 +70,7 @@
 
         <!-- Column -->
         <!-- Column -->
+        @if ($utilisateur->type==null)
         <div class="col-lg-4 col-md-4">
             <div class="card card-size3">
                 <img class="" src="images/weatherbg.jpg" alt="Card image cap">
@@ -79,23 +80,56 @@
                 </div>
                 <div class="card-body weather-small ">
                     <div class="row ">
-                        <div class="col-8 b-r align-self-center">
+                        <div class="col-6 b-r align-self-center">
                             <div class="d-flex">
                                 <div class="display-6 text-info"><i class="wi wi-day-rain-wind"></i></div>
                                 <div class="m-l-20">
-                                    <h1 class="font-light text-info m-b-0">75<sup>%</sup></h1>
-                                    <small>present au cour</small>
+                                    <h1 class="font-light text-info m-b-0">{{ 100-$presence }}<sup>%</sup></h1>
+                                    <small>presence aux cours</small>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4 text-center">
-                            <h1 class="font-light m-b-0">25<sup>%</sup></h1>
-                            <small>absenteiste</small>
+                        <div class="col-6 text-center">
+                            <h1 class="font-light m-b-0">{{ $presence }}<sup>%</sup></h1>
+                            <small>absence globale</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        @else
+        <div class="col-lg-4 col-md-4">
+            <div class="card card-inverse card-success">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="m-r-20 align-self-center">
+                            <h1 class="text-white"><i class="icon-cloud-download"></i></h1>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <h3 class="card-title">Evènement: Défilé(2)</h3>
+                                <h6 class="card-subtitle badge badge-success">Voir</h6>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 align-self-center">
+
+                        </div>
+                        <div class="col-8 p-t-10 p-b-20 text-right">
+                            <div class="spark-count" style="height:65px">
+                                <h2 class="font-light text-white">14-11-2019</h2>
+                                <canvas style="display: inline-block; width: 146px; height: 70px; vertical-align: top;"
+                                    width="146" height="70"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
         <!-- Column -->
     </div>
     <!-- Row -->
@@ -127,8 +161,12 @@
                     </div>
                 </div>
                 <div class="col-12" style="background-color: aliceblue">
-
+                      -Remise des diplômes le 10-11-2020
                 </div>
+                <br>
+                <div class="col-12" style="background-color: aliceblue">
+                    -Rassemblement de Défilé(1) le 10-12-2020
+              </div>
             </div>
         </div>
     </div>
@@ -139,25 +177,41 @@
             <div class="card-body">
                 <h3 class="card-title">Résultat du dernier vote</h3>
                 <h6 class="text-muted  text-info">Le Vainqueur</h6>
-                <div id="visitor" style="height: 267px; width: 100%; max-height: 290px; position: relative;" class="c3">
+                <div id="visitor" style="height: 400px; width: 100%; max-height: 300px; position: relative;" class="c3">
 
-                        <div class="table-responsive m-t-20">
-                            @if (sizeOf($liste)==0)
-                            <h3 class="card-title">Aucun resultat disponible pour le moment</h3>
-                            @else
 
-                            <table class="table stylish-table">
-                                    <tbody>
-                                 <tr class="">
-                                    <td><span class="round"><img src="images/2.jpg" alt="user" width="50"></span><td>
-                                        <h6> {{ $liste[0]->nom_prof }} </h6><small class="text-muted">{{ $liste[0]->nom }}  </small></td>
-                                    <td> {{ $liste[0]->vote }} voix <br><div class="progress-bar bg-success" role="progressbar" style="width: {{ $liste[0]->vote }}%; height:25px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> </td>
 
-                                 </tr>
-                                    </tbody>
-                             </table>
 
-                            @endif
+                    @if (sizeOf($premier)==0)
+                    <h6 class="card-subtitle">pas de vote pour le moment</h6>
+
+                    @else
+                    <div class="dl m-l-10" style="margin-top: -20px;">
+                        <h6 class="card-subtitle">{{ $premier[0]->voix }} Voix</h6>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ $premier[0]->voix }}%; height:25px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="apus-teacher-inner text-center style2">
+                        <div class="author-avatar">
+                            <div class="post-thumbnail">
+                                <img src="images/we.jpg" class="attachment-full size-full wp-post-image" alt="" width="200" height="200">
+                            </div>
+                        </div>
+                        <div class="infor">
+                            <h3 class="name">
+                                <a href="">
+                                    {{ $premier[0]->nom }}
+                                </a>
+                            </h3>
+                            <div class="socials">
+                                <a href="#"><img src="images/reseauxprof.png" class="mn-icon-1405"></a>
+                            </div>
+                        </div>
+                    @endif
+
+
+
 
                 </div>
 
@@ -378,7 +432,7 @@
                             <div class="col-md-2 col-xs-6 b-r"> <strong>Numéro</strong>
                                 <p class="text-muted">{{ $utilisateur->téléphone }}</p>
                             </div>
-                            <div class="col-md-5 col-xs-6 b-r"> <strong>Email</strong>
+                            <div class="col-md-3 col-xs-6 b-r"> <strong>Email</strong>
                                 <p class="text-muted">{{ $utilisateur->email }}</p>
                             </div>
                             <div class="col-md-2 col-xs-6"> <strong>Vile</strong>
@@ -429,49 +483,64 @@
 
                             {{ csrf_field() }}
                             <div class="form-group">
+                                <label class="col-md-12">Nom</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="nom" value="{{ $utilisateur->nom }}" name="prenom"
+                                        class="form-control form-control-line" disabled>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
                                 <label class="col-md-12">prenom</label>
                                 <div class="col-md-12">
-                                    <input type="text" value="{{ $utilisateur->prenom }}" name="prenom"
-                                        class="form-control form-control-line">
+                                    <input type="text" name="prenom" value="{{ $utilisateur->prenom }}" name="prenom"
+                                        class="form-control form-control-line" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="example-email" class="col-md-12">Email</label>
                                 <div class="col-md-12">
-                                    <input type="email" value="{{ $utilisateur->email }}"
+                                    <input type="email" name="email" value="{{ $utilisateur->email }}"
                                         class="form-control form-control-line" name="email" id="example-email">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-12">mot de Passe</label>
-                                <div class="col-md-12">
-                                    <input type="password" placeholder="************"
-                                        class="form-control form-control-line" name="mdp">
-                                </div>
-                            </div>
+
 
 
                             <div class="form-group">
                                 <label class="col-md-12">No téléphone</label>
                                 <div class="col-md-12">
-                                    <input type="text" value="{{ $utilisateur->téléphone }}"
-                                        class="form-control form-control-line" name="numero">
+                                    <input type="text" name="phone" value="{{ $utilisateur->téléphone }}"
+                                        class="form-control form-control-line" name="phone">
                                 </div>
                             </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-12">Selectioner la ville</label>
+                        <label class="col-sm-12">Ville</label>
                         <div class="col-sm-12">
-                            <select class="form-control form-control-line" name="ville">
+                            <select class="form-control form-control-line" name="ville" disabled>
                                 <option selected="selected">{{ $utilisateur->ville }}</option>
-                                <option>Yaoundé</option>
-                                <option>Bafoussam</option>
-                                <option>Douala</option>
-                                <option>Garoua</option>
-                                <option>Gaoundéré</option>
+
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-md-12">mot de Passe</label>
+                            <div class="col-md-12">
+                                <input type="password" placeholder="************"
+                                    class="form-control form-control-line" name="pass1">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12">confirmer le mot de Passe</label>
+                            <div class="col-md-12">
+                                <input type="password" placeholder="************"
+                                    class="form-control form-control-line" name="pass2">
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-sm-12">

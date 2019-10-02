@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\models\Appel;
+use App\models\blog;
+use App\models\cahier;
+use App\models\vote as AppVote;
 use MercurySeries\Flashy\Flashy;
-use App\models\Matiere;
 
 class PagesController extends Controller
 {
@@ -51,26 +52,37 @@ class PagesController extends Controller
         }
 
         $utilisateur=auth()->user();
-        $niveau=$utilisateur->niveau;
-        $filiere=$utilisateur->filiere;
-        $maxVote=Matiere::max('vote');
-        $premier=Matiere::whereVote($maxVote)->get();
-        $liste=Matiere::orderBy('vote','desc')->get();
 
-        $resultat=Matiere::whereNiveau($niveau)->get();
-        $nombre=Matiere::whereNiveau($niveau)->count();
-        if ($filiere=='sr') {
-            $init=0;
-        } else {
-            if ($filiere=='se') {
-                $init=1;
-            } else {
-                $init=2;
-            }
 
-        }
+        $maxVote=AppVote::max('voix');
+        $premier=AppVote::join('matricules','matricules.id','=','votes.matricule')
+        ->whereVoix($maxVote)->get();
+
         $utilisateur=auth()->user();
-        return view('index/profil',compact('resultat','nombre','utilisateur','niveau','filiere','init','premier','liste'));
+
+        if ($utilisateur->type==null) {
+            $nbrcour=cahier::join('matieres','matieres.id','=','cahiers.matiere')
+            ->whereClasse($utilisateur->classe)
+            ->count();
+
+            $nbrpres=Appel::join('matieres','matieres.id','=','appels.matiere')
+            ->join('matricules','matricules.id','=','appels.matricule')
+            ->where([
+                ['matieres.classe',$utilisateur->classe],
+                ['matricules.matricule',$utilisateur->matricule]
+                ])
+            ->count();
+           if($nbrcour==0){
+            $nbrcour=1;
+
+           }
+            $presence=($nbrpres/$nbrcour)*100;
+        }
+
+
+
+
+        return view('index/profil',compact('utilisateur','premier','presence'));
     }
 
     public function parametre(){
@@ -104,7 +116,9 @@ class PagesController extends Controller
             return redirect()->route('home');
             }
             $utilisateur=auth()->user();
-        return view('index/blog',compact('utilisateur'));
+
+            $reponse=blog::orderBy('created_at','desc')->get();
+        return view('index/blog',compact('utilisateur','reponse'));
     }
 
     public function ouvrirVote(){

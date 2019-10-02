@@ -12,7 +12,7 @@
                     </span>
                 </span>
 <br><br>
-                <span style="color: black">CONSEIL DE DISCIPLINE :
+                <span style="color: black">CONSEIL DE DISCIPLINE :{{ sizeOf($discipline) }}
                         <span> </span>
                 </span>
 

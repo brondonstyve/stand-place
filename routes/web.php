@@ -47,7 +47,7 @@ Route::post('/modification_avatar', 'controllerCompte@modifAvatar')->name('avata
 
 Route::post('/supprimer_avatar', 'controllerCompte@suppAvatar')->name('avatar_supp_path');
 
-Route::get('/blog', 'PagesController@ouvrirBlog')->name('blog_path');
+Route::get('/blog', 'PagesController@ouvrirBlog')->name('blog_etu_path');
 
 Route::get('vote', 'vote@membreVotes')->name('vote_path');
 
@@ -268,3 +268,13 @@ Route::post('/lancer_vote_etudiant','vote@lancerVoteEtudiant')->name('Lancer_vot
 // blog
 
 Route::get('/Blog','blogController@accueiBlog')->name('blog_path');
+
+Route::post('/sujets','blogController@ajouterBlog')->name('ajouterBlog_path');
+
+Route::post('/supp-sujets','blogController@supBlog')->name('sup_Blog_path');
+
+//message
+
+Route::get('/message','messageController@message')->name('message_path');
+
+Route::post('/messageEmail','messageController@rechercherEmail')->name('rechercher_email_path');

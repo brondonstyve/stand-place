@@ -62,6 +62,8 @@ class ControllerCompte extends Controller
                 'prenom'=>$request->prenom,
                 'classe'=>$request->classe,
                 'email'=>$request->email,
+                'téléphone'=>$request->num,
+                'ville'=>$request->ville,
                 'mot_de_passe'=>bcrypt($request->mdpconf),
                 'type'=>$request->type,
                 'date'=>date('Y-mm-dd')
@@ -94,8 +96,9 @@ class ControllerCompte extends Controller
             $nom=$request->nom;
             $prenom=$request->prenom;
             $classe=$request->classe;
+            $type=$request->type;
             Flashy::error('erreur!   les deux mots de passe ne coincident pas.');
-            return view('index/creationCompte',compact('matricules','nom','prenom','classe'));
+            return view('index/creationCompte',compact('matricules','nom','prenom','classe','type'));
         }
 
      }
@@ -104,8 +107,9 @@ class ControllerCompte extends Controller
         $nom=$request->nom;
         $prenom=$request->prenom;
         $classe=$request->classe;
+        $type=$request->type;
         Flashy::error('l\'adresse email entrée existe déja.');
-        return view('index/creationCompte',compact('matricules','nom','prenom','classe'));
+        return view('index/creationCompte',compact('matricules','nom','prenom','classe','type'));
 
      }
 
@@ -129,25 +133,69 @@ class ControllerCompte extends Controller
             return redirect()->route('home');
             }
 
-        $modif=auth()->user()->update(
-            [
-               'nom'=>$request->nom,
-               'email'=>$request->email,
-               'mot_de_passe'=>bcrypt($request->mdp),
-               'téléphone'=>$request->numero,
-               'ville'=>$request->ville,
 
-             ]
-        );
+            if (auth()->user()->email==$request->email) {
+                if ($request->pass1==$request->pass2) {
+                    $modif=auth()->user()->update(
+                        [
+                           'nom'=>$request->nom,
+                           'prenom'=>$request->prenom,
+                           'email'=>$request->email,
+                           'mot_de_passe'=>bcrypt($request->pass1),
+                           'téléphone'=>$request->phone,
+                           'ville'=>$request->ville,
 
-        if ($modif) {
-            Flashy::success('modification reuissie');
-            return redirect()->route('profil');
+                         ]
+                    );
+
+                    if ($modif) {
+                        Flashy::success('modification reuissie');
+                        return redirect()->route('profil_path');
+                    }
+                    else{
+                        Flashy::success('échec de la modification');
+                        return redirect()->route('profil_path');
+                    }
+                } else {
+                    Flashy::error('les mots de passe ne correpondent pas');
+                    return redirect()->route('profil_path');
+                }
+            } else {
+                $test_email=Compte::whereEmail($request->email)->first();
+
+            if($test_email==null){
+            if ($request->pass1==$request->pass2) {
+                $modif=auth()->user()->update(
+                    [
+                       'email'=>$request->email,
+                       'mot_de_passe'=>bcrypt($request->pass1),
+                       'téléphone'=>$request->phone,
+
+                     ]
+                );
+
+                if ($modif) {
+                    Flashy::success('modification reuissie');
+                    return redirect()->route('profil_path');
+                }
+                else{
+                    Flashy::success('échec de la modification');
+                    return redirect()->route('profil_path');
+                }
+            } else {
+                Flashy::error('les mots de passe ne correpondent pas');
+                return redirect()->route('profil_path');
+            }
+        }else{
+            Flashy::error('cet email est déjà utilisé par un autre utilisateur');
+            return redirect()->route('profil_path');
         }
-        else{
-            Flashy::success('échec de la modification');
-            return redirect()->route('profil');
-        }
+            }
+
+
+
+
+
     }
 
 
@@ -214,7 +262,9 @@ class ControllerCompte extends Controller
                 $classe=$matri->classe;
                 $anne_acc=$matri->annee_accademique;
                 $type=$matri->type;
-                return \view('index/creationCompte',compact('matricules','nom','prenom','classe','type'));
+                $ville=$matri->ville;
+                $num=$matri->numero;
+                return \view('index/creationCompte',compact('matricules','nom','ville','num','prenom','classe','type'));
             }
             else {
                 Flashy::error('Le matricule entré est deja utilisé');

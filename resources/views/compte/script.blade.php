@@ -10,5 +10,6 @@
 <script src="js/c3.js"></script>
 <script src="js/jQuery.js"></script>
 <script src="js/chrono.js"></script>
+<script src="js/admin/mesAjax.js"></script>
 
 

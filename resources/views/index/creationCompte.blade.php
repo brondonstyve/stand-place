@@ -48,6 +48,8 @@
                                                 <input class="form-control"  type="text"  disabled value="@if($type==null) {{ $classe }} @else XX @endif" style="text-align: left;">
                                                 <input type="hidden" name='classe' value="@if($type==null) {{ $classe }} @else XX @endif">
                                                 <input type="hidden" name='type' value="{{ $type }}">
+                                                <input type="hidden" name='ville' value="{{ $ville }}">
+                                                <input type="hidden" name='num' value="{{ $num }}">
 
                                                 {{ $errors->first('classe',':message') }}
                                             </div>

@@ -44,8 +44,11 @@ class disciplineController extends Controller
             ->simplePaginate(5);
 
         //dd($liste);
+        $matricule=Matricule::whereMatricule($utilisateur->matricule)->get('id');
+        $discipline=discipline::whereMatricule($matricule[0]->id)
+        ->get();
 
-      return view('index/discipline',compact('utilisateur','remplisseur','liste'));
+      return view('index/discipline',compact('utilisateur','remplisseur','liste','discipline'));
     }
 
 

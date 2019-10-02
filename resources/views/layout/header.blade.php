@@ -153,7 +153,7 @@
                             </div>
                         </div>
                         <div class="centre">
-                            <input type="submit" class="btn btn-info">
+                            <input type="submit" class="btn btn-info btn-sm" value="envoyer">
                         </div>
 
                 </div>
@@ -187,7 +187,7 @@
 
                         <div class="form-group btn-sm">
                             <div class="col-xs-12 ">
-                                <input class="form-control" type="password" name='mdp' required=""
+                                <input class="form-control btn-sm" type="password" name='mdp' required=""
                                     placeholder="Mot de passe">
                                 {{ $errors->first('mdp',':message') }}
                             </div>
@@ -202,7 +202,7 @@
                         </div>
 
                         <div class="centre">
-                            <input type="submit" class="btn btn-info"></div>
+                            <input type="submit" class="btn btn-sm btn-success" value="envoyer"></div>
 
                 </div>
             </div>

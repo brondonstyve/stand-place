@@ -111,7 +111,7 @@ class paiementController extends Controller
 
            $ident=explode('.',$identifiant);
            $idMat=$ident[1];
-                $randon1=rand(1,99);
+                $randon1=rand(99,9999);
                 $matricule=$classe.'_'.$date.'_'.$dates.'-'.$randon1.'_'.$idMat;
 
                     $post = Paiement::whereIn('id', $ident)

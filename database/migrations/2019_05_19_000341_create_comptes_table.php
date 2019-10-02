@@ -16,7 +16,7 @@ class CreateComptesTable extends Migration
         Schema::create('comptes', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('mat')->index()->unsigned();
-            $table->string('matricule',50);
+            $table->string('matricule');
             $table->string('nom',50);
             $table->string('prenom',50)->nullable();
             $table->string('classe',10)->nullable();

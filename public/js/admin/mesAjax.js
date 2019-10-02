@@ -1023,3 +1023,42 @@ $('#vote #formulaire-vote #retirer #liste').on('change', function(e) {
         '<input type="hidden" name="nbre" value="' + val + '" id="nbre">',
     );
 });
+
+
+//blog
+
+$('#Ajout-sujet #blog').on('submit', function(e) {
+    e.preventDefault();
+    var url = $(this).attr('action');
+    var data = $(this).serialize();
+    $.post(url, data, function(data) {
+        window.location.reload();
+    })
+});
+
+$(document).on('click', '#supp-sujet', function(e) {
+    var id = $(this).data('id');
+    var url = '/supp-sujets';
+    $.post(url, { id: id }, function(data) {
+        alert(data);
+        window.location.reload();
+    })
+})
+
+
+//message
+
+$('#frame #sidepanel #search #contact').keyup(function(e) {
+    $('#frame #sidepanel #result-contact #contenu').remove();
+    var content = $(this).val();
+    var div = $('<div id="contenu">');
+    if (content != "") {
+        $.post('/messageEmail', { email: content }, function(data) {
+            for (let index = 0; index < data.length; index++) {
+                div.append('<img src="/storage/avatars/' + data[index].photo + '" width="40px" style="border-radius:100%" alt="" "_"/> <a href="#" style="color:white" data-id=' + data[index].id + '> <span class="preview">' + data[index].email + '</span></a><br> ');
+            }
+            $('#frame #sidepanel #result-contact').append(div);
+        });
+    }
+
+});
